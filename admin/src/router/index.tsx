@@ -1,9 +1,9 @@
 import { lazy } from "react";
 import {
-	Navigate,
-	type RouteObject,
-	RouterProvider,
-	createHashRouter,
+  Navigate,
+  type RouteObject,
+  RouterProvider,
+  createHashRouter,
 } from "react-router-dom";
 
 import DashboardLayout from "@/layouts/dashboard";
@@ -14,34 +14,38 @@ import { ErrorRoutes } from "@/router/routes/error-routes";
 import type { AppRouteObject } from "#/router";
 
 const { VITE_APP_HOMEPAGE: HOMEPAGE } = import.meta.env;
+
 const LoginRoute: AppRouteObject = {
-	path: "/login",
-	Component: lazy(() => import("@/pages/sys/login/Login")),
+  path: "/login",
+  Component: lazy(() => import("@/pages/sys/login/Login")),
 };
 
 const PAGE_NOT_FOUND_ROUTE: AppRouteObject = {
-	path: "*",
-	element: <Navigate to="/404" replace />,
+  path: "*",
+  element: <Navigate to="/404" replace />,
 };
 
 export default function Router() {
-	const permissionRoutes = usePermissionRoutes();
-	const asyncRoutes: AppRouteObject = {
-		path: "/",
-		element: (
-			<AuthGuard>
-				<DashboardLayout />
-			</AuthGuard>
-		),
-		children: [
-			{ index: true, element: <Navigate to={HOMEPAGE} replace /> },
-			...permissionRoutes,
-		],
-	};
+  const permissionRoutes = usePermissionRoutes();
 
-	const routes = [LoginRoute, asyncRoutes, ErrorRoutes, PAGE_NOT_FOUND_ROUTE];
+  const asyncRoutes: AppRouteObject = {
+    path: "/",
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
+    children: [
+      { index: true, element: <Navigate to={HOMEPAGE} replace /> },
+      ...permissionRoutes,
+    ],
+  };
 
-	const router = createHashRouter(routes as unknown as RouteObject[]);
+  const routes = [LoginRoute, asyncRoutes, ErrorRoutes, PAGE_NOT_FOUND_ROUTE];
 
-	return <RouterProvider router={router} />;
+  const router = createHashRouter(routes as unknown as RouteObject[]);
+
+  return (
+    <RouterProvider router={router} future={{ v7_startTransition: true }} />
+  );
 }
