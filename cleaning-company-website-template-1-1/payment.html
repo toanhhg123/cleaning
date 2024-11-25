@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TechTitans - Thanh Toán</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="img/favicon.ico" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .service-info, .contact-form form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .service-info img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- Header Start -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="header-top row align-items-center">
+                    <div class="col-lg-3">
+                        <div class="brand">
+                            <a href="index.html" class="d-flex">
+                                <img src="img/2-removebg-preview.png" alt="Logo">
+                                TechTitans
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="navbar navbar-expand-lg bg-light navbar-light">
+                            <a href="#" class="navbar-brand">MENU</a>
+                            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                <div class="navbar-nav mx-auto">
+                                    <a href="index.html" class="nav-item nav-link">Trang chủ</a>
+                                    <a href="about.html" class="nav-item nav-link">Giới thiệu</a>
+                                    <a href="service.html" class="nav-item nav-link">Dịch vụ</a>
+                                    <a href="complaint.html" class="nav-item nav-link">Khiếu nại</a>
+                                    <a href="contact.html" class="nav-item nav-link">Liên hệ</a>
+                                </div>
+                                <div class="d-flex me-0">
+                                    <a href="cart.html" class="nav-item nav-link"><i class="fas fa-clipboard fa-2x"></i></a>
+                                    <div class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><i class="fas fa-user fa-2x"></i></a>
+                                        <div class="dropdown-menu">
+                                            <a href="login.html" class="dropdown-item">Đăng nhập</a>
+                                            <a href="register.html" class="dropdown-item">Đăng ký</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="container">
+                <h2>Xác Nhận Thanh Toán</h2>
+            </div>
+        </div>
+
+        <!-- Thông tin dịch vụ -->
+        <div class="container mt-5">
+            <div class="service-info mb-4">
+                <h3 id="serviceName">Tên dịch vụ</h3>
+                <p><strong>Giá:</strong> <span id="servicePrice"></span></p>
+                <p><strong>Thời gian:</strong> <span id="serviceTime"></span></p>
+                <p><strong>Địa chỉ:</strong> <span id="serviceAddress"></span></p>
+            </div>
+
+            <!-- Form đặt dịch vụ-->
+            <form id="orderForm">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" placeholder="Họ và tên" id="fullName" required />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="tel" class="form-control" placeholder="Số điện thoại" id="phone" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="6" placeholder="Lời nhắn" id="message"></textarea>
+                </div>
+                <button class="btn btn-primary" id="submit-order" type="submit">Thanh toán</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <!-- Footer content -->
+    </div>
+
+    <!-- Script -->
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const serviceName = urlParams.get("name") || "Không xác định";
+            const servicePrice = urlParams.get("price") || "0 VNĐ";
+            const serviceTime = urlParams.get("time") || "Chưa xác định";
+
+            document.getElementById("serviceName").textContent = serviceName;
+            document.getElementById("servicePrice").textContent = servicePrice;
+            document.getElementById("serviceTime").textContent = serviceTime;
+
+            document.querySelector("#orderForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                const newOrder = {
+                    id: Date.now(),
+                    fullName: document.getElementById("fullName").value,
+                    phone: document.getElementById("phone").value,
+                    message: document.getElementById("message").value,
+                    service: serviceName,
+                    price: servicePrice,
+                    status: "Đang xử lý"
+                };
+
+                const orders = JSON.parse(localStorage.getItem("orders")) || [];
+                orders.push(newOrder);
+                localStorage.setItem("orders", JSON.stringify(orders));
+
+                alert("Thanh toán thành công!");
+                window.location.href = `order-detail.html?id=${newOrder.id}`;
+            });
+        });
+    </script>
+</body>
+</html>

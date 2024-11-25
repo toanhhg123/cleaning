@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Quản Lý Hệ Thống</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body>
+    <div class="container mt-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>Admin - Quản Lý Hệ Thống</h2>
+            <button id="logoutButton" class="btn btn-danger" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+            </button>
+            
+        </div>
+
+        <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="orders-tab" data-toggle="tab" href="#orders" role="tab">Quản Lý Đơn Hàng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="services-tab" data-toggle="tab" href="#services" role="tab">Quản Lý Dịch Vụ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="customers-tab" data-toggle="tab" href="#customers" role="tab">Quản Lý Khách Hàng</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="employees-tab" data-toggle="tab" href="#employees" role="tab">Quản Lý Nhân Viên</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="adminTabContent">
+            <!-- Quản Lý Đơn Hàng -->
+            <div class="tab-pane fade show active" id="orders" role="tabpanel">
+                <h3>Quản Lý Đơn Hàng</h3>
+                <input type="text" id="searchOrders" class="form-control mb-3" placeholder="Tìm kiếm đơn hàng">
+                <table class="table table-bordered mt-2" id="orderTable">
+                    <thead>
+                        <tr><th>ID</th><th>Họ Tên</th><th>Số Điện Thoại</th><th>Dịch Vụ</th><th>Ngày</th><th>Giờ Bắt Đầu</th><th>Giờ Kết Thúc</th><th>Địa Chỉ</th><th>Trạng thái</th><th>Hành Động</th></tr>
+                    </thead>
+                    <tbody>
+                        <!-- Nội dung thêm động -->
+                    </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination justify-content-center" id="orderPagination"></ul>
+                </nav>
+                <form id="orderForm">
+                    <input type="hidden" id="orderId">
+                    <input type="text" id="fullName" placeholder="Họ Tên" class="form-control">
+                    <input type="text" id="phone" placeholder="Số Điện Thoại" class="form-control">
+                    <input type="text" id="service" placeholder="Dịch Vụ" class="form-control">
+                    <input type="date" id="date" class="form-control">
+                    <input type="time" id="startTime" class="form-control">
+                    <input type="time" id="endTime" class="form-control">
+                    <input type="text" id="address" placeholder="Địa Chỉ" class="form-control">
+                    <select id="status" class="form-control mt-2" required>
+                        <option value="Pending">Đang Chờ</option>
+                        <option value="In Progress">Đang Xử Lý</option>
+                        <option value="Completed">Hoàn Thành</option>
+                        <option value="Cancelled">Đã Hủy</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary mt-2">Lưu Đơn Hàng</button>
+                </form>
+            </div>
+
+            <!-- Quản Lý Dịch Vụ -->
+            <div class="tab-pane fade" id="services" role="tabpanel">
+                <h3>Quản Lý Dịch Vụ</h3>
+                <input type="text" id="searchServices" class="form-control mb-3" placeholder="Tìm kiếm dịch vụ">
+                <table class="table table-bordered mt-2" id="serviceTable">
+                    <thead>
+                        <tr><th>ID</th><th>Tên Dịch Vụ</th><th>Giá</th><th>Mô Tả</th><th>Hành Động</th></tr>
+                    </thead>
+                    <tbody>
+                        <!-- Nội dung thêm động -->
+                    </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination justify-content-center" id="servicePagination"></ul>
+                </nav>
+                <form id="serviceForm">
+                    <input type="hidden" id="serviceId">
+                    <input type="text" id="serviceName" placeholder="Tên Dịch Vụ" class="form-control">
+                    <input type="number" id="servicePrice" placeholder="Giá" class="form-control">
+                    <input type="text" id="serviceDescription" placeholder="Mô Tả" class="form-control">
+                    <button type="submit" class="btn btn-primary mt-2">Lưu Dịch Vụ</button>
+                </form>
+            </div>
+
+            <!-- Quản Lý Khách Hàng -->
+            <div class="tab-pane fade" id="customers" role="tabpanel">
+                <h3>Quản Lý Khách Hàng</h3>
+                <input type="text" id="searchCustomers" class="form-control mb-3" placeholder="Tìm kiếm khách hàng">
+                <table class="table table-bordered mt-2" id="customerTable">
+                    <thead>
+                        <tr><th>ID</th><th>Tên</th><th>Số Điện Thoại</th><th>Email</th><th>Hành Động</th></tr>
+                    </thead>
+                    <tbody>
+                        <!-- Nội dung thêm động -->
+                    </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination justify-content-center" id="customerPagination"></ul>
+                </nav>
+                <form id="customerForm">
+                    <input type="hidden" id="customerId">
+                    <input type="text" id="customerName" placeholder="Tên Khách Hàng" class="form-control">
+                    <input type="text" id="customerPhone" placeholder="Số Điện Thoại" class="form-control">
+                    <input type="email" id="customerEmail" placeholder="Email" class="form-control">
+                    <button type="submit" class="btn btn-primary mt-2">Lưu Khách Hàng</button>
+                </form>
+            </div>
+
+            <!-- Quản Lý Nhân Viên -->
+            <div class="tab-pane fade" id="employees" role="tabpanel">
+                <h3>Quản Lý Nhân Viên</h3>
+                <input type="text" id="searchEmployees" class="form-control mb-3" placeholder="Tìm kiếm nhân viên">
+                <table class="table table-bordered mt-2" id="employeeTable">
+                    <thead>
+                        <tr><th>ID</th><th>Tên</th><th>Số Điện Thoại</th><th>Email</th><th>Chức Vụ</th><th>Hành Động</th></tr>
+                    </thead>
+                    <tbody>
+                        <!-- Nội dung thêm động -->
+                    </tbody>
+                </table>
+                <nav>
+                    <ul class="pagination justify-content-center" id="employeePagination"></ul>
+                </nav>
+                <form id="employeeForm">
+                    <input type="hidden" id="employeeId">
+                    <input type="text" id="employeeName" placeholder="Tên Nhân Viên" class="form-control">
+                    <input type="text" id="employeePhone" placeholder="Số Điện Thoại" class="form-control">
+                    <input type="email" id="employeeEmail" placeholder="Email" class="form-control">
+                    <input type="text" id="employeePosition" placeholder="Chức Vụ" class="form-control">
+                    <button type="submit" class="btn btn-primary mt-2">Lưu Nhân Viên</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/admin.js"></script>
+</body>
+</html>

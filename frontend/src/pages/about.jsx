@@ -5,225 +5,176 @@ const About = () => {
   return (
     <>
       <Header />
-      {/* <!-- Page Header Start --> */}
+
+      {/* Page Header Start */}
       <div className="page-header">
         <div className="container">
           <div className="row">
             <div className="col-12">
-              <h2>About Us</h2>
+              <h2>Giới thiệu</h2>
             </div>
             <div className="col-12">
-              <a href="#/">Home</a>
-              <a href="#/">About Us</a>
+              <a href>Trang chủ</a>
+              <a href>Giới thiệu</a>
             </div>
           </div>
         </div>
       </div>
-      {/* <!-- Page Header End --> */}
-
-      {/* <!-- About Start --> */}
-      <div className="about">
-        <div className="container">
-          <div className="row">
-            <div className="col-lg-5 col-md-6">
-              <div className="about-img">
-                <img src="/img/about.jpg" alt="about" />
-              </div>
-            </div>
-            <div className="col-lg-7 col-md-6">
-              <div className="about-text">
-                <h2>
-                  <span>10</span> Years Experience
-                </h2>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Phasellus nec pretium mi. Curabitur facilisis ornare velit non
-                  vulputate. Aliquam metus tortor, auctor id gravida
-                  condimentum, viverra quis sem.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Phasellus nec pretium mi. Curabitur facilisis ornare velit non
-                  vulputate. Aliquam metus tortor, auctor id gravida
-                  condimentum, viverra quis sem. Curabitur non nisl nec nisi
-                  scelerisque maximus. Aenean consectetur convallis porttitor.
-                  Aliquam interdum at lacus non blandit.
-                </p>
-                <a className="btn" href="#/">
-                  Learn More
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* <!-- About End --> */}
-
-      {/* <!-- Story Start --> */}
+      {/* Page Header End */}
+      {/* Story Start */}
       <div className="story">
         <div className="container">
           <div className="section-header">
-            <p>Company Story</p>
-            <h2>Learn About Our Journey</h2>
+            <p>Lịch sử công ty</p>
+            <h2 style={{ width: 600 }}>Hành trình của chúng tôi</h2>
           </div>
           <div className="row">
             <div className="col-lg-12">
               <div className="story-container">
                 <div className="story-end">
-                  <p>Now</p>
+                  <p>Hiện tại</p>
                 </div>
                 <div className="story-continue">
                   <div className="row story-right">
                     <div className="col-md-6">
-                      <p className="story-date">01 Dec 2020</p>
+                      <p className="story-date">29/11/2024</p>
                     </div>
                     <div className="col-md-6">
                       <div className="story-box">
                         <div className="story-text">
-                          <h3>Lorem ipsum dolor</h3>
+                          <h3>Kế hoạch mở rộng</h3>
                           <p>
-                            Lorem ipsum dolor sit amet elit. Proin euismod nibh
-                            in convallis. Nam vitae posuere tortor, et imperdiet
-                            nunc. Praesent nisl nulla, fringilla eu ornare,
-                            dignissim vitae ipsum.
+                            Đón chào năm mới với kế hoạch mở rộng quy mô dịch vụ
+                            và nâng cao chất lượng phục vụ.
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <div className="row story-left">
                     <div className="col-md-6 d-md-none d-block">
-                      <p className="story-date">01 Jun 2020</p>
+                      <p className="story-date">8/11/2024</p>
                     </div>
                     <div className="col-md-6">
                       <div className="story-box">
                         <div className="story-text">
-                          <h3>Lorem ipsum dolor</h3>
+                          <h3>Ra mắt dịch vụ mới</h3>
                           <p>
-                            Lorem ipsum dolor sit amet elit. Proin euismod nibh
-                            in convallis. Nam vitae posuere tortor, et imperdiet
-                            nunc. Praesent nisl nulla, fringilla eu ornare,
-                            dignissim vitae ipsum.
+                            Chúng tôi chính thức ra mắt dịch vụ vệ sinh mới,
+                            mang đến nhiều lựa chọn và giải pháp linh hoạt đáp
+                            ứng nhu cầu cho khách hàng.
                           </p>
                         </div>
                       </div>
                     </div>
                     <div className="col-md-6 d-md-block d-none">
-                      <p className="story-date">01 Jun 2020</p>
+                      <p className="story-date">8/11/2024</p>
                     </div>
                   </div>
-
                   <div className="row">
                     <div className="col-12">
                       <div className="story-year">
-                        <p>2020</p>
+                        <p>Tháng 11</p>
                       </div>
                     </div>
                   </div>
-
                   <div className="row story-right">
                     <div className="col-md-6">
-                      <p className="story-date">01 Dec 2019</p>
+                      <p className="story-date">19/10/2024</p>
                     </div>
                     <div className="col-md-6">
                       <div className="story-box">
                         <div className="story-text">
-                          <h3>Lorem ipsum dolor</h3>
+                          <h3>Cải tiến quy trình</h3>
                           <p>
-                            Lorem ipsum dolor sit amet elit. Proin euismod nibh
-                            in convallis. Nam vitae posuere tortor, et imperdiet
-                            nunc. Praesent nisl nulla, fringilla eu ornare,
-                            dignissim vitae ipsum.
+                            Cải tiến quy trình làm việc để nâng cao hiệu quả và
+                            chất lượng dịch vụ. Các bước quy trình mới giúp tối
+                            ưu hóa thời gian.
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <div className="row story-left">
                     <div className="col-md-6 d-md-none d-block">
-                      <p className="story-date">01 Jun 2019</p>
+                      <p className="story-date">01/10/2024</p>
                     </div>
                     <div className="col-md-6">
                       <div className="story-box">
                         <div className="story-text">
-                          <h3>Lorem ipsum dolor</h3>
+                          <h3>Mở rộng đội ngũ</h3>
                           <p>
-                            Lorem ipsum dolor sit amet elit. Proin euismod nibh
-                            in convallis. Nam vitae posuere tortor, et imperdiet
-                            nunc. Praesent nisl nulla, fringilla eu ornare,
-                            dignissim vitae ipsum.
+                            Đội ngũ nhân viên được mở rộng và đào tạo bài bản
+                            nhằm nâng cao kỹ năng phục vụ. Chúng tôi tin rằng
+                            nhân viên chuyên nghiệp là chìa khóa cho sự thành
+                            công của dịch vụ.
                           </p>
                         </div>
                       </div>
                     </div>
                     <div className="col-md-6 d-md-block d-none">
-                      <p className="story-date">01 Jun 2019</p>
+                      <p className="story-date">01/10/2024</p>
                     </div>
                   </div>
-
                   <div className="row">
                     <div className="col-12">
                       <div className="story-year">
-                        <p>2019</p>
+                        <p>Tháng 10</p>
                       </div>
                     </div>
                   </div>
-
                   <div className="row story-right">
                     <div className="col-md-6">
-                      <p className="story-date">01 Dec 2018</p>
+                      <p className="story-date">15/09/2024</p>
                     </div>
                     <div className="col-md-6">
                       <div className="story-box">
                         <div className="story-text">
-                          <h3>Lorem ipsum dolor</h3>
+                          <h3>Sự kiện giới thiệu</h3>
                           <p>
-                            Lorem ipsum dolor sit amet elit. Proin euismod nibh
-                            in convallis. Nam vitae posuere tortor, et imperdiet
-                            nunc. Praesent nisl nulla, fringilla eu ornare,
-                            dignissim vitae ipsum.
+                            Tổ chức sự kiện tại địa phương để giới thiệu dịch vụ
+                            và thu hút sự quan tâm từ cộng đồng. Đây là cơ hội
+                            để khách hàng giao lưu với đội ngũ nhân viên và hiểu
+                            rõ hơn.
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
-
                   <div className="row story-left">
                     <div className="col-md-6 d-md-none d-block">
-                      <p className="story-date">01 Jun 2018</p>
+                      <p className="story-date">15/09/2024</p>
                     </div>
                     <div className="col-md-6">
                       <div className="story-box">
                         <div className="story-text">
-                          <h3>Lorem ipsum dolor</h3>
+                          <h3>Ra mắt dịch vụ</h3>
                           <p>
-                            Lorem ipsum dolor sit amet elit. Proin euismod nibh
-                            in convallis. Nam vitae posuere tortor, et imperdiet
-                            nunc. Praesent nisl nulla, fringilla eu ornare,
-                            dignissim vitae ipsum.
+                            Dịch vụ vệ sinh chuyên nghiệp đầu tiên của chúng tôi
+                            ra mắt và nhanh chóng được khách hàng đón nhận.
+                            Chúng tôi tập trung vào chất lượng và sự hài lòng
+                            của khách hàng.
                           </p>
                         </div>
                       </div>
                     </div>
                     <div className="col-md-6 d-md-block d-none">
-                      <p className="story-date">01 Jun 2018</p>
+                      <p className="story-date">15/08/2024</p>
                     </div>
                   </div>
                 </div>
                 <div className="story-start">
-                  <p>Launch</p>
+                  <p>Bắt đầu</p>
                 </div>
                 <div className="story-launch">
                   <div className="story-box">
                     <div className="story-text">
-                      <h3>Launched our company on 01 Jan 2018</h3>
+                      <h3>Thành lập công ty ngày 15/7/2024</h3>
                       <p>
-                        Lorem ipsum dolor sit amet elit. Proin euismod nibh in
-                        convallis. Nam vitae posuere tortor, et imperdiet nunc.
-                        Praesent nisl nulla, fringilla eu ornare, dignissim
-                        vitae ipsum.
+                        Công ty được thành lập với mục tiêu cung cấp dịch vụ vệ
+                        sinh chất lượng cho khách hàng. Chúng tôi cam kết mang
+                        đến môi trường sạch sẽ và an toàn cho mọi không gian
+                        sống.
                       </p>
                     </div>
                   </div>
@@ -233,36 +184,47 @@ const About = () => {
           </div>
         </div>
       </div>
-      {/* <!-- Story End --> */}
-
-      {/* <!-- Team Start --> */}
+      {/* Story End */}
+      {/* Team Start */}
       <div className="team">
         <div className="container">
           <div className="section-header">
-            <p>Team Member</p>
-            <h2>Meet Our Expert Cleaners</h2>
+            {/* <p>Thành Lập</p> */}
+            <h2 style={{ width: 600 }}>Những Người Sáng Lập</h2>
           </div>
-          <div className="row">
+          <div className="row justify-content-center">
             <div className="col-lg-3 col-md-6">
               <div className="team-item">
                 <div className="team-img">
-                  <img src="/img/team-1.jpg" alt="Team" />
+                  <img src="img/tuan.jpg" alt="Team Image" />
                 </div>
                 <div className="team-text">
-                  <h2>Dylan Adams</h2>
+                  <h2>Lê Anh Tuấn</h2>
                   <h3>Developer</h3>
                   <div className="team-social">
-                    <a className="social-tw" href="#/">
-                      <i className="fab fa-twitter"></i>
+                    <a
+                      className="social-tw"
+                      href="https://www.facebook.com/anhtuan.2501"
+                    >
+                      <i className="fab fa-twitter" />
                     </a>
-                    <a className="social-fb" href="#/">
-                      <i className="fab fa-facebook-f"></i>
+                    <a
+                      className="social-fb"
+                      href="https://www.facebook.com/anhtuan.2501"
+                    >
+                      <i className="fab fa-facebook-f" />
                     </a>
-                    <a className="social-li" href="#/">
-                      <i className="fab fa-linkedin-in"></i>
+                    <a
+                      className="social-li"
+                      href="https://www.facebook.com/anhtuan.2501"
+                    >
+                      <i className="fab fa-linkedin-in" />
                     </a>
-                    <a className="social-in" href="#/">
-                      <i className="fab fa-instagram"></i>
+                    <a
+                      className="social-in"
+                      href="https://www.facebook.com/anhtuan.2501"
+                    >
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -271,73 +233,60 @@ const About = () => {
             <div className="col-lg-3 col-md-6">
               <div className="team-item">
                 <div className="team-img">
-                  <img src="/img/team-2.jpg" alt="Team" />
+                  <img src="img/thao.jpg" alt="Team Image" />
                 </div>
                 <div className="team-text">
-                  <h2>Dylan Adams</h2>
+                  <h2>Thu Thảo</h2>
                   <h3>Developer</h3>
                   <div className="team-social">
-                    <a className="social-tw" href="#/">
-                      <i className="fab fa-twitter"></i>
+                    <a className="social-tw" href>
+                      <i className="fab fa-twitter" />
                     </a>
-                    <a className="social-fb" href="#/">
-                      <i className="fab fa-facebook-f"></i>
+                    <a className="social-fb" href>
+                      <i className="fab fa-facebook-f" />
                     </a>
-                    <a className="social-li" href="#/">
-                      <i className="fab fa-linkedin-in"></i>
+                    <a className="social-li" href>
+                      <i className="fab fa-linkedin-in" />
                     </a>
-                    <a className="social-in" href="#/">
-                      <i className="fab fa-instagram"></i>
+                    <a className="social-in" href>
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-md-6">
+            <div className="col-lg-3 col-md-12">
               <div className="team-item">
                 <div className="team-img">
-                  <img src="/img/team-3.jpg" alt="Team" />
+                  <img src="img/hieu chim.jpg" alt="Team Image" />
                 </div>
                 <div className="team-text">
-                  <h2>Dylan Adams</h2>
+                  <h2>Hoàng Trung Hiếu</h2>
                   <h3>Developer</h3>
                   <div className="team-social">
-                    <a className="social-tw" href="#/">
-                      <i className="fab fa-twitter"></i>
+                    <a
+                      className="social-tw"
+                      href="https://www.facebook.com/profile.php?id=100023731251523"
+                    >
+                      <i className="fab fa-twitter" />
                     </a>
-                    <a className="social-fb" href="#/">
-                      <i className="fab fa-facebook-f"></i>
+                    <a
+                      className="social-fb"
+                      href="https://www.facebook.com/profile.php?id=100023731251523"
+                    >
+                      <i className="fab fa-facebook-f" />
                     </a>
-                    <a className="social-li" href="#/">
-                      <i className="fab fa-linkedin-in"></i>
+                    <a
+                      className="social-li"
+                      href="https://www.facebook.com/profile.php?id=100023731251523"
+                    >
+                      <i className="fab fa-linkedin-in" />
                     </a>
-                    <a className="social-in" href="#/">
-                      <i className="fab fa-instagram"></i>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-6">
-              <div className="team-item">
-                <div className="team-img">
-                  <img src="/img/team-4.jpg" alt="Team" />
-                </div>
-                <div className="team-text">
-                  <h2>Dylan Adams</h2>
-                  <h3>Developer</h3>
-                  <div className="team-social">
-                    <a className="social-tw" href="#/">
-                      <i className="fab fa-twitter"></i>
-                    </a>
-                    <a className="social-fb" href="#/">
-                      <i className="fab fa-facebook-f"></i>
-                    </a>
-                    <a className="social-li" href="#/">
-                      <i className="fab fa-linkedin-in"></i>
-                    </a>
-                    <a className="social-in" href="#/">
-                      <i className="fab fa-instagram"></i>
+                    <a
+                      className="social-in"
+                      href="https://www.facebook.com/profile.php?id=100023731251523"
+                    >
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -345,8 +294,8 @@ const About = () => {
             </div>
           </div>
         </div>
+        {/* Team End */}
       </div>
-      {/* <!-- Team End --> */}
 
       <Footer />
     </>

@@ -1,0 +1,248 @@
+/* Nền và font chữ */
+body {
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+}
+
+/* Tiêu đề chính */
+h2 {
+    color: #4a4a4a;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* Thông tin nhân viên */
+.employee-info {
+    background-color: #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-info h4 {
+    color: #007bff;
+    font-weight: 500;
+}
+
+.employee-info p {
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Bảng công việc */
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.table th {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+
+.table td {
+    text-align: center;
+    color: #555;
+}
+
+/* Nút bấm */
+.btn-info, .btn-success {
+    font-weight: bold;
+    font-size: 14px;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+h2, h4 {
+    color: #0056b3;
+    font-weight: 600;
+}
+
+.employee-info {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.employee-info h4 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.employee-info p {
+    margin: 5px 0;
+    font-size: 1em;
+}
+
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table th {
+    background-color: #0056b3;
+    color: #ffffff;
+}
+
+.table td {
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.table-primary {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+button.btn {
+    padding: 8px 16px;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+button.btn-primary {
+    background-color: #0056b3;
+    border: none;
+}
+
+button.btn-primary:hover {
+    background-color: #003d7a;
+}
+
+button.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+button.btn-success:hover {
+    background-color: #218838;
+}
+
+button.btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+button.btn-danger:hover {
+    background-color: #c82333;
+}
+
+.form-control {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    padding: 8px 12px;
+    font-size: 1em;
+}
+
+.form-control:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 4px rgba(0, 86, 179, 0.3);
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+table {
+    margin-top: 20px;
+}
+
+.table td {
+    color: #333;
+}
+
+#attendanceTable td {
+    background-color: #f1f5f8;
+}
+
+#attendanceTable th {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.alert {
+    padding: 15px;
+    background-color: #4caf50;
+    color: white;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+  /* Trang trí giao diện */
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f4f6f9;
+}
+.container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+h2 {
+    font-weight: 700;
+    color: #007bff;
+    text-align: center;
+}
+.employee-info, .attendance-section, .tasks-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+.form-control {
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+.btn-primary, .btn-success, .btn-danger {
+    font-weight: 600;
+}
+.table {
+    border-radius: 5px;
+    overflow: hidden;
+}
+.table th {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+}
+.table td {
+    text-align: center;
+}
+.logout-btn {
+    float: right;
+    font-size: 0.9em;
+}
+.btn-check-in, .btn-check-out {
+    width: 100%;
+    margin-bottom: 10px;
+}

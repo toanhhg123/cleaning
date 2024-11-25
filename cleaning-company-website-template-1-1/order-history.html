@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lịch Sử Đơn Hàng - TechTitans</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>Lịch Sử Đơn Hàng</h2>
+        <div id="order-list" class="mt-4"></div>
+    </div>
+
+    <script>
+        function displayOrderHistory() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const orderList = document.getElementById('order-list');
+            orderList.innerHTML = "";
+
+            if (orders.length === 0) {
+                orderList.innerHTML = "<p>Không có đơn hàng nào.</p>";
+            } else {
+                orders.forEach(order => {
+                    const orderItem = document.createElement('div');
+                    orderItem.classList.add('border', 'p-3', 'mb-3', 'rounded');
+                    orderItem.innerHTML = `
+                <h4>Dịch vụ: ${order.service}</h4>
+                <p><strong>Giá:</strong> ${order.price}</p>
+                <p><strong>Ngày:</strong> ${order.date}</p>
+                <p><strong>Thời gian:</strong> ${order.startTime} - ${order.endTime}</p>
+                <p><strong>Địa chỉ:</strong> ${order.address}</p>
+                <a href="order-detail.html?id=${order.id}" class="btn btn-info">Xem Chi Tiết</a>
+            `;
+                    orderList.appendChild(orderItem);
+                });
+            }
+        }
+
+        displayOrderHistory();
+    </script>
+</body>
+
+</html>

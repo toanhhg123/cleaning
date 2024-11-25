@@ -1,79 +1,59 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+  let location = useLocation();
+
+  const isHomePage = location.pathname === "/";
+
   return (
     <div className="header home">
       <div className="container-fluid">
         <div className="header-top row align-items-center">
           <div className="col-lg-3">
             <div className="brand">
-              <Link to="index.html">CleanMe</Link>
+              <a to="index.html" className="d-flex">
+                <img src="/img/2-removebg-preview.png" alt="Logo" />
+                TechTitans
+              </a>
             </div>
           </div>
           <div className="col-lg-9">
-            <div className="topbar">
-              <div className="topbar-col">
-                <Link to="tel:+012 345 67890">
-                  <i className="fa fa-phone-alt"></i>+012 345 67890
-                </Link>
-              </div>
-              <div className="topbar-col">
-                <Link to="mailto:info@example.com">
-                  <i className="fa fa-envelope"></i>info@example.com
-                </Link>
-              </div>
-              <div className="topbar-col">
-                <div className="topbar-social">
-                  <Link to="">
-                    <i className="fab fa-twitter"></i>
-                  </Link>
-                  <Link to="">
-                    <i className="fab fa-facebook-f"></i>
-                  </Link>
-                  <Link to="">
-                    <i className="fab fa-youtube"></i>
-                  </Link>
-                  <Link to="">
-                    <i className="fab fa-instagram"></i>
-                  </Link>
-                  <Link to="">
-                    <i className="fab fa-linkedin-in"></i>
-                  </Link>
-                </div>
-              </div>
-            </div>
             <div className="navbar navbar-expand-lg bg-light navbar-light">
-              <Link to="#" className="navbar-brand">
+              <a to="#" className="navbar-brand">
                 MENU
-              </Link>
+              </a>
               <button
                 type="button"
                 className="navbar-toggler"
                 data-toggle="collapse"
                 data-target="#navbarCollapse"
               >
-                <span className="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon" />
               </button>
-
               <div
                 className="collapse navbar-collapse justify-content-between"
                 id="navbarCollapse"
               >
-                <div className="navbar-nav ml-auto">
+                <div className="navbar-nav mx-auto">
                   <Link to="/" className="nav-item nav-link active">
-                    Home
+                    Trang chủ
                   </Link>
                   <Link to="/about" className="nav-item nav-link">
-                    About
+                    Giới thiệu
                   </Link>
                   <Link to="/service" className="nav-item nav-link">
-                    Service
+                    Dịch vụ
                   </Link>
-                  <Link to="/project" className="nav-item nav-link">
-                    Project
+                  <Link to="/complaint" className="nav-item nav-link">
+                    Khiếu nại
                   </Link>
                   <Link to="/contact" className="nav-item nav-link">
-                    Contact
+                    Liên hệ
+                  </Link>
+                </div>
+                <div className="d-flex me-0">
+                  <Link to="order-history.html" className="nav-item nav-link">
+                    <i className="fas fa-clipboard fa-2x" />
                   </Link>
                   <div className="nav-item dropdown">
                     <Link
@@ -81,68 +61,36 @@ const Header = () => {
                       className="nav-link dropdown-toggle"
                       data-toggle="dropdown"
                     >
-                      Dropdown
+                      <i className="fas fa-user fa-2x" />
                     </Link>
                     <div className="dropdown-menu">
-                      <Link to="#" className="dropdown-item">
-                        Sub Item 1
+                      <Link to="login.html" className="dropdown-item">
+                        Đăng nhập
                       </Link>
-                      <Link to="#" className="dropdown-item">
-                        Sub Item 2
+                      <Link to="register.html" className="dropdown-item">
+                        Đăng ký
                       </Link>
                     </div>
                   </div>
-                  <Link to="#" className="btn">
-                    Get A Quote
-                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="hero row align-items-center">
-          <div className="col-md-7">
-            <h2>Best & Trusted</h2>
-            <h2>
-              <span>Cleaning</span> Service
-            </h2>
-            <p>Lorem ipsum dolor sit amet elit pretium facilisis ornare</p>
-            <Link className="btn" to="">
-              Explore Now
-            </Link>
-          </div>
-          <div className="col-md-5">
-            <div className="form">
-              <h3>Get A Quote</h3>
-              <form>
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder="Your Name"
-                />
-                <input
-                  className="form-control"
-                  type="text"
-                  placeholder="Mobile Number"
-                />
-                <div className="control-group">
-                  <select className="custom-select" defaultValue={""}>
-                    <option value={""}>Choose a service</option>
-                    <option value="1">House Cleaning</option>
-                    <option value="2">Apartment Cleaning</option>
-                    <option value="3">Office Cleaning</option>
-                  </select>
-                </div>
-                <textarea
-                  className="form-control"
-                  placeholder="Comment"
-                ></textarea>
-                <button className="btn btn-block">Get A Quote</button>
-              </form>
+        {isHomePage && (
+          <div className="hero row">
+            <div className="col-md-5">
+              <h2>Dịch vụ Vệ sinh</h2>
+              <h2>
+                <span>Tốt &amp; Đáng Tin Cậy</span>
+              </h2>
+              <p>
+                Sạch sẽ từng góc, sống khỏe từng phút, để không gian thêm bùng
+                nổ!
+              </p>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Đơn Hàng - TechTitans</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .order-container {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .order-container h4 {
+            color: #333;
+        }
+        .back-to-services {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Chi Tiết Đơn Hàng</h2>
+        <div id="order-detail" class="order-container"></div>
+        <div class="text-center back-to-services">
+            <a href="service.html" class="btn btn-secondary">Quay lại danh sách dịch vụ</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Lấy ID của đơn hàng từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('id');
+
+            // Lấy danh sách đơn hàng từ localStorage
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const order = orders.find(order => order.id == orderId);
+
+            const orderDetail = document.getElementById('order-detail');
+
+            if (order) {
+                // Hiển thị chi tiết đơn hàng
+                orderDetail.innerHTML = `
+                    <h4><strong>Dịch vụ:</strong> ${order.service}</h4>
+                    <p><strong>Giá:</strong> ${order.price}</p>
+                    <p><strong>Họ và tên:</strong> ${order.fullName}</p>
+                    <p><strong>Số điện thoại:</strong> ${order.phone}</p>
+                    <p><strong>Ngày:</strong> ${order.date}</p>
+                    <p><strong>Thời gian:</strong> ${order.startTime} - ${order.endTime}</p>
+                    <p><strong>Địa chỉ:</strong> ${order.address}</p>
+                    <p><strong>Lời nhắn:</strong> ${order.message}</p>
+                    <p><strong>Trạng thái:</strong> <span id="order-status">${order.status}</span></p>
+                `;
+            } else {
+                // Hiển thị thông báo khi không tìm thấy đơn hàng
+                orderDetail.innerHTML = `
+                    <p class="text-danger">Không tìm thấy đơn hàng. Vui lòng kiểm tra lại.</p>
+                `;
+            }
+
+            // Debugging thông tin từ localStorage để xác minh
+            console.log("Order ID from URL:", orderId);
+            console.log("Orders in localStorage:", orders);
+        });
+    </script>
+</body>
+</html>

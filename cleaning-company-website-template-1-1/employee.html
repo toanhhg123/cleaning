@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/employee.css">
+</head>
+<body>
+    <!-- Nút đăng xuất -->
+    <div class="container mt-3 text-right">
+        <button id="logoutButton" class="btn btn-danger logout-btn" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Đăng Xuất
+        </button>
+    </div>
+
+    <div class="container mt-5">
+        <h2>Bảng Điều Khiển Nhân Viên</h2>
+
+        <!-- Danh sách công việc -->
+        <div class="tasks-section">
+            <h4>Danh Sách Công Việc</h4>
+            <table class="table table-bordered mt-3" id="taskTable">
+                <thead class="table-primary">
+                    <tr>
+                        <th>ID Công Việc</th>
+                        <th>Tên Công Việc</th>
+                        <th>Trạng Thái</th>
+                        <th>Ngày Dịch Vụ</th>
+                        <th>Thời Gian</th>
+                        <th>Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Nội dung sẽ được thêm động bằng JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- JavaScript -->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const isLoggedIn = localStorage.getItem("isLoggedIn");
+                const role = localStorage.getItem("role");
+
+                if (isLoggedIn !== "true" || role !== "employee") {
+                    window.location.href = "login.html";
+                } else {
+                    loadTasks();
+                }
+            });
+
+            function logout() {
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("role");
+                window.location.href = "login.html";
+            }
+
+            function loadTasks() {
+                const tasks = JSON.parse(localStorage.getItem("employeeTasks")) || [
+                    { id: 1, name: "Kiểm tra hệ thống A", status: "Chưa hoàn thành", date: "2023-11-10", startTime: "08:00", endTime: "10:00" },
+                    { id: 2, name: "Sửa chữa máy B", status: "Đã nhận", date: "2023-11-11", startTime: "13:00", endTime: "15:00" }
+                ];
+                const tableBody = document.querySelector("#taskTable tbody");
+                tableBody.innerHTML = "";
+
+                tasks.forEach(task => {
+                    const isDisabled = task.status !== "Chưa hoàn thành";
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${task.id}</td>
+                        <td>${task.name}</td>
+                        <td>${task.status}</td>
+                        <td>${task.date}</td>
+                        <td>${task.startTime} - ${task.endTime}</td>
+                        <td>
+                            <button 
+                                class="btn btn-success" 
+                                onclick="acceptTask(${task.id})" 
+                                ${isDisabled ? "disabled" : ""}
+                            >
+                                Nhận Việc
+                            </button>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+
+                // Lưu lại danh sách công việc đã cập nhật
+                localStorage.setItem("employeeTasks", JSON.stringify(tasks));
+            }
+
+            function acceptTask(taskId) {
+                const tasks = JSON.parse(localStorage.getItem("employeeTasks")) || [];
+                const task = tasks.find(t => t.id === taskId);
+
+                if (task && task.status === "Chưa hoàn thành") {
+                    task.status = "Đã nhận";
+                    alert(`Bạn đã nhận công việc: ${task.name}`);
+                    
+                    // Lưu trạng thái mới vào localStorage
+                    localStorage.setItem("employeeTasks", JSON.stringify(tasks));
+                    
+                    // Tải lại danh sách công việc để hiển thị cập nhật
+                    loadTasks();
+                } else {
+                    alert("Công việc này không thể nhận!");
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>
