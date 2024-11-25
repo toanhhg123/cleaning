@@ -33,7 +33,7 @@ export default function NavLogo({ collapsed, onToggle }: Props) {
 						className="ml-2 text-xl font-bold"
 						style={{ color: colorPrimary }}
 					>
-						Slash Admin
+						Cleaning
 					</span>
 				)}
 			</div>

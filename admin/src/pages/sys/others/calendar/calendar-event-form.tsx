@@ -105,9 +105,7 @@ export default function CalendarEventForm({
 						if (type === "edit") onEdit(event);
 						onCancel();
 					})
-					.catch((info) => {
-						console.log("Validate Failed:", info);
-					});
+					.catch((info) => {});
 			}}
 		>
 			<Form

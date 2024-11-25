@@ -1,6 +1,19 @@
 package com.clean.app.entity;
 
-import jakarta.persistence.*;
+import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Data
@@ -11,8 +24,8 @@ public class Services {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 150)
-    private String title;
+    @Column(nullable = false, length = 1000)
+    private String name;
 
     @Column(nullable = false)
     private String description;
@@ -20,16 +33,35 @@ public class Services {
     @Column(nullable = false)
     private Double price;
 
+    @Column(nullable = false)
+    private Double pricePerHour;
+
+    @Column(name = "customer_id", nullable = false)
+    private Long customerId;
+
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
-    private User customer; // Khách hàng tạo dịch vụ
+    @JoinColumn(name = "customer_id", nullable = false, insertable = false, updatable = false)
+    private User customer;
 
     @Column(nullable = false, length = 50)
-    private String status = "pending"; // Trạng thái: pending, approved, rejected
+    private String status = "pending";
 
-    @Column(name = "created_at", updatable = false)
-    private java.time.LocalDateTime createdAt = java.time.LocalDateTime.now();
+    @Column(name = "created_at", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
-    @Column(name = "updated_at")
-    private java.time.LocalDateTime updatedAt = java.time.LocalDateTime.now();
+    @Column(name = "updated_at", insertable = false, updatable = true)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+        updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 }

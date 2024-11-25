@@ -5,6 +5,15 @@ export interface UserToken {
 	refreshToken?: string;
 }
 
+export interface UserInfoResponse {
+	id: number;
+	fullName: string;
+	email: string;
+	phoneNumber: string;
+	password: string;
+	role: string;
+}
+
 export interface UserInfo {
 	id: string;
 	email: string;

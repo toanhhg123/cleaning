@@ -1,0 +1,11 @@
+{
+  "id": "9100714781927703",
+  "parentId": "",
+  "label": "sys.menu.dashboard",
+  "name": "Dashboard",
+  "icon": "ic-analysis",
+  "type": 1,
+  "route": "dashboard",
+  "order": 1,
+  "component": "/dashboard/analysis/index.tsx"
+}

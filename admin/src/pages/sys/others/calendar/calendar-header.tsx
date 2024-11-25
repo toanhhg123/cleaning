@@ -31,7 +31,7 @@ export default function CalendarHeader({
 	onMove,
 	onCreate,
 	onViewTypeChange,
-}: Props) {
+}: Readonly<Props>) {
 	const { screenMap } = useResponsive();
 
 	const items = useMemo<ViewTypeMenu[]>(

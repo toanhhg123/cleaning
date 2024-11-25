@@ -17,7 +17,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtService {
     private static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437";
-    private static final long EXPIRATION_DATE = 604800000;
+    private static final long EXPIRATION_DATE = 6048000000L;
 
     // generate JWT token
     public String generateToken(Authentication authentication) {

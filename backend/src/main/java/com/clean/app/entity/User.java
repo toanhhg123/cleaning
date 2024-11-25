@@ -1,5 +1,9 @@
 package com.clean.app.entity;
 
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -26,9 +30,22 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Column(name = "created_at", updatable = false)
-    private java.time.LocalDateTime createdAt = java.time.LocalDateTime.now();
+    @Column(name = "created_at", insertable = false, updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
 
-    @Column(name = "updated_at")
-    private java.time.LocalDateTime updatedAt = java.time.LocalDateTime.now();
+    @Column(name = "updated_at", insertable = false, updatable = true)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+        updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 }

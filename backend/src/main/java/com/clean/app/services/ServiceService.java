@@ -40,10 +40,9 @@ public class ServiceService {
         Optional<Services> serviceOptional = serviceRepository.findById(id);
         if (serviceOptional.isPresent()) {
             Services service = serviceOptional.get();
-            service.setTitle(serviceDetails.getTitle());
+            service.setName(serviceDetails.getName());
             service.setDescription(serviceDetails.getDescription());
             service.setPrice(serviceDetails.getPrice());
-            service.setUpdatedAt(java.time.LocalDateTime.now());
             return serviceRepository.save(service);
         }
         return null;
@@ -54,7 +53,6 @@ public class ServiceService {
         if (serviceOptional.isPresent()) {
             Services service = serviceOptional.get();
             service.setStatus("approved");
-            service.setUpdatedAt(java.time.LocalDateTime.now());
             return serviceRepository.save(service);
         }
         return null;
@@ -65,7 +63,6 @@ public class ServiceService {
         if (serviceOptional.isPresent()) {
             Services service = serviceOptional.get();
             service.setStatus("rejected");
-            service.setUpdatedAt(java.time.LocalDateTime.now());
             return serviceRepository.save(service);
         }
         return null;

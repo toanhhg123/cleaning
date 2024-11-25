@@ -1,15 +1,13 @@
-package com.clean.app.auth;
+package com.clean.app.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
-@NoArgsConstructor
+@Data
+@Builder
 public class AuthRequest {
-
     private String email;
     private String password;
-
 }

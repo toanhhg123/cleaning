@@ -24,10 +24,10 @@ function LoginForm() {
 
 	if (loginState !== LoginStateEnum.LOGIN) return null;
 
-	const handleFinish = async ({ username, password }: SignInReq) => {
+	const handleFinish = async ({ email, password }: SignInReq) => {
 		setLoading(true);
 		try {
-			await signIn({ username, password });
+			await signIn({ email, password });
 		} finally {
 			setLoading(false);
 		}
@@ -42,7 +42,7 @@ function LoginForm() {
 				size="large"
 				initialValues={{
 					remember: true,
-					username: DEFAULT_USER.username,
+					email: DEFAULT_USER.email,
 					password: DEFAULT_USER.password,
 				}}
 				onFinish={handleFinish}
@@ -60,7 +60,7 @@ function LoginForm() {
 										className="ml-1"
 										style={{ color: themeToken.colorInfoTextHover }}
 									>
-										<span>{DEFAULT_USER.username}</span>
+										<span>{DEFAULT_USER.email}</span>
 									</strong>
 								</div>
 
@@ -94,9 +94,13 @@ function LoginForm() {
 				</div>
 
 				<Form.Item
-					name="username"
+					name="email"
 					rules={[
-						{ required: true, message: t("sys.login.accountPlaceholder") },
+						{
+							required: true,
+							message: t("sys.login.accountPlaceholder"),
+							type: "email",
+						},
 					]}
 				>
 					<Input placeholder={t("sys.login.userName")} />
@@ -104,7 +108,10 @@ function LoginForm() {
 				<Form.Item
 					name="password"
 					rules={[
-						{ required: true, message: t("sys.login.passwordPlaceholder") },
+						{
+							required: true,
+							message: t("sys.login.passwordPlaceholder"),
+						},
 					]}
 				>
 					<Input.Password

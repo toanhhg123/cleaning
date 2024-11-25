@@ -1,57 +1,56 @@
 import axios, {
-	type AxiosRequestConfig,
 	type AxiosError,
+	type AxiosRequestConfig,
 	type AxiosResponse,
 } from "axios";
 
 import { t } from "@/locales/i18n";
 import userStore from "@/store/userStore";
 
-import { toast } from "sonner";
 import type { Result } from "#/api";
-import { ResultEnum } from "#/enum";
+import { toast } from "sonner";
 
-// 创建 axios 实例
 const axiosInstance = axios.create({
 	baseURL: import.meta.env.VITE_APP_BASE_API,
 	timeout: 50000,
 	headers: { "Content-Type": "application/json;charset=utf-8" },
 });
 
-// 请求拦截
 axiosInstance.interceptors.request.use(
 	(config) => {
-		// 在请求被发送之前做些什么
-		config.headers.Authorization = "Bearer Token";
+		const token = userStore.getState().userToken.accessToken;
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
+
 		return config;
 	},
 	(error) => {
-		// 请求错误时做些什么
 		return Promise.reject(error);
 	},
 );
 
-// 响应拦截
 axiosInstance.interceptors.response.use(
-	(res: AxiosResponse<Result>) => {
+	(res: AxiosResponse) => {
 		if (!res.data) throw new Error(t("sys.api.apiRequestFailed"));
 
-		const { status, data, message } = res.data;
-		// 业务请求成功
-		const hasSuccess =
-			data && Reflect.has(res.data, "status") && status === ResultEnum.SUCCESS;
+		const { data } = res;
+
+		const hasSuccess = !!data;
+
 		if (hasSuccess) {
-			return data;
+			return data || res.data;
 		}
 
-		// 业务请求错误
-		throw new Error(message || t("sys.api.apiRequestFailed"));
+		const errorMessage = "Lỗi dòng data response";
+		throw new Error(errorMessage);
 	},
 	(error: AxiosError<Result>) => {
 		const { response, message } = error || {};
 
 		const errMsg =
-			response?.data?.message || message || t("sys.api.errorMessage");
+			(response?.data?.message ?? message) || t("sys.api.errorMessage");
+
 		toast.error(errMsg, {
 			position: "top-center",
 		});
