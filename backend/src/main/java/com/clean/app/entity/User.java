@@ -2,6 +2,9 @@ package com.clean.app.entity;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -30,12 +33,12 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    @Column(name = "created_at", insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = true)
-    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
 
     @PrePersist

@@ -142,6 +142,7 @@ const createMenuRoute = (
   );
 
   if (permission.component) {
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const Element = lazy(loadComponentFromPath(permission.component) as any);
     baseRoute.element = permission.frameSrc ? (
       <Element src={permission.frameSrc} />

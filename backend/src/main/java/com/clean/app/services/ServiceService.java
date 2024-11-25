@@ -43,6 +43,7 @@ public class ServiceService {
             service.setName(serviceDetails.getName());
             service.setDescription(serviceDetails.getDescription());
             service.setPrice(serviceDetails.getPrice());
+            service.setStatus(serviceDetails.getStatus());
             return serviceRepository.save(service);
         }
         return null;

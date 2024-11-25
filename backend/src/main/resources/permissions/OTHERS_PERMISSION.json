@@ -10,6 +10,16 @@
     "component": "/sys/others/service/index.tsx"
   },
   {
+    "id": "39534525257359246",
+    "parentId": "",
+    "label": "sys.menu.order",
+    "name": "order",
+    "icon": "solar:calendar-bold-duotone",
+    "type": 1,
+    "route": "order",
+    "component": "/sys/others/order/index.tsx"
+  },
+  {
     "id": "5455837930804461",
     "parentId": "",
     "label": "sys.menu.disabled",

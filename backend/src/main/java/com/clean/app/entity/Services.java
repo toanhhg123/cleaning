@@ -2,6 +2,9 @@ package com.clean.app.entity;
 
 import java.util.Date;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,12 +49,12 @@ public class Services {
     @Column(nullable = false, length = 50)
     private String status = "pending";
 
-    @Column(name = "created_at", insertable = false, updatable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @Column(name = "updated_at", insertable = false, updatable = true)
-    @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedDate
+    @Column(name = "updated_at", nullable = false)
     private Date updatedAt;
 
     @PrePersist

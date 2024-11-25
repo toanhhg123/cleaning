@@ -1,5 +1,10 @@
 package com.clean.app.entity;
 
+import java.util.Date;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,9 +23,22 @@ public class Wallet {
     @Column(nullable = false)
     private Double balance = 0.00;
 
-    @Column(name = "created_at", updatable = false)
-    private java.time.LocalDateTime createdAt = java.time.LocalDateTime.now();
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Date createdAt;
 
-    @Column(name = "updated_at")
-    private java.time.LocalDateTime updatedAt = java.time.LocalDateTime.now();
+    @LastModifiedDate
+    @Column(name = "updated_at", nullable = false)
+    private Date updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+        updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 }

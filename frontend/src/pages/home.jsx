@@ -192,16 +192,16 @@ const Home = () => {
                   <h3>CEO</h3>
                   <div className="team-social">
                     <a className="social-tw" href="#/">
-                      <i className="fab fa-twitter"></i>
+                      <i className="fab fa-twitter" />
                     </a>
                     <a className="social-fb" href="#/">
-                      <i className="fab fa-facebook-f"></i>
+                      <i className="fab fa-facebook-f" />
                     </a>
                     <a className="social-li" href="#/">
-                      <i className="fab fa-linkedin-in"></i>
+                      <i className="fab fa-linkedin-in" />
                     </a>
                     <a className="social-in" href="#/">
-                      <i className="fab fa-instagram"></i>
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -217,16 +217,16 @@ const Home = () => {
                   <h3>Team Manager</h3>
                   <div className="team-social">
                     <a className="social-tw" href="#/">
-                      <i className="fab fa-twitter"></i>
+                      <i className="fab fa-twitter" />
                     </a>
                     <a className="social-fb" href="#/">
-                      <i className="fab fa-facebook-f"></i>
+                      <i className="fab fa-facebook-f" />
                     </a>
                     <a className="social-li" href="#/">
-                      <i className="fab fa-linkedin-in"></i>
+                      <i className="fab fa-linkedin-in" />
                     </a>
                     <a className="social-in" href="#/">
-                      <i className="fab fa-instagram"></i>
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -242,16 +242,16 @@ const Home = () => {
                   <h3>Cleaner</h3>
                   <div className="team-social">
                     <a className="social-tw" href="#/">
-                      <i className="fab fa-twitter"></i>
+                      <i className="fab fa-twitter" />
                     </a>
                     <a className="social-fb" href="#/">
-                      <i className="fab fa-facebook-f"></i>
+                      <i className="fab fa-facebook-f" />
                     </a>
                     <a className="social-li" href="#/">
-                      <i className="fab fa-linkedin-in"></i>
+                      <i className="fab fa-linkedin-in" />
                     </a>
                     <a className="social-in" href="#/">
-                      <i className="fab fa-instagram"></i>
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -267,16 +267,16 @@ const Home = () => {
                   <h3>Cleaner</h3>
                   <div className="team-social">
                     <a className="social-tw" href="#/">
-                      <i className="fab fa-twitter"></i>
+                      <i className="fab fa-twitter" />
                     </a>
                     <a className="social-fb" href="#/">
-                      <i className="fab fa-facebook-f"></i>
+                      <i className="fab fa-facebook-f" />
                     </a>
                     <a className="social-li" href="#/">
-                      <i className="fab fa-linkedin-in"></i>
+                      <i className="fab fa-linkedin-in" />
                     </a>
                     <a className="social-in" href="#/">
-                      <i className="fab fa-instagram"></i>
+                      <i className="fab fa-instagram" />
                     </a>
                   </div>
                 </div>
@@ -433,7 +433,7 @@ const Home = () => {
               <div className="price-item">
                 <div className="price-header">
                   <div className="price-icon">
-                    <i className="fa fa-home"></i>
+                    <i className="fa fa-home" />
                   </div>
                   <div className="price-title">
                     <h2>Standard</h2>
@@ -458,7 +458,8 @@ const Home = () => {
                 <div className="price-footer">
                   <div className="price-action">
                     <a href="#/">
-                      <i className="fa fa-shopping-cart"></i>Book Now
+                      <i className="fa fa-shopping-cart" />
+                      Book Now
                     </a>
                   </div>
                 </div>
@@ -468,7 +469,7 @@ const Home = () => {
               <div className="price-item featured-item">
                 <div className="price-header">
                   <div className="price-icon">
-                    <i className="fa fa-star"></i>
+                    <i className="fa fa-star" />
                   </div>
                   <div className="price-title">
                     <h2>Premium</h2>
@@ -493,7 +494,8 @@ const Home = () => {
                 <div className="price-footer">
                   <div className="price-action">
                     <a href="#/">
-                      <i className="fa fa-shopping-cart"></i>Book Now
+                      <i className="fa fa-shopping-cart" />
+                      Book Now
                     </a>
                   </div>
                 </div>
@@ -503,7 +505,7 @@ const Home = () => {
               <div className="price-item">
                 <div className="price-header">
                   <div className="price-icon">
-                    <i className="fa fa-gift"></i>
+                    <i className="fa fa-gift" />
                   </div>
                   <div className="price-title">
                     <h2>Enterprise</h2>
@@ -528,7 +530,7 @@ const Home = () => {
                 <div className="price-footer">
                   <div className="price-action">
                     <a href="#/">
-                      <i className="fa fa-shopping-cart"></i>Book Now
+                      <i className="fa fa-shopping-cart" /> Book Now
                     </a>
                   </div>
                 </div>
@@ -550,7 +552,9 @@ const Home = () => {
             <div className="col-md-4">
               <div className="form">
                 <input className="form-control" placeholder="Email here" />
-                <button className="btn">Submit</button>
+                <button type="button" className="btn">
+                  Submit
+                </button>
               </div>
             </div>
           </div>
@@ -654,9 +658,9 @@ const Home = () => {
                 <img src="/img/blog-1.jpg" alt="Blog" />
                 <h3>Lorem ipsum dolor</h3>
                 <div className="meta">
-                  <i className="fa fa-list-alt"></i>
+                  <i className="fa fa-list-alt" />
                   <a href="#/">Flour Cleaning</a>
-                  <i className="fa fa-calendar-alt"></i>
+                  <i className="fa fa-calendar-alt" />
                   <p>11-Jun-20</p>
                 </div>
                 <p>
@@ -674,9 +678,9 @@ const Home = () => {
                 <img src="/img/blog-2.jpg" alt="Blog" />
                 <h3>Lorem ipsum dolor</h3>
                 <div className="meta">
-                  <i className="fa fa-list-alt"></i>
+                  <i className="fa fa-list-alt" />
                   <a href="#/">Glass Cleaning</a>
-                  <i className="fa fa-calendar-alt"></i>
+                  <i className="fa fa-calendar-alt" />
                   <p>11-Jun-20</p>
                 </div>
                 <p>
@@ -694,9 +698,9 @@ const Home = () => {
                 <img src="/img/blog-3.jpg" alt="Blog" />
                 <h3>Lorem ipsum dolor</h3>
                 <div className="meta">
-                  <i className="fa fa-list-alt"></i>
+                  <i className="fa fa-list-alt" />
                   <a href="#/">Carpet Cleaning</a>
-                  <i className="fa fa-calendar-alt"></i>
+                  <i className="fa fa-calendar-alt" />
                   <p>11-Jun-20</p>
                 </div>
                 <p>

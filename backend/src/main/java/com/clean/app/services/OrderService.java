@@ -45,7 +45,6 @@ public class OrderService {
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
             order.setStatus(orderDetails.getStatus());
-            order.setUpdatedAt(java.time.LocalDateTime.now());
             return orderRepository.save(order);
         }
         return null;

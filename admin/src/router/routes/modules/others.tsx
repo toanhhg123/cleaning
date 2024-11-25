@@ -14,6 +14,7 @@ const Iframe = lazy(() => import("@/pages/sys/others/iframe"));
 const Calendar = lazy(() => import("@/pages/sys/others/calendar"));
 const Kanban = lazy(() => import("@/pages/sys/others/kanban"));
 
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 function Wrapper({ children }: any) {
 	return <Suspense fallback={<CircleLoading />}>{children}</Suspense>;
 }

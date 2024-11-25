@@ -7,30 +7,32 @@ const Footer = () => {
             <div className="footer-contact">
               <h2>Get In Touch</h2>
               <p>
-                <i className="fa fa-map-marker-alt"></i>123 Street, New York,
-                USA
+                <i className="fa fa-map-marker-alt" />
+                123 Street, New York, USA
               </p>
               <p>
-                <i className="fa fa-phone-alt"></i>+012 345 67890
+                <i className="fa fa-phone-alt" />
+                +012 345 67890
               </p>
               <p>
-                <i className="fa fa-envelope"></i>info@example.com
+                <i className="fa fa-envelope" />
+                info@example.com
               </p>
               <div className="footer-social">
                 <a href="#/">
-                  <i className="fab fa-twitter"></i>
+                  <i className="fab fa-twitter" />
                 </a>
                 <a href="#/">
-                  <i className="fab fa-facebook-f"></i>
+                  <i className="fab fa-facebook-f" />
                 </a>
                 <a href="#/">
-                  <i className="fab fa-youtube"></i>
+                  <i className="fab fa-youtube" />
                 </a>
                 <a href="#/">
-                  <i className="fab fa-instagram"></i>
+                  <i className="fab fa-instagram" />
                 </a>
                 <a href="#/">
-                  <i className="fab fa-linkedin-in"></i>
+                  <i className="fab fa-linkedin-in" />
                 </a>
               </div>
             </div>
@@ -63,7 +65,9 @@ const Footer = () => {
                 lacus eget velit
               </p>
               <input className="form-control" placeholder="Email here" />
-              <button className="btn">Submit</button>
+              <button type="button" className="btn">
+                Submit
+              </button>
             </div>
           </div>
         </div>

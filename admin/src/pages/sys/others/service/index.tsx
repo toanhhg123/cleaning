@@ -12,6 +12,7 @@ import {
 	InputNumber,
 	Modal,
 	Popconfirm,
+	Radio,
 	Table,
 } from "antd";
 import type { ColumnsType } from "antd/es/table";
@@ -78,6 +79,11 @@ const ServicePage = () => {
 	};
 
 	const columns: ColumnsType<ServiceResponse> = [
+		{
+			title: "Id",
+			dataIndex: "id",
+			width: 60,
+		},
 		{
 			title: "Name",
 			dataIndex: "name",
@@ -246,6 +252,17 @@ const ServicePage = () => {
 							}
 							className="!w-full"
 						/>
+					</Form.Item>
+
+					<Form.Item<ServiceResponse>
+						label="Status"
+						name="status"
+						rules={[{ required: true, message: "Please input your name!" }]}
+					>
+						<Radio.Group optionType="button">
+							<Radio value={"pending"}>Pending</Radio>
+							<Radio value={"active"}>Active</Radio>
+						</Radio.Group>
 					</Form.Item>
 
 					<Form.Item<ServiceResponse>

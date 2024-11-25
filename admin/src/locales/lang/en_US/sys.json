@@ -104,6 +104,7 @@
 			"components": "Components",
 			"icon": "Icon",
 			"service": "Service",
+			"order": "Orders",
 			"animate": "Animate",
 			"scroll": "Scroll",
 			"markdown": "Markdown",

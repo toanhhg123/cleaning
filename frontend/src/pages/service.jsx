@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import Header from "../components/header";
 
@@ -14,8 +15,8 @@ const Service = () => {
               <h2>Our Services</h2>
             </div>
             <div className="col-12">
-              <a href>Home</a>
-              <a href>Our Services</a>
+              <Link to="">Home</Link>
+              <Link to="">Our Services</Link>
             </div>
           </div>
         </div>

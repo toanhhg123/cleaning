@@ -27,7 +27,6 @@ public class WalletService {
         if (walletOptional.isPresent()) {
             Wallet wallet = walletOptional.get();
             wallet.setBalance(wallet.getBalance() + amount);
-            wallet.setUpdatedAt(java.time.LocalDateTime.now());
             return walletRepository.save(wallet);
         }
         return null;

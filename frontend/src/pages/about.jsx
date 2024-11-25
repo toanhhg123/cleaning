@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Footer from "../components/footer";
 import Header from "../components/header";
 
@@ -14,8 +15,8 @@ const About = () => {
               <h2>Giới thiệu</h2>
             </div>
             <div className="col-12">
-              <a href>Trang chủ</a>
-              <a href>Giới thiệu</a>
+              <Link to="/">Trang chủ</Link>
+              <Link to="/about">Giới thiệu</Link>
             </div>
           </div>
         </div>
@@ -196,7 +197,7 @@ const About = () => {
             <div className="col-lg-3 col-md-6">
               <div className="team-item">
                 <div className="team-img">
-                  <img src="img/tuan.jpg" alt="Team Image" />
+                  <img src="img/tuan.jpg" alt="Team" />
                 </div>
                 <div className="team-text">
                   <h2>Lê Anh Tuấn</h2>
@@ -233,22 +234,22 @@ const About = () => {
             <div className="col-lg-3 col-md-6">
               <div className="team-item">
                 <div className="team-img">
-                  <img src="img/thao.jpg" alt="Team Image" />
+                  <img src="img/thao.jpg" alt="Team" />
                 </div>
                 <div className="team-text">
                   <h2>Thu Thảo</h2>
                   <h3>Developer</h3>
                   <div className="team-social">
-                    <a className="social-tw" href>
+                    <a className="social-tw" href="#/">
                       <i className="fab fa-twitter" />
                     </a>
-                    <a className="social-fb" href>
+                    <a className="social-fb" href="#/">
                       <i className="fab fa-facebook-f" />
                     </a>
-                    <a className="social-li" href>
+                    <a className="social-li" href="#/">
                       <i className="fab fa-linkedin-in" />
                     </a>
-                    <a className="social-in" href>
+                    <a className="social-in" href="#/">
                       <i className="fab fa-instagram" />
                     </a>
                   </div>
@@ -258,7 +259,7 @@ const About = () => {
             <div className="col-lg-3 col-md-12">
               <div className="team-item">
                 <div className="team-img">
-                  <img src="img/hieu chim.jpg" alt="Team Image" />
+                  <img src="img/hieu chim.jpg" alt="Team " />
                 </div>
                 <div className="team-text">
                   <h2>Hoàng Trung Hiếu</h2>

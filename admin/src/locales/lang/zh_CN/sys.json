@@ -135,6 +135,7 @@
 			"blank": "空白",
 			"calendar": "日历",
 			"services": "Services",
+			"order": "Orders",
 			"kanban": "看板",
 			"error": {
 				"index": "异常页",
