@@ -5,8 +5,6 @@ import java.util.Date;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -29,6 +27,12 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+
+    private String code;
+
+    private String avatar;
+
+    private String address;
 
     @Column(nullable = false)
     private String role;

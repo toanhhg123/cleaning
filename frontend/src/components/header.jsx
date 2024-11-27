@@ -1,7 +1,9 @@
 import { Link, useLocation } from "react-router-dom";
+import useUser, { useAuth } from "../hooks/useUser";
 
 const Header = () => {
-  let location = useLocation();
+  const location = useLocation();
+  const { isLogined } = useAuth();
 
   const isHomePage = location.pathname === "/";
 
@@ -11,17 +13,17 @@ const Header = () => {
         <div className="header-top row align-items-center">
           <div className="col-lg-3">
             <div className="brand">
-              <a to="index.html" className="d-flex">
+              <Link to="index.html" className="d-flex">
                 <img src="/img/2-removebg-preview.png" alt="Logo" />
                 TechTitans
-              </a>
+              </Link>
             </div>
           </div>
           <div className="col-lg-9">
             <div className="navbar navbar-expand-lg bg-light navbar-light">
-              <a to="#" className="navbar-brand">
+              <Link to="#" className="navbar-brand">
                 MENU
-              </a>
+              </Link>
               <button
                 type="button"
                 className="navbar-toggler"
@@ -63,14 +65,18 @@ const Header = () => {
                     >
                       <i className="fas fa-user fa-2x" />
                     </Link>
-                    <div className="dropdown-menu">
-                      <Link to="login.html" className="dropdown-item">
-                        Đăng nhập
-                      </Link>
-                      <Link to="register.html" className="dropdown-item">
-                        Đăng ký
-                      </Link>
-                    </div>
+                    {isLogined ? (
+                      <UserDropDown />
+                    ) : (
+                      <div className="dropdown-menu">
+                        <Link to="/login" className="dropdown-item">
+                          Đăng nhập
+                        </Link>
+                        <Link to="/register" className="dropdown-item">
+                          Đăng ký
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -92,6 +98,24 @@ const Header = () => {
           </div>
         )}
       </div>
+    </div>
+  );
+};
+
+const UserDropDown = () => {
+  const { userInfo } = useUser();
+
+  return (
+    <div className="dropdown-menu">
+      <Link to="#/" className="dropdown-item">
+        {userInfo.fullName} | {userInfo.email}
+      </Link>
+      <Link to="/my-orders" className="dropdown-item">
+        lịch sử order
+      </Link>
+      <Link to="#/" className="dropdown-item">
+        Đăng xuất
+      </Link>
     </div>
   );
 };

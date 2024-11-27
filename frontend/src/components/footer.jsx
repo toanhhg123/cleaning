@@ -3,9 +3,29 @@ const Footer = () => {
     <div className="footer">
       <div className="container">
         <div className="row">
+          <div className="col-md-6 col-lg-2">
+            <div className="footer-link">
+              <h2>TechTitans</h2>
+              <a href="#/">Trang chủ</a>
+              <a href="#/">Giới thiệu</a>
+              <a href="#/">Dịch vụ</a>
+              <a href="#/">FAQs</a>
+              <a href="#/">Đánh giá</a>
+            </div>
+          </div>
+          <div className="col-md-6 col-lg-4">
+            <div className="footer-link">
+              <h2>Chính sách và hỗ trợ</h2>
+              <a href="#/">Điều kiện giao dịch chung</a>
+              <a href="#/">Điều khoản sử dụng</a>
+              <a href="#/">Bảo mật thông tin thanh toán</a>
+              <a href="#/">Chính sách vận chuyển và giao nhận</a>
+              <a href="#/">Chính sách bảo vệ dữ liệu cá nhân</a>
+            </div>
+          </div>
           <div className="col-md-6 col-lg-3">
             <div className="footer-contact">
-              <h2>Get In Touch</h2>
+              <h2>Liên Hệ</h2>
               <p>
                 <i className="fa fa-map-marker-alt" />
                 123 Street, New York, USA
@@ -38,26 +58,6 @@ const Footer = () => {
             </div>
           </div>
           <div className="col-md-6 col-lg-3">
-            <div className="footer-link">
-              <h2>Useful Link</h2>
-              <a href="#/">About Us</a>
-              <a href="#/">Our Story</a>
-              <a href="#/">Our Services</a>
-              <a href="#/">Our Projects</a>
-              <a href="#/">Contact Us</a>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-3">
-            <div className="footer-link">
-              <h2>Useful Link</h2>
-              <a href="#/">Our Clients</a>
-              <a href="#/">Clients Review</a>
-              <a href="#/">Ongoing Project</a>
-              <a href="#/">Customer Support</a>
-              <a href="#/">FAQs</a>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-3">
             <div className="footer-form">
               <h2>Stay Updated</h2>
               <p>
@@ -69,29 +69,6 @@ const Footer = () => {
                 Submit
               </button>
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="container footer-menu">
-        <div className="f-menu">
-          <a href="#/">Terms of use</a>
-          <a href="#/">Privacy policy</a>
-          <a href="#/">Cookies</a>
-          <a href="#/">Help & FQAs</a>
-          <a href="#/">Contact us</a>
-        </div>
-      </div>
-      <div className="container copyright">
-        <div className="row">
-          <div className="col-md-6">
-            <p>
-              &copy; <a href="#/">HTML Codex</a>, All Right Reserved.
-            </p>
-          </div>
-          <div className="col-md-6">
-            <p>
-              Designed By <a href="#/">HTML Codex</a>
-            </p>
           </div>
         </div>
       </div>

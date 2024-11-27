@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.clean.app.entity.Order;
 import com.clean.app.services.OrderService;
+import com.clean.app.services.UserService;
 
 import lombok.AllArgsConstructor;
 
@@ -23,6 +24,7 @@ import lombok.AllArgsConstructor;
 public class OrderController {
 
     private final OrderService orderService;
+    private final UserService userService;
 
     @GetMapping
     public List<Order> getAllOrders() {
@@ -40,6 +42,12 @@ public class OrderController {
         return orderService.getOrdersByStatus(status);
     }
 
+    @GetMapping("/my-orders")
+    public List<Order> getMyOrders() {
+        var id = userService.getCurrentUser().getId();
+        return orderService.getOrdersByEmployeeId(id);
+    }
+
     @GetMapping("/employee/{employeeId}")
     public List<Order> getOrdersByEmployeeId(@PathVariable Long employeeId) {
         return orderService.getOrdersByEmployeeId(employeeId);
@@ -52,6 +60,7 @@ public class OrderController {
 
     @PostMapping
     public Order createOrder(@RequestBody Order order) {
+        order.setEmployeeId(userService.getCurrentUser().getId());
         return orderService.createOrder(order);
     }
 

@@ -13,142 +13,23 @@ const Contact = () => {
           <div className="container">
             <div className="row">
               <div className="col-12">
-                <h2>Contact Us</h2>
+                <h2>Đánh giá</h2>
               </div>
               <div className="col-12">
                 <Link to={"/"}>Home</Link>
-                <Link to={"/contact"}>Contact Us</Link>
+                <Link to={"/contact"}>Dánh giá</Link>
               </div>
             </div>
           </div>
         </div>
         {/* Page Header End */}
         {/* Contact Start */}
-        <div className="contact">
-          <div className="container">
-            <div className="section-header">
-              <p>Contact Us</p>
-              <h2>Find Your Answer / Send Message</h2>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="faqs">
-                  <div id="accordion">
-                    <div className="card">
-                      <div className="card-header">
-                        <a
-                          className="card-link collapsed"
-                          data-toggle="collapse"
-                          href="#collapseOne"
-                          aria-expanded="true"
-                        >
-                          <span>1</span> Lorem ipsum dolor sit amet?
-                        </a>
-                      </div>
-                      <div
-                        id="collapseOne"
-                        className="collapse show"
-                        data-parent="#accordion"
-                      >
-                        <div className="card-body">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Phasellus nec pretium mi. Curabitur facilisis
-                          ornare velit non.
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card">
-                      <div className="card-header">
-                        <a
-                          className="card-link"
-                          data-toggle="collapse"
-                          href="#collapseTwo"
-                        >
-                          <span>2</span> Lorem ipsum dolor sit amet?
-                        </a>
-                      </div>
-                      <div
-                        id="collapseTwo"
-                        className="collapse"
-                        data-parent="#accordion"
-                      >
-                        <div className="card-body">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Phasellus nec pretium mi. Curabitur facilisis
-                          ornare velit non.
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card">
-                      <div className="card-header">
-                        <a
-                          className="card-link"
-                          data-toggle="collapse"
-                          href="#collapseThree"
-                        >
-                          <span>3</span> Lorem ipsum dolor sit amet?
-                        </a>
-                      </div>
-                      <div
-                        id="collapseThree"
-                        className="collapse"
-                        data-parent="#accordion"
-                      >
-                        <div className="card-body">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Phasellus nec pretium mi. Curabitur facilisis
-                          ornare velit non.
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card">
-                      <div className="card-header">
-                        <a
-                          className="card-link"
-                          data-toggle="collapse"
-                          href="#collapseFour"
-                        >
-                          <span>4</span> Lorem ipsum dolor sit amet?
-                        </a>
-                      </div>
-                      <div
-                        id="collapseFour"
-                        className="collapse"
-                        data-parent="#accordion"
-                      >
-                        <div className="card-body">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Phasellus nec pretium mi. Curabitur facilisis
-                          ornare velit non.
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card">
-                      <div className="card-header">
-                        <a
-                          className="card-link"
-                          data-toggle="collapse"
-                          href="#collapseFour"
-                        >
-                          <span>5</span> Lorem ipsum dolor sit amet?
-                        </a>
-                      </div>
-                      <div
-                        id="collapseFour"
-                        className="collapse"
-                        data-parent="#accordion"
-                      >
-                        <div className="card-body">
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Phasellus nec pretium mi. Curabitur facilisis
-                          ornare velit non.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
+        {/* Contact Start */}
+        <div className="contact" style={{ marginTop: "-80px" }}>
+          <div className="container text-center">
+            <h3 className="mt-5 mb-5">Gửi đánh giá</h3>
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-9">
                 <div className="contact-form">
                   <form>
                     <div className="form-row">
@@ -156,7 +37,7 @@ const Contact = () => {
                         <input
                           type="text"
                           className="form-control"
-                          placeholder="Your Name"
+                          placeholder="Họ và tên"
                           required="required"
                         />
                       </div>
@@ -164,7 +45,7 @@ const Contact = () => {
                         <input
                           type="email"
                           className="form-control"
-                          placeholder="Your Email"
+                          placeholder="Email"
                           required="required"
                         />
                       </div>
@@ -173,7 +54,7 @@ const Contact = () => {
                       <input
                         type="text"
                         className="form-control"
-                        placeholder="Subject"
+                        placeholder="Chủ đề"
                         required="required"
                       />
                     </div>
@@ -181,14 +62,14 @@ const Contact = () => {
                       <textarea
                         className="form-control"
                         rows={6}
-                        placeholder="Message"
+                        placeholder="Lời nhắn"
                         required="required"
                         defaultValue={""}
                       />
                     </div>
                     <div>
                       <button className="btn" type="submit">
-                        Send Message
+                        Xác nhận
                       </button>
                     </div>
                   </form>
@@ -197,6 +78,8 @@ const Contact = () => {
             </div>
           </div>
         </div>
+        {/* Contact End */}
+
         {/* Contact End */}
       </div>
 

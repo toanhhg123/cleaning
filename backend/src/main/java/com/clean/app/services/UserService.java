@@ -66,7 +66,9 @@ public class UserService {
             user.setEmail(userDetails.getEmail());
             user.setPhoneNumber(userDetails.getPhoneNumber());
             user.setRole(userDetails.getRole());
-
+            user.setAvatar(userDetails.getAvatar());
+            user.setCode(userDetails.getCode());
+            user.setAddress(userDetails.getAddress());
             // update password
             log.info("update password ::: {}", userDetails.getPassword());
             if (userDetails.getPassword() != null) {

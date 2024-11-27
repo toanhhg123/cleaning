@@ -6,8 +6,11 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.clean.app.entity.Order;
+import com.clean.app.entity.Services;
 import com.clean.app.repository.OrderRepository;
+import com.clean.app.repository.ServiceRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -15,6 +18,8 @@ import lombok.AllArgsConstructor;
 public class OrderService {
 
     private final OrderRepository orderRepository;
+    private final ServiceService serviceService;
+    private final ServiceRepository serviceRepository;
 
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
@@ -36,7 +41,11 @@ public class OrderService {
         return orderRepository.findByServiceId(serviceId);
     }
 
+    @Transactional()
     public Order createOrder(Order order) {
+        Services service = serviceService.getServiceById(order.getServiceId());
+        service.setStatus("booked");
+        serviceRepository.save(service);
         return orderRepository.save(order);
     }
 
