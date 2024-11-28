@@ -91,7 +91,7 @@ const ServiceDetails = () => {
                           <strong>From</strong>
                         </label>
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control shadow-sm"
                           id="dateFrom"
                           name="dateFrom"
@@ -103,7 +103,7 @@ const ServiceDetails = () => {
                           <strong>To</strong>
                         </label>
                         <input
-                          type="date"
+                          type="datetime-local"
                           className="form-control shadow-sm"
                           id="dateTo"
                           name="dateTo"

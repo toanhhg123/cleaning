@@ -123,28 +123,30 @@ const OrderDetails = () => {
             </div>
           )}
 
-          <form onSubmit={handleUploadFile}>
-            {/* Avatar */}
-            <div className="mb-3 mt-5">
-              <label htmlFor="avatar" className="form-label">
-                File
-              </label>
+          {role === "employee" && (
+            <form onSubmit={handleUploadFile}>
+              {/* Avatar */}
+              <div className="mb-3 mt-5">
+                <label htmlFor="avatar" className="form-label">
+                  File
+                </label>
 
-              <input
-                type="file"
-                name="file"
-                id="avatar"
-                className="form-control"
-              />
-            </div>
+                <input
+                  type="file"
+                  name="file"
+                  id="avatar"
+                  className="form-control"
+                />
+              </div>
 
-            {/* Submit Button */}
-            <div className="text-center">
-              <button type="submit" className="btn btn-primary btn-lg">
-                Đính kèm file
-              </button>
-            </div>
-          </form>
+              {/* Submit Button */}
+              <div className="text-center">
+                <button type="submit" className="btn btn-primary btn-lg">
+                  Đính kèm file
+                </button>
+              </div>
+            </form>
+          )}
 
           {orderImages && (
             <div className="row mt-5">

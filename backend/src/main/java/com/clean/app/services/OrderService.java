@@ -9,7 +9,6 @@ import com.clean.app.entity.Order;
 import com.clean.app.entity.OrderImage;
 import com.clean.app.repository.OrderImageRepository;
 import com.clean.app.repository.OrderRepository;
-import com.clean.app.repository.ServiceRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -63,7 +62,6 @@ public class OrderService {
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
             order.setStatus(orderDetails.getStatus());
-            order.setEmployeeId(orderDetails.getEmployeeId());
             return orderRepository.save(order);
         }
         return null;
@@ -80,8 +78,10 @@ public class OrderService {
         return null;
     }
 
+    @Transactional
     public boolean deleteOrder(Long id) {
         if (orderRepository.existsById(id)) {
+            orderImageRepository.deleteByOrderId(id);
             orderRepository.deleteById(id);
             return true;
         }

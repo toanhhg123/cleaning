@@ -194,7 +194,9 @@ const OrderPage = () => {
             </Radio.Group>
           </Form.Item>
 
-          <OrderImageBox id={form.getFieldValue("id")} />
+          {form.getFieldValue("id") && (
+            <OrderImageBox id={form.getFieldValue("id")} />
+          )}
         </Form>
       </Modal>
     </Card>
