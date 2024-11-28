@@ -29,32 +29,32 @@ const charAt = `
 console.info(`%c${charAt}`, "color: #5BE49B");
 
 const queryClient = new QueryClient({
-	defaultOptions: {
-		queries: {
-			retry: 3,
-			gcTime: 300_000,
-			staleTime: 10_1000,
-			refetchOnWindowFocus: false,
-			refetchOnReconnect: false,
-			refetchOnMount: false,
-		},
-	},
+  defaultOptions: {
+    // queries: {
+    // 	retry: 3,
+    // 	gcTime: 300_000,
+    // 	staleTime: 10_1000,
+    // 	refetchOnWindowFocus: false,
+    // 	refetchOnReconnect: false,
+    // 	refetchOnMount: false,
+    // },
+  },
 });
 
 const root = ReactDOM.createRoot(
-	document.getElementById("root") as HTMLElement,
+  document.getElementById("root") as HTMLElement
 );
 
 root.render(
-	<HelmetProvider>
-		<QueryClientProvider client={queryClient}>
-			<ReactQueryDevtools initialIsOpen={false} />
-			<Suspense>
-				<Analytics />
-				<App />
-			</Suspense>
-		</QueryClientProvider>
-	</HelmetProvider>,
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
+      <Suspense>
+        <Analytics />
+        <App />
+      </Suspense>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 // worker.start({ onUnhandledRequest: "bypass" });

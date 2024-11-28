@@ -33,14 +33,25 @@ public class Order {
     private Services service;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "employee_id", insertable = false, updatable = false)
     private User employee;
 
-    @Column(name = "employee_id", nullable = false)
+    @Column(name = "employee_id")
     private Long employeeId;
 
     @Column(nullable = false, length = 50)
     private String status = "pending";
+
+    private Date dateFrom;
+
+    private Date dateTo;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    private User customer;
+
+    @Column(name = "customer_id")
+    private Long customerId;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)

@@ -9,6 +9,9 @@ import { Toaster } from "sonner";
 import ServiceDetails from "./pages/service-detail";
 import MyOrders from "./pages/my-orders";
 import OrderDetails from "./pages/order-details";
+import OrderPage from "./pages/orders";
+import MyWorksPage from "./pages/my-works";
+import Profile from "./pages/profile";
 
 const App = () => {
   return (
@@ -24,7 +27,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/service-detail/:id" element={<ServiceDetails />} />
         <Route path="/my-orders" element={<MyOrders />} />
+        <Route path="/orders" element={<OrderPage />} />
+        <Route path="/my-works" element={<MyWorksPage />} />
         <Route path="/order-detail/:id" element={<OrderDetails />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );

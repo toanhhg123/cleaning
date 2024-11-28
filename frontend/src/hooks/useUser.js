@@ -24,4 +24,9 @@ export const useAuth = () => {
   };
 };
 
+export const useRole = () => {
+  const { userInfo } = useUser();
+  return userInfo?.role;
+};
+
 export default useUser;

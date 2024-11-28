@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clean.app.entity.Order;
+import com.clean.app.entity.OrderImage;
 import com.clean.app.services.OrderService;
 import com.clean.app.services.UserService;
 
@@ -45,11 +46,17 @@ public class OrderController {
     @GetMapping("/my-orders")
     public List<Order> getMyOrders() {
         var id = userService.getCurrentUser().getId();
-        return orderService.getOrdersByEmployeeId(id);
+        return orderService.getByCustomerId(id);
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<Order> getOrdersByEmployeeId(@PathVariable Long employeeId) {
+        return orderService.getOrdersByEmployeeId(employeeId);
+    }
+
+    @GetMapping("/my-works")
+    public List<Order> getMyWorks() {
+        var employeeId = userService.getCurrentUser().getId();
         return orderService.getOrdersByEmployeeId(employeeId);
     }
 
@@ -60,8 +67,24 @@ public class OrderController {
 
     @PostMapping
     public Order createOrder(@RequestBody Order order) {
-        order.setEmployeeId(userService.getCurrentUser().getId());
+        order.setCustomerId(userService.getCurrentUser().getId());
         return orderService.createOrder(order);
+    }
+
+    @PostMapping("/image")
+    public OrderImage createOrderImage(@RequestBody OrderImage orderImage) {
+        return orderService.createOrderImage(orderImage);
+    }
+
+    @GetMapping("/image/{orderId}")
+    public List<OrderImage> getOrderImagesByOrderId(@PathVariable Long orderId) {
+        return orderService.getOrderImagesByOrderId(orderId);
+    }
+
+    @PostMapping("/accept/{id}")
+    public Order acceptOrder(@PathVariable Long id) {
+        var employeeId = userService.getCurrentUser().getId();
+        return orderService.acceptOrder(id, employeeId);
     }
 
     @PutMapping("/{id}")

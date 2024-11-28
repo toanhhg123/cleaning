@@ -1,22 +1,12 @@
 import {
+  type OrderResponse,
   default as apiOrder,
   default as orderService,
-  type OrderResponse,
 } from "@/api/services/orderService";
-import type { ServiceResponse } from "@/api/services/serviceService";
 import { IconButton, Iconify } from "@/components/icon";
 import ProTag from "@/theme/antd/components/tag";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  Card,
-  Form,
-  Input,
-  InputNumber,
-  Modal,
-  Popconfirm,
-  Radio,
-  Table,
-} from "antd";
+import { Card, Form, Input, Modal, Popconfirm, Radio, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -90,14 +80,14 @@ const OrderPage = () => {
       dataIndex: "service",
       width: 60,
       render: (service) => (
-        <ProTag color="blue-inverse">{service.customer.fullName}</ProTag>
+        <ProTag color="blue-inverse">{service.customer?.fullName}</ProTag>
       ),
     },
     {
       title: "Employee",
       dataIndex: "employee",
       width: 60,
-      render: (employee) => <ProTag color="cyan">{employee.fullName}</ProTag>,
+      render: (employee) => <ProTag color="cyan">{employee?.fullName}</ProTag>,
     },
     {
       title: "Status",

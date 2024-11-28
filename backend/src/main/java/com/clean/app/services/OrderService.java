@@ -6,7 +6,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.clean.app.entity.Order;
-import com.clean.app.entity.Services;
+import com.clean.app.entity.OrderImage;
+import com.clean.app.repository.OrderImageRepository;
 import com.clean.app.repository.OrderRepository;
 import com.clean.app.repository.ServiceRepository;
 
@@ -18,8 +19,7 @@ import lombok.AllArgsConstructor;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final ServiceService serviceService;
-    private final ServiceRepository serviceRepository;
+    private final OrderImageRepository orderImageRepository;
 
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
@@ -37,16 +37,25 @@ public class OrderService {
         return orderRepository.findByEmployeeId(employeeId);
     }
 
+    public List<Order> getByCustomerId(Long id) {
+        return orderRepository.findByCustomerId(id);
+    }
+
     public List<Order> getOrdersByServiceId(Long serviceId) {
         return orderRepository.findByServiceId(serviceId);
     }
 
     @Transactional()
     public Order createOrder(Order order) {
-        Services service = serviceService.getServiceById(order.getServiceId());
-        service.setStatus("booked");
-        serviceRepository.save(service);
         return orderRepository.save(order);
+    }
+
+    public OrderImage createOrderImage(OrderImage order) {
+        return orderImageRepository.save(order);
+    }
+
+    public List<OrderImage> getOrderImagesByOrderId(Long orderId) {
+        return orderImageRepository.findByOrderId(orderId);
     }
 
     public Order updateOrder(Long id, Order orderDetails) {
@@ -54,6 +63,18 @@ public class OrderService {
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
             order.setStatus(orderDetails.getStatus());
+            order.setEmployeeId(orderDetails.getEmployeeId());
+            return orderRepository.save(order);
+        }
+        return null;
+    }
+
+    public Order acceptOrder(Long id, Long employeeId) {
+        Optional<Order> orderOptional = orderRepository.findById(id);
+        if (orderOptional.isPresent()) {
+            Order order = orderOptional.get();
+            order.setStatus("processing");
+            order.setEmployeeId(employeeId);
             return orderRepository.save(order);
         }
         return null;

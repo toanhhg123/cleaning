@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 
 import com.clean.app.entity.Wallet;
 import com.clean.app.repository.WalletRepository;
-
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;

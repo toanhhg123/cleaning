@@ -14,8 +14,8 @@ const Project = () => {
               <h2>Our Projects</h2>
             </div>
             <div className="col-12">
-              <a href>Home</a>
-              <a href>Our Projects</a>
+              <a href="#/">Home</a>
+              <a href="#/">Our Projects</a>
             </div>
           </div>
         </div>

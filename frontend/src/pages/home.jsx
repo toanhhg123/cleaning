@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
@@ -132,7 +131,7 @@ const Home = () => {
               <div className="col-lg-3 col-md-6">
                 <div className="team-item">
                   <div className="team-img">
-                    <img src="img/team-1.jpg" alt="Team Image" />
+                    <img src="img/team-1.jpg" alt="Team" />
                   </div>
                   <div className="team-text">
                     <h2>Josh Dunn</h2>
@@ -169,7 +168,7 @@ const Home = () => {
               <div className="col-lg-3 col-md-6">
                 <div className="team-item">
                   <div className="team-img">
-                    <img src="img/team-2.jpg" alt="Team Image" />
+                    <img src="img/team-2.jpg" alt="Team" />
                   </div>
                   <div className="team-text">
                     <h2>Mollie Ross</h2>
@@ -206,22 +205,22 @@ const Home = () => {
               <div className="col-lg-3 col-md-6">
                 <div className="team-item">
                   <div className="team-img">
-                    <img src="img/team-3.jpg" alt="Team Image" />
+                    <img src="img/team-3.jpg" alt="Team" />
                   </div>
                   <div className="team-text">
                     <h2>Dylan Adams</h2>
                     <h3>Cleaner</h3>
                     <div className="team-social">
-                      <a className="social-tw" href>
+                      <a className="social-tw" href="#/">
                         <i className="fab fa-twitter" />
                       </a>
-                      <a className="social-fb" href>
+                      <a className="social-fb" href="#/">
                         <i className="fab fa-facebook-f" />
                       </a>
-                      <a className="social-li" href>
+                      <a className="social-li" href="#/">
                         <i className="fab fa-linkedin-in" />
                       </a>
-                      <a className="social-in" href>
+                      <a className="social-in" href="#/">
                         <i className="fab fa-instagram" />
                       </a>
                     </div>
@@ -231,22 +230,22 @@ const Home = () => {
               <div className="col-lg-3 col-md-6">
                 <div className="team-item">
                   <div className="team-img">
-                    <img src="img/team-4.jpg" alt="Team Image" />
+                    <img src="img/team-4.jpg" alt="Team" />
                   </div>
                   <div className="team-text">
                     <h2>Jennifer Page</h2>
                     <h3>Cleaner</h3>
                     <div className="team-social">
-                      <a className="social-tw" href>
+                      <a className="social-tw" href="#/">
                         <i className="fab fa-twitter" />
                       </a>
-                      <a className="social-fb" href>
+                      <a className="social-fb" href="#/">
                         <i className="fab fa-facebook-f" />
                       </a>
-                      <a className="social-li" href>
+                      <a className="social-li" href="#/">
                         <i className="fab fa-linkedin-in" />
                       </a>
-                      <a className="social-in" href>
+                      <a className="social-in" href="#/">
                         <i className="fab fa-instagram" />
                       </a>
                     </div>
@@ -266,7 +265,7 @@ const Home = () => {
                   <p>Bạn Có Thể Hỏi</p>
                   <h2>Các Câu Hỏi Thường Gặp</h2>
                 </div>
-                <img src="img/faqs.jpg" alt="Image" />
+                <img src="img/faqs.jpg" alt="" />
               </div>
               <div className="col-md-7">
                 <div id="accordion">
@@ -403,7 +402,7 @@ const Home = () => {
             <div className="owl-carousel testimonials-carousel">
               <div className="testimonial-item">
                 <div className="testimonial-img">
-                  <img src="img/testimonial-1.jpg" alt />
+                  <img src="img/testimonial-1.jpg" alt="" />
                 </div>
                 <div className="testimonial-content">
                   <p>
@@ -416,7 +415,7 @@ const Home = () => {
               </div>
               <div className="testimonial-item">
                 <div className="testimonial-img">
-                  <img src="img/testimonial-2.jpg" alt />
+                  <img src="img/testimonial-2.jpg" alt="" />
                 </div>
                 <div className="testimonial-content">
                   <p>
@@ -429,7 +428,7 @@ const Home = () => {
               </div>
               <div className="testimonial-item">
                 <div className="testimonial-img">
-                  <img src="img/testimonial-3.jpg" alt />
+                  <img src="img/testimonial-3.jpg" alt="" />
                 </div>
                 <div className="testimonial-content">
                   <p>
@@ -442,7 +441,7 @@ const Home = () => {
               </div>
               <div className="testimonial-item">
                 <div className="testimonial-img">
-                  <img src="img/testimonial-4.jpg" alt />
+                  <img src="img/testimonial-4.jpg" alt="" />
                 </div>
                 <div className="testimonial-content">
                   <p>

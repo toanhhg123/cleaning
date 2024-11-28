@@ -1,22 +1,40 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import { getMyOrders } from "../service/order";
-import { Link } from "react-router-dom";
+import { acceptOrder, getOrdersStatus } from "../service/order";
+import { useNavigate } from "react-router-dom";
 
-const MyOrders = () => {
+const OrderPage = () => {
+  const navigate = useNavigate();
+
   const { data } = useQuery({
-    queryKey: ["orders"],
-    queryFn: () => getMyOrders(),
+    queryKey: ["orders", "status", "pending"],
+    queryFn: () => getOrdersStatus("pending"),
+  });
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useMutation({
+    mutationFn: (id) => acceptOrder(id),
+    onSuccess: () => {
+      toast.success("Đã xác nhận đơn hàng");
+      queryClient.invalidateQueries(["orders"]);
+      navigate("/my-works");
+    },
   });
 
   const orders = data || [];
+
+  const handleAcceptOrder = async (id) => {
+    mutate(id);
+  };
 
   return (
     <>
       <Header />
       <div className="container" style={{ marginTop: "200px" }}>
-        <h2 className="text-center mb-4">Lịch Sử Đơn Hàng</h2>
+        <h2 className="text-center mb-4">Danh sách don hang</h2>
 
         <div className="row">
           {orders.map((order) => (
@@ -31,15 +49,16 @@ const MyOrders = () => {
                   </p>
                   <p className="card-text">
                     <strong>Ngày:</strong>{" "}
-                    {new Date(order.createdAt).toLocaleString()}
+                    {new Date(order.dateFrom).toLocaleString()} {" đến "}
+                    {new Date(order.dateTo).toLocaleString()}
                   </p>
                   <p className="card-text">
                     <strong>Trạng thái:</strong>{" "}
                     <span
                       className={`badge ${
-                        order.status === "done"
+                        order.status === "Successed"
                           ? "bg-success"
-                          : order.status === "processing"
+                          : order.status === "Processing"
                           ? "bg-warning"
                           : "bg-danger"
                       }`}
@@ -47,12 +66,13 @@ const MyOrders = () => {
                       {order.status}
                     </span>
                   </p>
-                  <Link
-                    to={`/order-detail/${order.id}`}
+                  <button
+                    type="button"
                     className="btn btn-outline-info w-100"
+                    onClick={() => handleAcceptOrder(order.id)}
                   >
-                    Xem Chi Tiết
-                  </Link>
+                    Nhận dịch vụ
+                  </button>
                 </div>
               </div>
             </div>
@@ -65,4 +85,4 @@ const MyOrders = () => {
   );
 };
 
-export default MyOrders;
+export default OrderPage;

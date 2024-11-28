@@ -1,5 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
-import useUser, { useAuth } from "../hooks/useUser";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useUser, { useAuth, useRole } from "../hooks/useUser";
 
 const Header = () => {
   const location = useLocation();
@@ -104,18 +104,44 @@ const Header = () => {
 
 const UserDropDown = () => {
   const { userInfo } = useUser();
+  const role = useRole();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log("logout");
+    localStorage.removeItem("accessToken");
+    navigate("/login");
+  };
 
   return (
     <div className="dropdown-menu">
-      <Link to="#/" className="dropdown-item">
-        {userInfo.fullName} | {userInfo.email}
+      <Link to="/profile" className="dropdown-item">
+        {userInfo.fullName} | Thông tin
       </Link>
-      <Link to="/my-orders" className="dropdown-item">
-        lịch sử order
-      </Link>
-      <Link to="#/" className="dropdown-item">
+      {role === "customer" && (
+        <>
+          <Link to="/my-orders" className="dropdown-item">
+            lịch sử order
+          </Link>
+          <Link to="/my-orders" className="dropdown-item">
+            Tạo dịch vụ
+          </Link>
+        </>
+      )}
+
+      {role === "employee" && (
+        <>
+          <Link to="/orders" className="dropdown-item">
+            Danh sách công việc
+          </Link>
+          <Link to="/my-works" className="dropdown-item">
+            Công việc của tôi
+          </Link>
+        </>
+      )}
+      <button type="button" className="dropdown-item" onClick={handleLogout}>
         Đăng xuất
-      </Link>
+      </button>
     </div>
   );
 };

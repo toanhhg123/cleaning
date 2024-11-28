@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import { getMyOrders } from "../service/order";
+import { getMyWorks } from "../service/order";
 import { Link } from "react-router-dom";
 
-const MyOrders = () => {
+const MyWorksPage = () => {
   const { data } = useQuery({
-    queryKey: ["orders"],
-    queryFn: () => getMyOrders(),
+    queryKey: ["orders", "my-works"],
+    queryFn: () => getMyWorks(),
   });
 
   const orders = data || [];
@@ -16,7 +16,7 @@ const MyOrders = () => {
     <>
       <Header />
       <div className="container" style={{ marginTop: "200px" }}>
-        <h2 className="text-center mb-4">Lịch Sử Đơn Hàng</h2>
+        <h2 className="text-center mb-4">Danh sách don hang</h2>
 
         <div className="row">
           {orders.map((order) => (
@@ -31,7 +31,8 @@ const MyOrders = () => {
                   </p>
                   <p className="card-text">
                     <strong>Ngày:</strong>{" "}
-                    {new Date(order.createdAt).toLocaleString()}
+                    {new Date(order.dateFrom).toLocaleString()} {" đến "}
+                    {new Date(order.dateTo).toLocaleString()}
                   </p>
                   <p className="card-text">
                     <strong>Trạng thái:</strong>{" "}
@@ -49,9 +50,10 @@ const MyOrders = () => {
                   </p>
                   <Link
                     to={`/order-detail/${order.id}`}
+                    type="button"
                     className="btn btn-outline-info w-100"
                   >
-                    Xem Chi Tiết
+                    Xem chi tiết
                   </Link>
                 </div>
               </div>
@@ -65,4 +67,4 @@ const MyOrders = () => {
   );
 };
 
-export default MyOrders;
+export default MyWorksPage;
