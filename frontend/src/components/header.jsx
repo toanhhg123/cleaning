@@ -123,9 +123,9 @@ const UserDropDown = () => {
           <Link to="/my-orders" className="dropdown-item">
             lịch sử order
           </Link>
-          <Link to="/my-orders" className="dropdown-item">
+          {/* <Link to="/my-orders" className="dropdown-item">
             Tạo dịch vụ
-          </Link>
+          </Link> */}
         </>
       )}
 

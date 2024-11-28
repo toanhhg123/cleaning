@@ -6,7 +6,16 @@ import {
 import { IconButton, Iconify } from "@/components/icon";
 import ProTag from "@/theme/antd/components/tag";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Card, Form, Input, Modal, Popconfirm, Radio, Table } from "antd";
+import {
+  Card,
+  Form,
+  Image,
+  Input,
+  Modal,
+  Popconfirm,
+  Radio,
+  Table,
+} from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -94,7 +103,11 @@ const OrderPage = () => {
       dataIndex: "status",
       width: 60,
       render: (status: OrderResponse["status"]) => (
-        <ProTag color={status === "done" ? "green" : "yellow"}>{status}</ProTag>
+        <ProTag
+          color={status === "done" || status === "success" ? "green" : "yellow"}
+        >
+          {status}
+        </ProTag>
       ),
     },
 
@@ -177,11 +190,38 @@ const OrderPage = () => {
               <Radio value={"pending"}>Pending</Radio>
               <Radio value={"processing"}>Processing</Radio>
               <Radio value={"done"}>Done</Radio>
+              <Radio value={"success"}>Success</Radio>
             </Radio.Group>
           </Form.Item>
+
+          <OrderImageBox id={form.getFieldValue("id")} />
         </Form>
       </Modal>
     </Card>
+  );
+};
+
+const OrderImageBox = ({ id }: { id: number }) => {
+  const { data: images } = useQuery({
+    queryKey: ["orders", "image", id],
+    queryFn: () => apiOrder.getOrderImages(id),
+  });
+
+  if (!images?.length) return <></>;
+
+  return (
+    <div className="flex gap-2 !w-full flex-1 my-10">
+      {images?.map((img) => {
+        return (
+          <Image
+            key={img.id}
+            width={200}
+            height={200}
+            src={`http://localhost:8080/api/upload/files/${img.image}`}
+          />
+        );
+      })}
+    </div>
   );
 };
 

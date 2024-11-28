@@ -12,9 +12,15 @@ export interface OrderResponse {
   service: ServiceResponse;
   employee: UserInfoResponse;
   employeeId: number;
-  status: "pending" | "processing" | "done";
+  status: "pending" | "processing" | "done" | "success";
   createdAt: number;
   updatedAt: number;
+}
+
+export interface OrderImage {
+  id: number;
+  orderId: number;
+  image: string;
 }
 
 const getOrders = () =>
@@ -31,4 +37,10 @@ const deleteOrders = (id: number) =>
     url: `${OrderApi.DEFAULT}/${id}`,
   });
 
-export default { getOrders, deleteOrders, updateOrders };
+const getOrderImages = (id: number) => {
+  return apiClient.get<OrderImage[]>({
+    url: `/orders/image/${id}`,
+  });
+};
+
+export default { getOrders, deleteOrders, updateOrders, getOrderImages };
