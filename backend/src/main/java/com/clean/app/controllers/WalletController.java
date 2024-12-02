@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clean.app.entity.Wallet;
+import com.clean.app.services.UserService;
 import com.clean.app.services.WalletService;
 
 import lombok.AllArgsConstructor;
@@ -20,10 +21,17 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class WalletController {
     private final WalletService walletService;
+    private final UserService userService;
 
     @PostMapping
     public Wallet createWallet(@RequestBody Wallet wallet) {
         return walletService.createWallet(wallet);
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Wallet> getMe() {
+        Wallet wallet = walletService.getWalletByUserId(userService.getCurrentUser().getId());
+        return wallet != null ? ResponseEntity.ok(wallet) : ResponseEntity.notFound().build();
     }
 
     @GetMapping("/user/{userId}")

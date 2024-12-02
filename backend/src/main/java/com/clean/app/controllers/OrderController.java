@@ -90,7 +90,7 @@ public class OrderController {
     @PutMapping("/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order orderDetails) {
         Order updatedOrder = orderService.updateOrder(id, orderDetails);
-        return updatedOrder != null ? ResponseEntity.ok(updatedOrder) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(updatedOrder);
     }
 
     @DeleteMapping("/{id}")

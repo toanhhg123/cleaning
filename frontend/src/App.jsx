@@ -12,6 +12,8 @@ import OrderDetails from "./pages/order-details";
 import OrderPage from "./pages/orders";
 import MyWorksPage from "./pages/my-works";
 import Profile from "./pages/profile";
+import Wallet from "./pages/wallet";
+import PaymentReturn from "./pages/payment-return";
 
 const App = () => {
   return (
@@ -31,6 +33,8 @@ const App = () => {
         <Route path="/my-works" element={<MyWorksPage />} />
         <Route path="/order-detail/:id" element={<OrderDetails />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/wallet" element={<Wallet />} />
+        <Route path="/payment-return" element={<PaymentReturn />} />
       </Routes>
     </div>
   );

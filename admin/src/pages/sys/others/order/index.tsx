@@ -11,6 +11,7 @@ import {
   Form,
   Image,
   Input,
+  InputNumber,
   Modal,
   Popconfirm,
   Radio,
@@ -91,6 +92,12 @@ const OrderPage = () => {
       render: (service) => (
         <ProTag color="blue-inverse">{service.customer?.fullName}</ProTag>
       ),
+    },
+    {
+      title: "Customer",
+      dataIndex: "customer",
+      width: 60,
+      render: (customer) => <ProTag color="cyan">{customer?.fullName}</ProTag>,
     },
     {
       title: "Employee",
@@ -192,6 +199,20 @@ const OrderPage = () => {
               <Radio value={"done"}>Done</Radio>
               <Radio value={"success"}>Success</Radio>
             </Radio.Group>
+          </Form.Item>
+
+          <Form.Item<OrderResponse> label="Price" name={["service", "price"]}>
+            <InputNumber<number>
+              defaultValue={1000}
+              formatter={(value) =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={(value) =>
+                value?.replace(/\$\s?|(,*)/g, "") as unknown as number
+              }
+              readOnly
+              disabled
+            />
           </Form.Item>
 
           {form.getFieldValue("id") && (

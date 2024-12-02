@@ -18,7 +18,12 @@ public class WalletService {
     }
 
     public Wallet getWalletByUserId(Long userId) {
-        return walletRepository.findByUserId(userId);
+        return walletRepository.findByUserId(userId).orElseGet(() -> {
+            Wallet wallet = new Wallet();
+            wallet.setUserId(userId);
+            wallet.setBalance(0.0);
+            return walletRepository.save(wallet);
+        });
     }
 
     public Wallet updateWalletBalance(Long walletId, Double amount) {

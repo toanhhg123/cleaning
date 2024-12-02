@@ -56,7 +56,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> {
                     authorize.requestMatchers("/api/auth/**").permitAll();
                     authorize.requestMatchers(HttpMethod.POST, "/api/users").permitAll();
-                    authorize.requestMatchers(HttpMethod.GET, "/api/upload/files/{filename:.+}").permitAll();
+                    authorize
+                            .requestMatchers(HttpMethod.GET, "/api/upload/files/{filename:.+}",
+                                    "/api/payment/vnpay-payment")
+                            .permitAll();
                     authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     authorize.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());

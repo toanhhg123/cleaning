@@ -5,10 +5,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { getServicesById } from "../service/service";
 import { createOrder } from "../service/order";
 import { toast } from "sonner";
+import useWallet from "../hooks/useWallet";
 
 const ServiceDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { data: wallet } = useWallet();
 
   const queryClient = useQueryClient();
 
@@ -19,6 +21,7 @@ const ServiceDetails = () => {
 
   const { mutate } = useMutation({
     mutationFn: (order) => createOrder(order),
+
     onSuccess: () => {
       toast.success("Đặt dịch vụ thành công");
       queryClient.invalidateQueries(["orders"]);
@@ -30,6 +33,11 @@ const ServiceDetails = () => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const { dateFrom, dateTo } = Object.fromEntries(formData);
+
+    if (wallet && wallet.balance < data.price) {
+      toast.error("vui lòng nạp thêm tiền vào tài khoản");
+      return;
+    }
 
     mutate({
       serviceId: id,

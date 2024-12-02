@@ -118,6 +118,9 @@ const UserDropDown = () => {
       <Link to="/profile" className="dropdown-item">
         {userInfo.fullName} | Thông tin
       </Link>
+      <Link to="/wallet" className="dropdown-item">
+        Ví cá nhân
+      </Link>
       {role === "customer" && (
         <>
           <Link to="/my-orders" className="dropdown-item">

@@ -11,6 +11,7 @@ export interface OrderResponse {
   serviceId: number;
   service: ServiceResponse;
   employee: UserInfoResponse;
+  customer: UserInfoResponse;
   employeeId: number;
   status: "pending" | "processing" | "done" | "success";
   createdAt: number;

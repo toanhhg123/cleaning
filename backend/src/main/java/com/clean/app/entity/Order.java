@@ -39,6 +39,9 @@ public class Order {
     @Column(name = "employee_id")
     private Long employeeId;
 
+    @Column(columnDefinition = "boolean default false")
+    private Boolean isPaid;
+
     @Column(nullable = false, length = 50)
     private String status = "pending";
 
