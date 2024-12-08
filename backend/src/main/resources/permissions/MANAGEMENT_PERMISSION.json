@@ -1,96 +1,87 @@
 {
-    "id": "0901673425580518",
-    "parentId": "",
-    "label": "sys.menu.management",
-    "name": "Management",
-    "icon": "ic-management",
-    "type": 0,
-    "route": "management",
-    "order": 2,
-    "children": [
+  "id": "0901673425580518",
+  "parentId": "",
+  "label": "sys.menu.management",
+  "name": "Management",
+  "icon": "ic-management",
+  "type": 0,
+  "route": "management",
+  "order": 2,
+  "children": [
+    {
+      "id": "2781684678535711",
+      "parentId": "0901673425580518",
+      "label": "sys.menu.user.index",
+      "name": "User",
+      "type": 0,
+      "route": "user",
+      "children": [
         {
-            "id": "2781684678535711",
-            "parentId": "0901673425580518",
-            "label": "sys.menu.user.index",
-            "name": "User",
-            "type": 0,
-            "route": "user",
-            "children": [
-                {
-                    "id": "4754063958766648",
-                    "parentId": "2781684678535711",
-                    "label": "sys.menu.user.profile",
-                    "name": "Profile",
-                    "type": 1,
-                    "route": "profile",
-                    "component": "/management/user/profile/index.tsx"
-                },
-                {
-                    "id": "2516598794787938",
-                    "parentId": "2781684678535711",
-                    "label": "sys.menu.user.account",
-                    "name": "Account",
-                    "type": 1,
-                    "route": "account",
-                    "component": "/management/user/account/index.tsx"
-                }
-            ]
+          "id": "4754063958766648",
+          "parentId": "2781684678535711",
+          "label": "sys.menu.user.profile",
+          "name": "Profile",
+          "type": 1,
+          "route": "profile",
+          "component": "/management/user/profile/index.tsx"
         },
         {
-            "id": "0249937641030250",
-            "parentId": "0901673425580518",
-            "label": "sys.menu.system.index",
-            "name": "System",
-            "type": 0,
-            "route": "system",
-            "children": [
-                {
-                    "id": "1985890042972842",
-                    "parentId": "0249937641030250",
-                    "label": "sys.menu.system.organization",
-                    "name": "Organization",
-                    "type": 1,
-                    "route": "organization",
-                    "component": "/management/system/organization/index.tsx"
-                },
-                {
-                    "id": "4359580910369984",
-                    "parentId": "0249937641030250",
-                    "label": "sys.menu.system.permission",
-                    "name": "Permission",
-                    "type": 1,
-                    "route": "permission",
-                    "component": "/management/system/permission/index.tsx"
-                },
-                {
-                    "id": "1689241785490759",
-                    "parentId": "0249937641030250",
-                    "label": "sys.menu.system.role",
-                    "name": "Role",
-                    "type": 1,
-                    "route": "role",
-                    "component": "/management/system/role/index.tsx"
-                },
-                {
-                    "id": "0157880245365433",
-                    "parentId": "0249937641030250",
-                    "label": "sys.menu.system.user",
-                    "name": "User",
-                    "type": 1,
-                    "route": "user",
-                    "component": "/management/system/user/index.tsx"
-                },
-                {
-                    "id": "0157880245365434",
-                    "parentId": "0249937641030250",
-                    "label": "sys.menu.system.user_detail",
-                    "name": "User Detail",
-                    "type": 1,
-                    "route": "user/:id",
-                    "component": "/management/system/user/detail.tsx",
-                    "hide": true
-                }
-            ]
+          "id": "2516598794787938",
+          "parentId": "2781684678535711",
+          "label": "sys.menu.user.account",
+          "name": "Account",
+          "type": 1,
+          "route": "account",
+          "component": "/management/user/account/index.tsx"
         }
-    ]
+      ]
+    },
+    {
+      "id": "0249937641030250",
+      "parentId": "0901673425580518",
+      "label": "sys.menu.system.index",
+      "name": "System",
+      "type": 0,
+      "route": "system",
+      "children": [
+        {
+          "id": "4359580910369984",
+          "parentId": "0249937641030250",
+          "label": "sys.menu.system.permission",
+          "name": "Permission",
+          "type": 1,
+          "route": "permission",
+          "component": "/management/system/permission/index.tsx"
+        },
+        {
+          "id": "1689241785490759",
+          "parentId": "0249937641030250",
+          "label": "sys.menu.system.role",
+          "name": "Role",
+          "type": 1,
+          "route": "role",
+          "component": "/management/system/role/index.tsx"
+        },
+        {
+          "id": "0157880245365433",
+          "parentId": "0249937641030250",
+          "label": "sys.menu.system.user",
+          "name": "User",
+          "type": 1,
+          "route": "user",
+          "component": "/management/system/user/index.tsx"
+        },
+        {
+          "id": "0157880245365434",
+          "parentId": "0249937641030250",
+          "label": "sys.menu.system.user_detail",
+          "name": "User Detail",
+          "type": 1,
+          "route": "user/:id",
+          "component": "/management/system/user/detail.tsx",
+          "hide": true
+        }
+      ]
+    }
+  ]
 }

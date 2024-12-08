@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Service from "./pages/service";
-import Contact from "./pages/contact";
+import Feedback from "./pages/Feedback";
 import Project from "./pages/project";
 import Login from "./pages/login";
 import { Toaster } from "sonner";
@@ -14,6 +14,7 @@ import MyWorksPage from "./pages/my-works";
 import Profile from "./pages/profile";
 import Wallet from "./pages/wallet";
 import PaymentReturn from "./pages/payment-return";
+import Contact from "./pages/contact";
 
 const App = () => {
   return (
@@ -24,7 +25,7 @@ const App = () => {
         <Route path="/about" element={<About />} />
         <Route path="/service" element={<Service />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/complaint" element={<Contact />} />
+        <Route path="/complaint" element={<Feedback />} />
         <Route path="/project" element={<Project />} />
         <Route path="/login" element={<Login />} />
         <Route path="/service-detail/:id" element={<ServiceDetails />} />

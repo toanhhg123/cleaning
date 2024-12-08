@@ -1,18 +1,24 @@
 import type { ServiceResponse } from "@/api/services/serviceService";
 import apiService from "@/api/services/serviceService";
+import apiFeedback from "@/api/services/serviceFeedback";
+
 import { IconButton, Iconify } from "@/components/icon";
 import { useUserInfo } from "@/store/userStore";
 import ProTag from "@/theme/antd/components/tag";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  Alert,
   Button,
   Card,
+  Drawer,
   Form,
   Input,
   InputNumber,
+  List,
   Modal,
   Popconfirm,
   Radio,
+  Spin,
   Table,
 } from "antd";
 import type { ColumnsType } from "antd/es/table";
@@ -161,6 +167,9 @@ const ServicePage = () => {
           >
             <Iconify icon="solar:pen-bold-duotone" size={18} />
           </IconButton>
+
+          <FeedbackShow service={record} />
+
           <Popconfirm
             title={`Delete the service ${record.name} ?`}
             okText="Yes"
@@ -299,6 +308,92 @@ const ServicePage = () => {
         </Form>
       </Modal>
     </Card>
+  );
+};
+
+const FeedbackShow = ({ service }: { service: ServiceResponse }) => {
+  const [show, setShow] = useState(false);
+
+  return (
+    <>
+      <IconButton
+        onClick={() => {
+          setShow(true);
+        }}
+      >
+        <Iconify icon="material-symbols:bookmark-heart" size={18} />
+      </IconButton>
+
+      <FeedbackDrawer
+        openDrawer={show}
+        closeDrawer={() => setShow(false)}
+        service={service}
+      />
+    </>
+  );
+};
+
+const FeedbackDrawer = ({
+  openDrawer,
+  closeDrawer,
+  service,
+}: {
+  openDrawer: boolean;
+  closeDrawer: () => void;
+  service: ServiceResponse;
+}) => {
+  const { data, isFetching, isError } = useQuery({
+    queryKey: ["serviceFeedbacks", service.id],
+    queryFn: () => apiFeedback.getFeedbacksByService(service.id),
+  });
+
+  const feedbacks = data || [];
+
+  return (
+    <Drawer
+      title={"Feedbacks"}
+      placement="right"
+      onClose={closeDrawer}
+      open={openDrawer}
+      width={400}
+    >
+      {isFetching && <Spin tip="Loading feedbacks..." />}
+      {isError && (
+        <Alert
+          type="error"
+          message="Failed to load feedbacks"
+          description="Please try again later."
+          showIcon
+        />
+      )}
+      {!isFetching && !isError && feedbacks.length === 0 && (
+        <p>No feedbacks available for this service.</p>
+      )}
+      {!isFetching && !isError && feedbacks.length > 0 && (
+        <List
+          dataSource={feedbacks}
+          renderItem={(feedback) => (
+            <List.Item>
+              <List.Item.Meta
+                title={`${feedback.title} (${feedback.rating}/5)`}
+                description={
+                  <>
+                    <p>{feedback.message}</p>
+                    <p>
+                      <strong>User:</strong> {feedback.user.fullName}
+                    </p>
+                    <p>
+                      <strong>Date:</strong>{" "}
+                      {new Date(feedback.createdAt).toLocaleString()}
+                    </p>
+                  </>
+                }
+              />
+            </List.Item>
+          )}
+        />
+      )}
+    </Drawer>
   );
 };
 

@@ -6,6 +6,7 @@ import { getServicesById } from "../service/service";
 import { createOrder } from "../service/order";
 import { toast } from "sonner";
 import useWallet from "../hooks/useWallet";
+import { getServiceFeedbackByServiceId } from "../service/serviceFeedback";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -17,6 +18,11 @@ const ServiceDetails = () => {
   const { data } = useQuery({
     queryKey: ["service", id],
     queryFn: () => getServicesById(id),
+  });
+
+  const { data: feedbacks } = useQuery({
+    queryKey: ["serviceFeedback", id],
+    queryFn: () => getServiceFeedbackByServiceId(id),
   });
 
   const { mutate } = useMutation({
@@ -134,6 +140,37 @@ const ServiceDetails = () => {
           </div>
         </div>
       )}
+
+      <div className="container mt-4">
+        <h2>Feedback List</h2>
+        <div className="row">
+          {feedbacks?.map((feedback) => (
+            <div key={feedback.id} className="col-md-6 mb-4">
+              <div className="card shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title">{feedback.title}</h5>
+                  <h6 className="text-muted">Rating: {feedback.rating} / 5</h6>
+                  <p className="card-text">{feedback.message}</p>
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      <strong>By:</strong> {feedback.user.fullName}
+                    </div>
+                    <div>
+                      <strong>Service:</strong> {feedback.service.name}
+                    </div>
+                  </div>
+                  <div className="text-muted mt-2">
+                    <small>
+                      Feedback created on:{" "}
+                      {new Date(feedback.createdAt).toLocaleDateString()}
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <Footer />
     </>

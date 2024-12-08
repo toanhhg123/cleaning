@@ -1,8 +1,32 @@
+import { useMutation } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import Footer from "../components/footer";
 import Header from "../components/header";
+import { createContact } from "../service/contact";
 
 const Contact = () => {
+  const { mutate } = useMutation({
+    mutationFn: (data) => createContact(data),
+    onSuccess: () => {
+      toast.success("thành công");
+    },
+    onError: () => {
+      toast.error("lỗi không xác định");
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+
+    mutate(data);
+
+    e.target.reset();
+  };
+
   return (
     <>
       <Header />
@@ -27,11 +51,11 @@ const Contact = () => {
         {/* Contact Start */}
         <div className="contact" style={{ marginTop: "-80px" }}>
           <div className="container text-center">
-            <h3 className="mt-5 mb-5">Gửi đánh giá</h3>
+            <h3 className="mt-5 mb-5">Gửi thông tin liên hệ</h3>
             <div className="row d-flex justify-content-center">
               <div className="col-md-9">
                 <div className="contact-form">
-                  <form>
+                  <form onSubmit={handleSubmit}>
                     <div className="form-row">
                       <div className="form-group col-md-6">
                         <input
@@ -39,6 +63,7 @@ const Contact = () => {
                           className="form-control"
                           placeholder="Họ và tên"
                           required="required"
+                          name="username"
                         />
                       </div>
                       <div className="form-group col-md-6">
@@ -47,6 +72,7 @@ const Contact = () => {
                           className="form-control"
                           placeholder="Email"
                           required="required"
+                          name="email"
                         />
                       </div>
                     </div>
@@ -56,14 +82,17 @@ const Contact = () => {
                         className="form-control"
                         placeholder="Chủ đề"
                         required="required"
+                        name="title"
                       />
                     </div>
+
                     <div className="form-group">
                       <textarea
                         className="form-control"
                         rows={6}
                         placeholder="Lời nhắn"
                         required="required"
+                        name="message"
                         defaultValue={""}
                       />
                     </div>

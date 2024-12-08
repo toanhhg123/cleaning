@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import {
@@ -8,10 +8,25 @@ import {
   updateOrder,
 } from "../service/order";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useRole } from "../hooks/useUser";
+import useUser, { useRole } from "../hooks/useUser";
 import { getFile, uploadFile } from "../service/upload";
+import { createServiceFeedback } from "../service/serviceFeedback";
+import { toast } from "sonner";
 
 const OrderDetails = () => {
+  const { userInfo } = useUser();
+  const navigate = useNavigate();
+
+  const { mutate } = useMutation({
+    mutationFn: (data) => createServiceFeedback(data),
+    onSuccess: () => {
+      toast.success("đánh giá thành công");
+    },
+    onError: () => {
+      toast.error("lỗi không xác định");
+    },
+  });
+
   const { id } = useParams();
   const role = useRole();
 
@@ -62,6 +77,25 @@ const OrderDetails = () => {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const body = Object.fromEntries(formData);
+
+    mutate({
+      ...body,
+      serviceId: data.serviceId,
+    });
+
+    await queryClient.invalidateQueries(["order", id]);
+    await queryClient.invalidateQueries(["serviceFeedback"]);
+
+    e.target.reset();
+
+    navigate(`/service-detail/${data.serviceId}`);
+  };
+
   if (!data) return null;
 
   return (
@@ -100,7 +134,7 @@ const OrderDetails = () => {
             <span
               id="order-status"
               className={`badge ${
-                data.status === "done"
+                data.status === "done" || data.status === "success"
                   ? "bg-success"
                   : data.status === "processing"
                   ? "bg-warning"
@@ -159,6 +193,82 @@ const OrderDetails = () => {
                   />
                 </div>
               ))}
+            </div>
+          )}
+
+          {(data.status === "success" || data.status === "success") && (
+            <div className="" style={{ marginTop: "30px" }}>
+              <div className="text-center">
+                <h3 className="mt-5 mb-5">Gửi đánh giá</h3>
+                <div className="row d-flex justify-content-center">
+                  <div className="col-md-9">
+                    <div className="contact-form">
+                      <form onSubmit={handleSubmit}>
+                        <div className="form-row">
+                          <div className="form-group col-md-6">
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Họ và tên"
+                              required="required"
+                              defaultValue={userInfo.fullName}
+                              readOnly
+                              disabled
+                            />
+                          </div>
+                          <div className="form-group col-md-6">
+                            <input
+                              type="email"
+                              className="form-control"
+                              placeholder="Email"
+                              required="required"
+                              defaultValue={userInfo.email}
+                              readOnly
+                              disabled
+                            />
+                          </div>
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Chủ đề"
+                            required="required"
+                            name="title"
+                          />
+                        </div>
+                        <div className="form-group">
+                          <input
+                            type="number"
+                            className="form-control"
+                            placeholder="Số sao(1-5)"
+                            required="required"
+                            name="rating"
+                            defaultValue={4}
+                            min={1}
+                            max={5}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <textarea
+                            className="form-control"
+                            rows={6}
+                            placeholder="Lời nhắn"
+                            required="required"
+                            name="message"
+                            defaultValue={""}
+                          />
+                        </div>
+                        <div>
+                          <button className="btn" type="submit">
+                            Xác nhận
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </div>
