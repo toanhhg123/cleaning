@@ -1,7 +1,19 @@
 import Header from "../components/header";
 import Footer from "../components/footer";
+import { useQuery } from "@tanstack/react-query";
+import { getServiceByTag } from "../service/service";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const { data } = useQuery({
+    queryKey: ["services", "tag", "trending"],
+    queryFn: () => getServiceByTag("trending"),
+  });
+
+  const services = data || [];
+
+  console.log(services);
+
   return (
     <>
       <Header />
@@ -15,46 +27,23 @@ const Home = () => {
               <h2>Dịch vụ thịnh hành</h2>
             </div>
             <div className="row">
-              <div className="col-lg-3 col-md-6">
-                <div className="service-item">
-                  <img src="img/service-1.jpg" alt="Service" />
-                  <h3>Flour Cleaning</h3>
-                  <p>1.000.000đ</p>
-                  <a className="btn" href="service-detail.html">
-                    Xem thêm
-                  </a>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6">
-                <div className="service-item">
-                  <img src="img/service-2.jpg" alt="Service" />
-                  <h3>Glass Cleaning</h3>
-                  <p>1.000.000đ</p>
-                  <a className="btn" href="service-detail.html">
-                    Xem thêm
-                  </a>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6">
-                <div className="service-item">
-                  <img src="img/service-3.jpg" alt="Service" />
-                  <h3>Carpet Cleaning</h3>
-                  <p>1.000.000đ</p>
-                  <a className="btn" href="service-detail.html">
-                    Xem thêm
-                  </a>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-6">
-                <div className="service-item">
-                  <img src="img/service-4.jpg" alt="Service" />
-                  <h3>Toilet Cleaning</h3>
-                  <p>1.000.000đ</p>
-                  <a className="btn" href="service-detail.html">
-                    Xem thêm
-                  </a>
-                </div>
-              </div>
+              {services.map((service) => {
+                return (
+                  <div className="col-lg-3 col-md-6" key={service.id}>
+                    <div className="service-item">
+                      <img src="/img/service-1.jpg" alt="Service" />
+                      <h3>{service.name}</h3>
+                      <p>{service.description}</p>
+                      <Link
+                        className="btn"
+                        to={`/service-detail/${service.id}`}
+                      >
+                        Chi tiết
+                      </Link>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

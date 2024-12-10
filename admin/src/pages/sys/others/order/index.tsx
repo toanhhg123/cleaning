@@ -18,6 +18,7 @@ import {
   Table,
 } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import Paragraph from "antd/lib/typography/Paragraph";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -119,6 +120,19 @@ const OrderPage = () => {
     },
 
     {
+      title: "Address",
+      dataIndex: "address",
+      width: 200,
+      /*************  ✨ Codeium Command ⭐  *************/
+      /******  659eb3b0-911c-4ab5-ac8b-60c751aacc13  *******/
+      render: (desc: string) => (
+        <Paragraph ellipsis={{ rows: 2, expandable: true, symbol: "more" }}>
+          {desc}
+        </Paragraph>
+      ),
+    },
+
+    {
       title: "Action",
       key: "operation",
       align: "center",
@@ -213,6 +227,14 @@ const OrderPage = () => {
               readOnly
               disabled
             />
+          </Form.Item>
+
+          <Form.Item<OrderResponse>
+            label="Address"
+            name="address"
+            rules={[{ message: "Please input your address!" }]}
+          >
+            <Input.TextArea />
           </Form.Item>
 
           {form.getFieldValue("id") && (

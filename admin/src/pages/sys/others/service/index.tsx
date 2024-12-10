@@ -242,6 +242,22 @@ const ServicePage = () => {
           </Form.Item>
 
           <Form.Item<ServiceResponse>
+            label="Phone"
+            name="phone"
+            rules={[{ required: true, message: "Please input your phone!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item<ServiceResponse>
+            label="Time"
+            name="time"
+            rules={[{ required: true, message: "Please input your Time!" }]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item<ServiceResponse>
             label="Price"
             name="price"
             rules={[
@@ -275,6 +291,17 @@ const ServicePage = () => {
           </Form.Item>
 
           <Form.Item<ServiceResponse>
+            label="Tag"
+            name="tag"
+            rules={[{ required: true, message: "Please input your name!" }]}
+          >
+            <Radio.Group optionType="button">
+              <Radio value={"normal"}>normal</Radio>
+              <Radio value={"trending"}>trending</Radio>
+            </Radio.Group>
+          </Form.Item>
+
+          <Form.Item<ServiceResponse>
             label="Price Per Hour"
             name="pricePerHour"
             rules={[
@@ -294,6 +321,14 @@ const ServicePage = () => {
               }
               className="!w-full"
             />
+          </Form.Item>
+
+          <Form.Item<ServiceResponse>
+            label="Address"
+            name="address"
+            rules={[{ required: true, message: "Please input your address!" }]}
+          >
+            <Input.TextArea />
           </Form.Item>
 
           <Form.Item<ServiceResponse>

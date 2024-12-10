@@ -127,7 +127,9 @@ const Feedback = () => {
             </div>
           </div>
         ) : (
-          <> </>
+          <h3 className="mt-5 mb-5" style={{ textAlign: "center" }}>
+            Vui lòng đăng nhập
+          </h3>
         )}
         {/* Contact End */}
 

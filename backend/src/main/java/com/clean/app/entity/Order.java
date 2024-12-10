@@ -32,6 +32,8 @@ public class Order {
     @JoinColumn(name = "service_id", nullable = false, insertable = false, updatable = false)
     private Services service;
 
+    private String address;
+
     @ManyToOne
     @JoinColumn(name = "employee_id", insertable = false, updatable = false)
     private User employee;

@@ -55,10 +55,13 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authorize -> {
                     authorize.requestMatchers("/api/auth/**").permitAll();
-                    authorize.requestMatchers(HttpMethod.POST, "/api/users").permitAll();
+                    authorize.requestMatchers(HttpMethod.POST, "/api/users", "/api/contact").permitAll();
                     authorize
                             .requestMatchers(HttpMethod.GET, "/api/upload/files/{filename:.+}",
-                                    "/api/payment/vnpay-payment")
+                                    "/api/payment/vnpay-payment",
+                                    "/api/services/**"
+
+                            )
                             .permitAll();
                     authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     authorize.anyRequest().authenticated();

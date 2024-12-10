@@ -15,6 +15,8 @@ import Profile from "./pages/profile";
 import Wallet from "./pages/wallet";
 import PaymentReturn from "./pages/payment-return";
 import Contact from "./pages/contact";
+import Register from "./pages/register";
+import ChangePassword from "./pages/change-password";
 
 const App = () => {
   return (
@@ -28,6 +30,9 @@ const App = () => {
         <Route path="/complaint" element={<Feedback />} />
         <Route path="/project" element={<Project />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/change-password" element={<ChangePassword />} />
+
         <Route path="/service-detail/:id" element={<ServiceDetails />} />
         <Route path="/my-orders" element={<MyOrders />} />
         <Route path="/orders" element={<OrderPage />} />

@@ -34,8 +34,14 @@ public class Services {
     @Column(nullable = false)
     private Double price;
 
+    private String phone;
+    private String address;
+    private String time;
+
     @Column(nullable = false)
     private Double pricePerHour;
+
+    private String tag;
 
     @Column(name = "customer_id", nullable = false)
     private Long customerId;

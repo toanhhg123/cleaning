@@ -15,6 +15,8 @@ export interface OrderResponse {
   employeeId: number;
   status: "pending" | "processing" | "done" | "success";
   createdAt: number;
+  address: string;
+
   updatedAt: number;
 }
 

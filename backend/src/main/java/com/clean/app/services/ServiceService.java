@@ -43,9 +43,17 @@ public class ServiceService {
             service.setDescription(serviceDetails.getDescription());
             service.setPrice(serviceDetails.getPrice());
             service.setStatus(serviceDetails.getStatus());
+            service.setTag(serviceDetails.getTag());
+            service.setPhone(serviceDetails.getPhone());
+            service.setTime(serviceDetails.getTime());
+            service.setAddress(serviceDetails.getAddress());
             return serviceRepository.save(service);
         }
         return null;
+    }
+
+    public List<Services> getServicesByTag(String tag) {
+        return serviceRepository.findByTag(tag);
     }
 
     public Services approveService(Long id) {

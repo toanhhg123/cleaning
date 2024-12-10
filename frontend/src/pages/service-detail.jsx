@@ -38,7 +38,7 @@ const ServiceDetails = () => {
   const handleOrder = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const { dateFrom, dateTo } = Object.fromEntries(formData);
+    const { dateFrom, dateTo, address } = Object.fromEntries(formData);
 
     if (wallet && wallet.balance < data.price) {
       toast.error("vui lòng nạp thêm tiền vào tài khoản");
@@ -49,6 +49,7 @@ const ServiceDetails = () => {
       serviceId: id,
       dateFrom: new Date(dateFrom).valueOf(),
       dateTo: new Date(dateTo).valueOf(),
+      address,
     });
   };
 
@@ -69,71 +70,109 @@ const ServiceDetails = () => {
       </div>
 
       {data && (
-        <div className="about" style={{ marginTop: 95 }}>
-          <div className="service-detail mt-5">
+        <div className="about py-5" style={{ marginTop: 95 }}>
+          <div className="service-detail">
             <div className="container">
-              <div className="row g-5">
-                {/* Service Image */}
-                <div className="col-lg-5 col-md-6">
-                  <div className="card border-0 shadow-sm">
-                    <img
-                      id="service-image"
-                      className="card-img-top rounded"
-                      alt="Service"
-                      src={data.image || "/img/service-1.jpg"}
-                    />
+              <div className="row justify-content-center">
+                <div className="col-lg-10">
+                  <div className="card border-0 rounded-4">
+                    <div className="row align-items-center g-4">
+                      {/* Service Image */}
+                      <div className="col-md-6">
+                        <img
+                          id="service-image"
+                          className="img-fluid rounded-4 shadow-sm"
+                          alt="Service"
+                          src={data.image || "/img/service-1.jpg"}
+                        />
+                      </div>
+
+                      {/* Service Info */}
+                      <div className="col-md-6">
+                        <h3
+                          id="service-name"
+                          className="text-primary fw-bold mb-2"
+                        >
+                          {data.name}
+                        </h3>
+                        <h4 id="service-price" className="text-danger fw-bold">
+                          {data.price} VND
+                        </h4>
+                        <ul className="list-unstyled mt-3">
+                          <li className="mb-2">
+                            <strong>Số điện thoại:</strong> {data?.phone}
+                          </li>
+                          <li className="mb-2">
+                            <strong>Địa chỉ:</strong> {data?.address}
+                          </li>
+                          <li className="mb-2">
+                            <strong>Thẻ:</strong> {data?.tag}
+                          </li>
+                          <li>
+                            <strong>Mô tả:</strong> {data.description}
+                          </li>
+                        </ul>
+
+                        {/* Order Form */}
+                        <form className="mt-4" onSubmit={handleOrder}>
+                          <div className="row g-3">
+                            <div className="col-md-6">
+                              <label
+                                htmlFor="dateFrom"
+                                className="form-label fw-semibold"
+                              >
+                                From
+                              </label>
+                              <input
+                                type="datetime-local"
+                                className="form-control shadow-sm"
+                                id="dateFrom"
+                                name="dateFrom"
+                                required
+                              />
+                            </div>
+                            <div className="col-md-6">
+                              <label
+                                htmlFor="dateTo"
+                                className="form-label fw-semibold"
+                              >
+                                To
+                              </label>
+                              <input
+                                type="datetime-local"
+                                className="form-control shadow-sm"
+                                id="dateTo"
+                                name="dateTo"
+                                required
+                              />
+                            </div>
+
+                            <div className="col-md-12 mt-2">
+                              <label
+                                htmlFor="dateTo"
+                                className="form-label fw-semibold"
+                              >
+                                Địa chỉ
+                              </label>
+                              <textarea
+                                className="form-control shadow-sm"
+                                name="address"
+                                id=""
+                              />
+                            </div>
+                          </div>
+                          <div className="mt-4 text-center">
+                            <button
+                              type="submit"
+                              className="btn btn-gradient btn-lg px-5 py-2"
+                            >
+                              Đặt dịch vụ
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
                   </div>
-                </div>
-
-                {/* Service Info */}
-                <div className="col-lg-7 col-md-6">
-                  <h3 id="service-name" className="text-primary fw-bold">
-                    {data.name}
-                  </h3>
-                  <h4 id="service-price" className="text-danger mb-3 fw-bold">
-                    {data.price} VND
-                  </h4>
-                  <p id="service-description" className="text-muted">
-                    {data.description}
-                  </p>
-
-                  {/* Order Form */}
-                  <form className="mt-4 px-3" onSubmit={handleOrder}>
-                    <div className="row g-3">
-                      <div className="col-md-6">
-                        <label htmlFor="dateFrom" className="form-label">
-                          <strong>From</strong>
-                        </label>
-                        <input
-                          type="datetime-local"
-                          className="form-control shadow-sm"
-                          id="dateFrom"
-                          name="dateFrom"
-                          required
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <label htmlFor="dateTo" className="form-label">
-                          <strong>To</strong>
-                        </label>
-                        <input
-                          type="datetime-local"
-                          className="form-control shadow-sm"
-                          id="dateTo"
-                          name="dateTo"
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="mt-4 text-center">
-                      <button
-                        type="submit"
-                        className="btn btn-success btn-lg px-5 py-2 shadow"
-                      >
-                        Đặt dịch vụ
-                      </button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>

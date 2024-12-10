@@ -56,11 +56,10 @@ const Wallet = () => {
               </div>
               <div className="card-body">
                 <p className="mb-2">
-                  <strong>User:</strong> {userInfo?.fullName}
+                  <strong>Người dùng:</strong> {userInfo?.fullName}
                 </p>
                 <p className="mb-2">
-                  <strong>Balance: {data?.balance?.toLocaleString()}</strong>{" "}
-                  VND
+                  <strong>Số dư: {data?.balance?.toLocaleString()}</strong> VND
                 </p>
               </div>
             </div>
@@ -69,7 +68,7 @@ const Wallet = () => {
               {/* Amount Input */}
               <div className="mb-3">
                 <label htmlFor="amount" className="form-label">
-                  Deposit Amount
+                  Số tiền muốn nạp:
                 </label>
                 <input
                   type="number"

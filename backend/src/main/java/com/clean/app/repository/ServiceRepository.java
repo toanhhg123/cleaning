@@ -12,4 +12,6 @@ public interface ServiceRepository extends JpaRepository<Services, Long> {
     List<Services> findByStatus(String status);
 
     List<Services> findByCustomerId(Long customerId);
+
+    List<Services> findByTag(String tag);
 }

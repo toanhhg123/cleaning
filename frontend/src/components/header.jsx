@@ -111,6 +111,7 @@ const UserDropDown = () => {
     console.log("logout");
     localStorage.removeItem("accessToken");
     navigate("/login");
+    window.location.reload();
   };
 
   return (
@@ -120,6 +121,9 @@ const UserDropDown = () => {
       </Link>
       <Link to="/wallet" className="dropdown-item">
         Ví cá nhân
+      </Link>
+      <Link to="/change-password" className="dropdown-item">
+        Đổi mật khẩu
       </Link>
       {role === "customer" && (
         <>

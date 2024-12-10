@@ -40,6 +40,11 @@ public class ServiceController {
         return serviceService.getServicesByStatus(status);
     }
 
+    @GetMapping("/tag/{tag}")
+    public List<Services> getServicesByTags(@PathVariable String tag) {
+        return serviceService.getServicesByTag(tag);
+    }
+
     @GetMapping("/customer/{customerId}")
     public List<Services> getServicesByCustomerId(@PathVariable Long customerId) {
         return serviceService.getServicesByCustomerId(customerId);
@@ -68,6 +73,8 @@ public class ServiceController {
         return rejectedService != null ? ResponseEntity.ok(rejectedService) : ResponseEntity.notFound().build();
     }
 
+    /************* ✨ Codeium Command ⭐ *************/
+    /****** 84abfc35-5423-4b8e-aabd-96c775c7188b *******/
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteService(@PathVariable Long id) {
         serviceService.deleteService(id);

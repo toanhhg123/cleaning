@@ -156,7 +156,7 @@ const Profile = () => {
                     {/* Avatar */}
                     <div className="mb-3">
                       <label htmlFor="avatar" className="form-label">
-                        Avatar
+                        Ảnh đại diện
                       </label>
 
                       {data.avatar && (

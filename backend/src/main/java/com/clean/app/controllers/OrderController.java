@@ -49,6 +49,13 @@ public class OrderController {
         return orderService.getByCustomerId(id);
     }
 
+    /************* ✨ Codeium Command ⭐ *************/
+    /**
+     * Retrieves a list of orders assigned to a specific employee.
+     *
+     * @param employeeId the ID of the employee whose orders are to be retrieved
+     *                   /****** 7bd83d1e-feeb-437c-b874-46872215f261
+     *******/
     @GetMapping("/employee/{employeeId}")
     public List<Order> getOrdersByEmployeeId(@PathVariable Long employeeId) {
         return orderService.getOrdersByEmployeeId(employeeId);
