@@ -33,3 +33,13 @@ cd backend
 ./mvnw clean install
 
 ```
+
+
+## restore database
+
+```
+docker compose up -d
+docker exec -i postgres-postgres-1 psql -U root -d postgres < ./backup.sql
+```
+
+## run src
