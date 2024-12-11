@@ -42,4 +42,22 @@ docker compose up -d
 docker exec -i postgres-postgres-1 psql -U root -d postgres < ./backup.sql
 ```
 
+
+
 ## run src
+
+```
+// chạy src 
+vào folder backend > AppAplication > run
+
+// chạy src admin > mở gitbash
+cd admin
+npm install -g pnpm 
+pnpm install
+pnpm dev
+
+// chay src frontend > mở gitbash
+cd frontend
+npm install
+npm run dev
+```
