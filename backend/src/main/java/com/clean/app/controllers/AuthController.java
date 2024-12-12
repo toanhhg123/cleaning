@@ -21,16 +21,19 @@ import lombok.AllArgsConstructor;
 public class AuthController {
     private final AuthService authService;
 
+    // api login
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest) {
         return ResponseEntity.ok(authService.login(authRequest));
     }
 
+    // api register
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody AuthRegister authRequest) {
         return ResponseEntity.ok(authService.register(authRequest));
     }
 
+    // api change password
     @PostMapping("/change-password")
     public ResponseEntity<User> changePassword(@RequestBody AuthChangePassword authRequest) {
         return ResponseEntity.ok(authService.changePassword(authRequest));

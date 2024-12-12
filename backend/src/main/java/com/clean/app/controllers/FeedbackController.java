@@ -21,16 +21,19 @@ import lombok.AllArgsConstructor;
 public class FeedbackController {
     private final FeedbackService feedbackService;
 
+    // lấy tất cả
     @GetMapping
-    public List<Feedback> getMethodName() {
+    public List<Feedback> getALl() {
         return feedbackService.getAllFeedback();
     }
 
+    // api tao
     @PostMapping
     public Feedback createFeedback(@RequestBody Feedback feedback) {
         return feedbackService.createFeedback(feedback);
     }
 
+    // api xoa
     @DeleteMapping("/{id}")
     public Long deleteFeedback(@PathVariable Long id) {
         feedbackService.deleteFeedback(id);

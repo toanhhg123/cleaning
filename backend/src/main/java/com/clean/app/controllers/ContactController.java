@@ -21,16 +21,19 @@ import lombok.AllArgsConstructor;
 public class ContactController {
     private final ContactService service;
 
+    // api lay tat ca
     @GetMapping
     public List<Contact> getAll() {
         return service.getAll();
     }
 
+    // api tao
     @PostMapping
     public Contact create(@RequestBody Contact contact) {
         return service.create(contact);
     }
 
+    // api xoa
     @DeleteMapping("/{id}")
     public Long deleteFeedback(@PathVariable Long id) {
         service.delete(id);

@@ -28,39 +28,35 @@ public class AuthService {
     private final UserRepository userRepository;
     private final UserService userService;
 
-    /**
-     * Login to the system.
-     *
-     * <p>
-     * This method takes the email and password of the user, and authenticates them.
-     * If the authentication is
-     * successful, it generates a JWT token and returns an {@link AuthResponse}
-     * containing the token.
-     *
-     * @param email    the email of the user
-     * @param password the password of the user
-     * @return the authentication response containing the JWT token
-     */
     public AuthResponse login(AuthRequest authRequest) {
+
+        // xac thuc tai khoan bang username and password
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 
+        // neu khong tim thay tai khoan thi throw exception
         if (!authentication.isAuthenticated())
             throw new UsernameNotFoundException(authRequest.getEmail());
 
+        // tao token
         String token = jwtService.generateToken(authentication);
 
+        // tra ve token
         return AuthResponse.builder().accessToken(token).build();
     }
 
+    // dang ky
     @Transactional
     public AuthResponse register(AuthRegister authRequest) {
+
+        // kiem tra email da ton tai
         userRepository
                 .findByEmail(authRequest.getEmail())
                 .ifPresent(u -> {
                     throw new ApiError(u.getEmail() + " đã tồn tại");
                 });
 
+        // tao user
         User user = User.builder()
                 .fullName(authRequest.getFullName())
                 .phoneNumber(authRequest.getPhoneNumber())
@@ -75,15 +71,19 @@ public class AuthService {
 
     }
 
+    // doi mat khau
     @Transactional
     public User changePassword(AuthChangePassword authRequest) {
 
+        // xac thuc tai khoan bang username and password
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authRequest.getEmail(), authRequest.getPassword()));
 
+        // neu khong tim thay tai khoan thi throw exception
         if (!authentication.isAuthenticated())
             throw new UsernameNotFoundException(authRequest.getEmail());
 
+        // thay doi mat khau
         User user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new ApiError(authRequest.getEmail() + " khong ton tai"));
 
