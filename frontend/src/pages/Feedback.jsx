@@ -39,11 +39,11 @@ const Feedback = () => {
           <div className="container">
             <div className="row">
               <div className="col-12">
-                <h2>Đánh giá</h2>
+                <h2>Khiếu nại</h2>
               </div>
               <div className="col-12">
                 <Link to={"/"}>Home</Link>
-                <Link to={"/contact"}>Dánh giá</Link>
+                <Link to={"/contact"}>Khiếu nại</Link>
               </div>
             </div>
           </div>

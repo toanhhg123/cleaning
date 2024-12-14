@@ -12,194 +12,224 @@ import ChartPie from "@/pages/components/chart/view/chart-pie";
 import ChartRadar from "@/pages/components/chart/view/chart-radar";
 import { useThemeToken } from "@/theme/hooks";
 
+import { default as apiOrder } from "@/api/services/orderService";
+import { useQuery } from "@tanstack/react-query";
 import AnalysisCard from "./analysis-card";
 import AnalysisNews from "./analysis-news";
 import AnalysisOrderTimeline from "./analysis-order-timeline";
 import AnalysisTasks from "./analysis-tasks";
 import AnalysisTrafficCard from "./analysis-traffic-card";
+import apiUser from "@/api/services/userService";
+import apiService from "@/api/services/serviceService";
+import apiContact from "@/api/services/contact";
 
 function Analysis() {
-	const theme = useThemeToken();
-	return (
-		<div className="p-2">
-			<Typography.Title level={2}>Hi, Welcome back 👋</Typography.Title>
-			<Row gutter={[16, 16]} justify="center">
-				<Col lg={6} md={12} span={24}>
-					<AnalysisCard
-						cover={glass_bag}
-						title="714k"
-						subtitle="Total Order"
-						style={{
-							color: theme.colorPrimaryTextActive,
-							background: `linear-gradient(135deg, ${Color(
-								theme.colorPrimaryActive,
-							)
-								.alpha(0.2)
-								.toString()}, ${Color(theme.colorPrimary)
-								.alpha(0.2)
-								.toString()}) rgb(255, 255, 255)`,
-						}}
-					/>
-				</Col>
-				<Col lg={6} md={12} span={24}>
-					<AnalysisCard
-						cover={glass_users}
-						title="1.35m"
-						subtitle="New Users"
-						style={{
-							color: theme.colorInfoTextActive,
-							background: `linear-gradient(135deg, ${Color(
-								theme.colorInfoActive,
-							)
-								.alpha(0.2)
-								.toString()}, ${Color(theme.colorInfo)
-								.alpha(0.2)
-								.toString()}) rgb(255, 255, 255)`,
-						}}
-					/>
-				</Col>
-				<Col lg={6} md={12} span={24}>
-					<AnalysisCard
-						cover={glass_buy}
-						title="1.72m"
-						subtitle="New Orders"
-						style={{
-							color: theme.colorWarningTextActive,
-							background: `linear-gradient(135deg, ${Color(
-								theme.colorWarningActive,
-							)
-								.alpha(0.2)
-								.toString()}, ${Color(theme.colorWarning)
-								.alpha(0.2)
-								.toString()}) rgb(255, 255, 255)`,
-						}}
-					/>
-				</Col>
-				<Col lg={6} md={12} span={24}>
-					<AnalysisCard
-						cover={glass_message}
-						title="234"
-						subtitle="Bug Reports"
-						style={{
-							color: theme.colorErrorTextActive,
-							background: `linear-gradient(135deg, ${Color(
-								theme.colorErrorActive,
-							)
-								.alpha(0.2)
-								.toString()}, ${Color(theme.colorError)
-								.alpha(0.2)
-								.toString()}) rgb(255, 255, 255)`,
-						}}
-					/>
-				</Col>
-			</Row>
+  const theme = useThemeToken();
 
-			<Row gutter={[16, 16]} className="mt-8" justify="center">
-				<Col span={24} lg={12} xl={16}>
-					<Card title="Website Visits">
-						<ChartMixed />
-					</Card>
-				</Col>
-				<Col span={24} lg={12} xl={8}>
-					<Card title="Current Visits">
-						<ChartPie />
-					</Card>
-				</Col>
-			</Row>
+  const { data: orders } = useQuery({
+    queryKey: ["orders"],
+    queryFn: apiOrder.getOrders,
+  });
+  const { data: users } = useQuery({
+    queryKey: ["users"],
+    queryFn: apiUser.getUsers,
+  });
 
-			<Row gutter={[16, 16]} className="mt-8" justify="center">
-				<Col span={24} lg={12} xl={16}>
-					<Card title="Conversion Rates">
-						<ChartBar />
-					</Card>
-				</Col>
-				<Col span={24} lg={12} xl={8}>
-					<Card title="Current Subject">
-						<ChartRadar />
-					</Card>
-				</Col>
-			</Row>
+  const { data: services } = useQuery({
+    queryKey: ["services"],
+    queryFn: apiService.getServices,
+  });
 
-			<Row gutter={[16, 16]} className="mt-8">
-				<Col span={24} lg={12} xl={16}>
-					<Card title="News">
-						<AnalysisNews />
-					</Card>
-				</Col>
-				<Col span={24} lg={12} xl={8}>
-					<Card title="Order Timeline">
-						<AnalysisOrderTimeline />
-					</Card>
-				</Col>
-			</Row>
+  const { data } = useQuery({
+    queryKey: ["contact"],
+    queryFn: apiContact.getContacts,
+  });
 
-			<Row gutter={[16, 16]} className="my-8">
-				<Col span={24} lg={12} xl={8}>
-					<Card title="Traffic by Site">
-						<Row gutter={[16, 16]}>
-							<Col span={12}>
-								<AnalysisTrafficCard
-									icon={
-										<Iconify icon="bxl:facebook" size={32} color="#1877f2" />
-									}
-									title="1.95k"
-									subtitle="FaceBook"
-								/>
-							</Col>
+  const totalOrder = orders?.length ?? 0;
+  const totalService = services?.length ?? 0;
+  const totalUsers = users?.map((user) => user.role === "employee").length ?? 0;
+  const totalContact = data?.length ?? 0;
 
-							<Col span={12}>
-								<AnalysisTrafficCard
-									icon={
-										<Iconify
-											icon="ant-design:google-outlined"
-											size={32}
-											color="#df3e30"
-										/>
-									}
-									title="9.12k"
-									subtitle="Google"
-								/>
-							</Col>
+  return (
+    <div className="p-2">
+      <Typography.Title level={2}>Hi, Welcome back 👋</Typography.Title>
+      <Row gutter={[16, 16]} justify="center">
+        <Col lg={6} md={12} span={24}>
+          <AnalysisCard
+            cover={glass_bag}
+            title={totalOrder.toLocaleString()}
+            subtitle="Total Order"
+            style={{
+              color: theme.colorPrimaryTextActive,
+              background: `linear-gradient(135deg, ${Color(
+                theme.colorPrimaryActive
+              )
+                .alpha(0.2)
+                .toString()}, ${Color(theme.colorPrimary)
+                .alpha(0.2)
+                .toString()}) rgb(255, 255, 255)`,
+            }}
+          />
+        </Col>
+        <Col lg={6} md={12} span={24}>
+          <AnalysisCard
+            cover={glass_users}
+            title={totalUsers.toLocaleString()}
+            subtitle="Total Employees"
+            style={{
+              color: theme.colorInfoTextActive,
+              background: `linear-gradient(135deg, ${Color(
+                theme.colorInfoActive
+              )
+                .alpha(0.2)
+                .toString()}, ${Color(theme.colorInfo)
+                .alpha(0.2)
+                .toString()}) rgb(255, 255, 255)`,
+            }}
+          />
+        </Col>
+        <Col lg={6} md={12} span={24}>
+          <AnalysisCard
+            cover={glass_buy}
+            title={totalService.toLocaleString()}
+            subtitle="Total Services"
+            style={{
+              color: theme.colorWarningTextActive,
+              background: `linear-gradient(135deg, ${Color(
+                theme.colorWarningActive
+              )
+                .alpha(0.2)
+                .toString()}, ${Color(theme.colorWarning)
+                .alpha(0.2)
+                .toString()}) rgb(255, 255, 255)`,
+            }}
+          />
+        </Col>
+        <Col lg={6} md={12} span={24}>
+          <AnalysisCard
+            cover={glass_message}
+            title={totalContact.toLocaleString()}
+            subtitle="Contacts"
+            style={{
+              color: theme.colorErrorTextActive,
+              background: `linear-gradient(135deg, ${Color(
+                theme.colorErrorActive
+              )
+                .alpha(0.2)
+                .toString()}, ${Color(theme.colorError)
+                .alpha(0.2)
+                .toString()}) rgb(255, 255, 255)`,
+            }}
+          />
+        </Col>
+      </Row>
 
-							<Col span={12}>
-								<AnalysisTrafficCard
-									icon={
-										<Iconify
-											icon="eva:linkedin-fill"
-											size={32}
-											color="#006097"
-										/>
-									}
-									title="6.98k"
-									subtitle="Linkedin"
-								/>
-							</Col>
+      <Row gutter={[16, 16]} className="mt-8" justify="center">
+        <Col span={24} lg={12} xl={16}>
+          <Card title="Website Visits">
+            <ChartMixed />
+          </Card>
+        </Col>
+        <Col span={24} lg={12} xl={8}>
+          <Card title="Current Visits">
+            <ChartPie />
+          </Card>
+        </Col>
+      </Row>
 
-							<Col span={12}>
-								<AnalysisTrafficCard
-									icon={
-										<Iconify
-											icon="eva:twitter-fill"
-											size={32}
-											color="#1c9cea"
-										/>
-									}
-									title="8.49k"
-									subtitle="Twitter"
-								/>
-							</Col>
-						</Row>
-					</Card>
-				</Col>
+      <Row gutter={[16, 16]} className="mt-8" justify="center">
+        <Col span={24} lg={12} xl={16}>
+          <Card title="Conversion Rates">
+            <ChartBar />
+          </Card>
+        </Col>
+        <Col span={24} lg={12} xl={8}>
+          <Card title="Current Subject">
+            <ChartRadar />
+          </Card>
+        </Col>
+      </Row>
 
-				<Col span={24} lg={12} xl={16}>
-					<Card title="Tasks">
-						<AnalysisTasks />
-					</Card>
-				</Col>
-			</Row>
-		</div>
-	);
+      <Row gutter={[16, 16]} className="mt-8">
+        <Col span={24} lg={12} xl={16}>
+          <Card title="News">
+            <AnalysisNews />
+          </Card>
+        </Col>
+        <Col span={24} lg={12} xl={8}>
+          <Card title="Order Timeline">
+            <AnalysisOrderTimeline />
+          </Card>
+        </Col>
+      </Row>
+
+      <Row gutter={[16, 16]} className="my-8">
+        <Col span={24} lg={12} xl={8}>
+          <Card title="Traffic by Site">
+            <Row gutter={[16, 16]}>
+              <Col span={12}>
+                <AnalysisTrafficCard
+                  icon={
+                    <Iconify icon="bxl:facebook" size={32} color="#1877f2" />
+                  }
+                  title="1.95k"
+                  subtitle="FaceBook"
+                />
+              </Col>
+
+              <Col span={12}>
+                <AnalysisTrafficCard
+                  icon={
+                    <Iconify
+                      icon="ant-design:google-outlined"
+                      size={32}
+                      color="#df3e30"
+                    />
+                  }
+                  title="9.12k"
+                  subtitle="Google"
+                />
+              </Col>
+
+              <Col span={12}>
+                <AnalysisTrafficCard
+                  icon={
+                    <Iconify
+                      icon="eva:linkedin-fill"
+                      size={32}
+                      color="#006097"
+                    />
+                  }
+                  title="6.98k"
+                  subtitle="Linkedin"
+                />
+              </Col>
+
+              <Col span={12}>
+                <AnalysisTrafficCard
+                  icon={
+                    <Iconify
+                      icon="eva:twitter-fill"
+                      size={32}
+                      color="#1c9cea"
+                    />
+                  }
+                  title="8.49k"
+                  subtitle="Twitter"
+                />
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+
+        <Col span={24} lg={12} xl={16}>
+          <Card title="Tasks">
+            <AnalysisTasks />
+          </Card>
+        </Col>
+      </Row>
+    </div>
+  );
 }
 
 export default Analysis;

@@ -327,3 +327,136 @@ Thư mục chứa mã nguồn chính của ứng dụng React.
 
 ### **3. Vite Config (`vite.config.js`)**
 - Tệp cấu hình cho Vite, một công cụ xây dựng frontend nhanh, hỗ trợ Hot Module Replacement (HMR) và tối ưu hóa quá trình phát triển.
+
+
+# Hướng Dẫn Tích Hợp Thanh Toán VNPay với Java Spring Boot
+
+## **Flow Thanh Toán VNPay**
+
+1. **Người dùng yêu cầu thanh toán**:
+   - Người dùng chọn phương thức thanh toán VNPay trên giao diện.
+
+2. **Tạo URL thanh toán VNPay**:
+   - Backend tạo URL thanh toán VNPay dựa trên các thông tin giao dịch.
+   - Gửi yêu cầu đến API VNPay để lấy URL thanh toán.
+
+3. **Chuyển hướng người dùng đến cổng thanh toán VNPay**:
+   - Frontend chuyển hướng người dùng đến URL VNPay mà backend trả về.
+   - Người dùng nhập thông tin và thực hiện thanh toán trên cổng VNPay.
+
+4. **Xử lý callback từ VNPay**:
+   - Sau khi thanh toán xong, VNPay gọi API callback của bạn để gửi kết quả giao dịch.
+   - Backend kiểm tra chữ ký (checksum) và trạng thái giao dịch để xác nhận giao dịch.
+
+5. **Hiển thị kết quả cho người dùng**:
+   - Backend trả về kết quả giao dịch cho frontend.
+   - Frontend hiển thị kết quả thanh toán thành công hoặc thất bại cho người dùng.
+
+---
+
+## **Hướng Dẫn Thực Hiện**
+
+### **1. Cấu hình các thông tin cần thiết**
+Bạn cần thông tin cấu hình từ VNPay:
+- `vnp_TmnCode`: Mã terminal của bạn.
+- `vnp_HashSecret`: Chuỗi bí mật dùng để tạo chữ ký.
+- `vnp_PayUrl`: URL API thanh toán VNPay.
+- `vnp_ReturnUrl`: URL để người dùng quay lại sau khi thanh toán.
+
+# Tích Hợp Thanh Toán VNPay với Java Spring Boot
+
+## 1. Tạo Đơn Hàng và URL Thanh Toán
+
+### Code
+```java
+@PostMapping(path = "/vn-pay")
+public String createOrder(
+        @RequestBody() PaymentRequest paymentRequest,
+        HttpServletRequest request)
+        throws JsonProcessingException {
+    String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+
+    paymentRequest.setUserId(userService.getCurrentUser().getId().toString());
+
+    // Convert the payment request to a JSON string
+    ObjectMapper objectMapper = new ObjectMapper();
+    String body = objectMapper.writeValueAsString(paymentRequest);
+
+    // Create the order and get the redirection URL
+    return paymentService.createOrder(paymentRequest.getAmount(), body, baseUrl);
+}
+```
+
+### **Giải Thích**
+
+#### **Mục Đích**  
+Xử lý yêu cầu từ phía client để tạo đơn hàng và trả về URL thanh toán VNPay.
+
+#### **Chi Tiết**  
+1. **Lấy thông tin URL server**:  
+   - Bao gồm `scheme`, tên miền, và cổng, được sử dụng để cấu hình `baseUrl`.
+
+2. **Thêm thông tin người dùng**:  
+   - Lấy `userId` của người dùng hiện tại thông qua `userService.getCurrentUser()` và gán vào `PaymentRequest`.
+
+3. **Chuyển đổi dữ liệu**:  
+   - Sử dụng `ObjectMapper` để chuyển đổi đối tượng `PaymentRequest` thành chuỗi JSON.
+
+4. **Tạo đơn hàng**:  
+   - Gọi phương thức `paymentService.createOrder()` để tạo đơn hàng với các tham số:
+     - `paymentRequest.getAmount()`: Số tiền cần thanh toán.
+     - `body`: Chuỗi JSON chứa thông tin đơn hàng.
+     - `baseUrl`: Đường dẫn gốc của server.
+
+#### **Kết Quả**  
+- Trả về URL từ VNPay để frontend chuyển hướng người dùng đến trang thanh toán.
+```java
+
+ @GetMapping(path = "/vnpay-payment")
+    public void returnOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Convert the payment request parameter to a JSON string
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        // Parse the JSON string to a PaymentRequest object
+        PaymentRequest paymentRequest = objectMapper.readValue(
+                request.getParameter("vnp_OrderInfo"),
+                PaymentRequest.class);
+        log.info("payment request: {}", paymentRequest.toString());
+
+        // Process the payment return
+        int result = paymentService.orderReturn(request, paymentRequest);
+
+        // Process the payment return
+        String clientUrl = result == 1
+                ? "http://localhost:5173/payment-return?type=success"
+                : "http://localhost:5173/payment-return?type=fail";
+
+        response.sendRedirect(clientUrl);
+    }
+```
+
+### Giải Thích
+
+#### Mục Đích
+Xử lý thông tin callback từ VNPay sau khi người dùng hoàn tất thanh toán.
+
+#### Chi Tiết
+1. **Lấy Thông Tin Callback**:
+   - Lấy tham số `vnp_OrderInfo` từ request callback và chuyển thành chuỗi JSON.
+
+2. **Chuyển Đổi Dữ Liệu**:
+   - Dùng `ObjectMapper` để parse JSON thành đối tượng `PaymentRequest`.
+
+3. **Kiểm Tra Trạng Thái Giao Dịch**:
+   - Gọi phương thức `paymentService.orderReturn()` với các tham số:
+     - `request`: Chứa thông tin callback từ VNPay gửi về.
+     - `paymentRequest`: Thông tin chi tiết về giao dịch được parse từ JSON.
+
+4. **Xử Lý Kết Quả Giao Dịch**:
+   - Nếu giao dịch thành công (`result == 1`):
+     - Chuyển hướng người dùng đến trang thành công: `/payment-return?type=success`.
+   - Nếu giao dịch thất bại:
+     - Chuyển hướng người dùng đến trang thất bại: `/payment-return?type=fail`.
+
+#### Kết Quả
+Điều hướng người dùng đến trang kết quả giao dịch tương ứng trên frontend.

@@ -13,7 +13,7 @@ const Header = () => {
         <div className="header-top row align-items-center">
           <div className="col-lg-3">
             <div className="brand">
-              <Link to="index.html" className="d-flex">
+              <Link to="/" className="d-flex">
                 <img src="/img/2-removebg-preview.png" alt="Logo" />
                 TechTitans
               </Link>
@@ -54,9 +54,6 @@ const Header = () => {
                   </Link>
                 </div>
                 <div className="d-flex me-0">
-                  <Link to="order-history.html" className="nav-item nav-link">
-                    <i className="fas fa-clipboard fa-2x" />
-                  </Link>
                   <div className="nav-item dropdown">
                     <Link
                       to="#"

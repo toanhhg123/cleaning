@@ -1,14 +1,17 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "sonner";
 import Footer from "../components/footer";
 import Header from "../components/header";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getServicesById } from "../service/service";
-import { createOrder } from "../service/order";
-import { toast } from "sonner";
+import { useRole } from "../hooks/useUser";
 import useWallet from "../hooks/useWallet";
+import { createOrder } from "../service/order";
+import { getServicesById } from "../service/service";
 import { getServiceFeedbackByServiceId } from "../service/serviceFeedback";
 
 const ServiceDetails = () => {
+  const role = useRole();
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: wallet } = useWallet();
@@ -114,62 +117,64 @@ const ServiceDetails = () => {
                         </ul>
 
                         {/* Order Form */}
-                        <form className="mt-4" onSubmit={handleOrder}>
-                          <div className="row g-3">
-                            <div className="col-md-6">
-                              <label
-                                htmlFor="dateFrom"
-                                className="form-label fw-semibold"
-                              >
-                                From
-                              </label>
-                              <input
-                                type="datetime-local"
-                                className="form-control shadow-sm"
-                                id="dateFrom"
-                                name="dateFrom"
-                                required
-                              />
-                            </div>
-                            <div className="col-md-6">
-                              <label
-                                htmlFor="dateTo"
-                                className="form-label fw-semibold"
-                              >
-                                To
-                              </label>
-                              <input
-                                type="datetime-local"
-                                className="form-control shadow-sm"
-                                id="dateTo"
-                                name="dateTo"
-                                required
-                              />
-                            </div>
+                        {role === "customer" && (
+                          <form className="mt-4" onSubmit={handleOrder}>
+                            <div className="row g-3">
+                              <div className="col-md-6">
+                                <label
+                                  htmlFor="dateFrom"
+                                  className="form-label fw-semibold"
+                                >
+                                  From
+                                </label>
+                                <input
+                                  type="datetime-local"
+                                  className="form-control shadow-sm"
+                                  id="dateFrom"
+                                  name="dateFrom"
+                                  required
+                                />
+                              </div>
+                              <div className="col-md-6">
+                                <label
+                                  htmlFor="dateTo"
+                                  className="form-label fw-semibold"
+                                >
+                                  To
+                                </label>
+                                <input
+                                  type="datetime-local"
+                                  className="form-control shadow-sm"
+                                  id="dateTo"
+                                  name="dateTo"
+                                  required
+                                />
+                              </div>
 
-                            <div className="col-md-12 mt-2">
-                              <label
-                                htmlFor="dateTo"
-                                className="form-label fw-semibold"
-                              >
-                                Địa chỉ
-                              </label>
-                              <textarea
-                                className="form-control shadow-sm"
-                                name="address"
-                                id=""
-                              />
+                              <div className="col-md-12 mt-2">
+                                <label
+                                  htmlFor="dateTo"
+                                  className="form-label fw-semibold"
+                                >
+                                  Địa chỉ
+                                </label>
+                                <textarea
+                                  className="form-control shadow-sm"
+                                  name="address"
+                                  id=""
+                                />
+                              </div>
                             </div>
-                          </div>
-                          <div className="mt-4 text-center">
-                            <button
-                              type="submit"
-                              className="btn btn-gradient btn-lg px-5 py-2"
-                            >
-                              Đặt dịch vụ
-                            </button>
-                          </div>
-                        </form>
+                            <div className="mt-4 text-center">
+                              <button
+                                type="submit"
+                                className="btn btn-gradient btn-lg px-5 py-2"
+                              >
+                                Đặt dịch vụ
+                              </button>
+                            </div>
+                          </form>
+                        )}
                       </div>
                     </div>
                   </div>

@@ -64,7 +64,6 @@ const Footer = () => {
                 Lorem ipsum dolor sit amet, adipiscing elit. Etiam accumsan
                 lacus eget velit
               </p>
-              <input className="form-control" placeholder="Email here" />
               <button type="button" className="btn">
                 Submit
               </button>
