@@ -49,7 +49,9 @@ public class Order {
 
     private Date dateFrom;
 
-    private Date dateTo;
+    private Integer time;
+
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)

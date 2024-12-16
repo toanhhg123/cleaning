@@ -47,6 +47,8 @@ public class ServiceService {
             service.setPhone(serviceDetails.getPhone());
             service.setTime(serviceDetails.getTime());
             service.setAddress(serviceDetails.getAddress());
+            if(serviceDetails.getImage() != null)  service.setImage(serviceDetails.getImage());
+
             return serviceRepository.save(service);
         }
         return null;
@@ -81,6 +83,7 @@ public class ServiceService {
             serviceRepository.deleteById(id);
             return true;
         }
+
         return false;
     }
 }

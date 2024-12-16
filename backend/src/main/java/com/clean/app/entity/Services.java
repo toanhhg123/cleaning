@@ -34,6 +34,8 @@ public class Services {
     @Column(nullable = false)
     private Double price;
 
+    private  String image;
+
     private String phone;
     private String address;
     private String time;
