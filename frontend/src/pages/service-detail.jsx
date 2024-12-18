@@ -8,9 +8,11 @@ import useWallet from "../hooks/useWallet";
 import { createOrder } from "../service/order";
 import { getServicesById } from "../service/service";
 import { getServiceFeedbackByServiceId } from "../service/serviceFeedback";
+import { useState } from "react";
 
 const ServiceDetails = () => {
   const role = useRole();
+  const [time, setTime] = useState(1);
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -41,7 +43,7 @@ const ServiceDetails = () => {
   const handleOrder = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const { dateFrom, dateTo, address } = Object.fromEntries(formData);
+    const { dateFrom, address } = Object.fromEntries(formData);
 
     if (wallet && wallet.balance < data.price) {
       toast.error("vui lòng nạp thêm tiền vào tài khoản");
@@ -51,8 +53,9 @@ const ServiceDetails = () => {
     mutate({
       serviceId: id,
       dateFrom: new Date(dateFrom).valueOf(),
-      dateTo: new Date(dateTo).valueOf(),
       address,
+      time,
+      price: data.pricePerHour * time,
     });
   };
 
@@ -86,7 +89,11 @@ const ServiceDetails = () => {
                           id="service-image"
                           className="img-fluid rounded-4 shadow-sm"
                           alt="Service"
-                          src={data.image || "/img/service-1.jpg"}
+                          src={`http://localhost:8080/api/upload/files/${data.image}`}
+                          onError={(e) => {
+                            e.currentTarget.src = "/img/service-1.jpg";
+                          }}
+                          height={200}
                         />
                       </div>
 
@@ -99,7 +106,7 @@ const ServiceDetails = () => {
                           {data.name}
                         </h3>
                         <h4 id="service-price" className="text-danger fw-bold">
-                          {data.price} VND
+                          {data.pricePerHour} VND / 1h
                         </h4>
                         <ul className="list-unstyled mt-3">
                           <li className="mb-2">
@@ -125,7 +132,7 @@ const ServiceDetails = () => {
                                   htmlFor="dateFrom"
                                   className="form-label fw-semibold"
                                 >
-                                  From
+                                  Thời gian
                                 </label>
                                 <input
                                   type="datetime-local"
@@ -135,22 +142,43 @@ const ServiceDetails = () => {
                                   required
                                 />
                               </div>
-                              <div className="col-md-6">
-                                <label
-                                  htmlFor="dateTo"
-                                  className="form-label fw-semibold"
-                                >
-                                  To
-                                </label>
-                                <input
-                                  type="datetime-local"
-                                  className="form-control shadow-sm"
-                                  id="dateTo"
-                                  name="dateTo"
-                                  required
-                                />
-                              </div>
 
+                              <div className="col-md-12 mt-3">
+                                <label
+                                  htmlFor="time"
+                                  className="form-label fw-semibold"
+                                  style={{ display: "block" }}
+                                >
+                                  time:
+                                </label>
+                                <select
+                                  name="time"
+                                  id="time"
+                                  className="ml-2"
+                                  style={{ padding: 8 }}
+                                  value={time}
+                                  onChange={(e) => {
+                                    setTime(+e.target.value);
+                                  }}
+                                >
+                                  {Array.from({ length: 24 }, (_, i) => (
+                                    <option
+                                      key={i.toLocaleString()}
+                                      value={i + 1}
+                                    >
+                                      {i + 1} h
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                              <div className="col-md-12 mt-3">
+                                <h4
+                                  id="service-price"
+                                  className="text-danger fw-bold"
+                                >
+                                  Chi phí: {data.pricePerHour * time} VND
+                                </h4>
+                              </div>
                               <div className="col-md-12 mt-2">
                                 <label
                                   htmlFor="dateTo"

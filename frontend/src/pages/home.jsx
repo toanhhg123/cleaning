@@ -31,7 +31,14 @@ const Home = () => {
                 return (
                   <div className="col-lg-3 col-md-6" key={service.id}>
                     <div className="service-item">
-                      <img src="/img/service-1.jpg" alt="Service" />
+                      <img
+                        src={`http://localhost:8080/api/upload/files/${service.image}`}
+                        onError={(e) => {
+                          e.currentTarget.src = "/img/service-1.jpg";
+                        }}
+                        height={200}
+                        alt="Service"
+                      />
                       <h3>{service.name}</h3>
                       <p>{service.description}</p>
                       <Link
