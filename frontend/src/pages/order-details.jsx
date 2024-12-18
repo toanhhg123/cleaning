@@ -130,16 +130,25 @@ const OrderDetails = () => {
                 {data?.customer?.fullName || "Chưa cập nhật"}
               </span>
             </p>
+
             <p className="mb-2">
               <strong>Số điện thoại KH:</strong>{" "}
               <span className="text-muted">
                 {data?.customer?.phoneNumber || "Chưa cập nhật"}
               </span>
             </p>
+
             <p className="mb-2">
               <strong>Địa chỉ KH:</strong>{" "}
               <span className="text-muted">
                 {data?.customer?.address || "Chưa cập nhật"}
+              </span>
+            </p>
+
+            <p className="mb-2">
+              <strong>Giá tiền:</strong>{" "}
+              <span className="text-muted">
+                {data?.price?.toLocaleString() || "Chưa cập nhật"}
               </span>
             </p>
 
