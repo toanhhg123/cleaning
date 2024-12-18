@@ -113,17 +113,36 @@ const OrderDetails = () => {
               <strong>Giá:</strong> {data.service.price} VND
             </p>
             <p className="mb-2">
-              <strong>Họ và tên:</strong>{" "}
+              <strong>Họ và tên NV:</strong>{" "}
               <span className="text-muted">
                 {data?.employee?.fullName || "Chưa cập nhật"}
               </span>
             </p>
             <p className="mb-2">
-              <strong>Số điện thoại:</strong>{" "}
+              <strong>Số điện thoại NV:</strong>{" "}
               <span className="text-muted">
                 {data?.employee?.phoneNumber || "Chưa cập nhật"}
               </span>
             </p>
+            <p className="mb-2">
+              <strong>Họ tên KH:</strong>{" "}
+              <span className="text-muted">
+                {data?.customer?.fullName || "Chưa cập nhật"}
+              </span>
+            </p>
+            <p className="mb-2">
+              <strong>Số điện thoại KH:</strong>{" "}
+              <span className="text-muted">
+                {data?.customer?.phoneNumber || "Chưa cập nhật"}
+              </span>
+            </p>
+            <p className="mb-2">
+              <strong>Địa chỉ KH:</strong>{" "}
+              <span className="text-muted">
+                {data?.customer?.address || "Chưa cập nhật"}
+              </span>
+            </p>
+
             <p className="mb-2">
               <strong>Ngày:</strong> {new Date(data.createdAt).toLocaleString()}
             </p>

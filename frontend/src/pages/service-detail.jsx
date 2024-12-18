@@ -45,7 +45,7 @@ const ServiceDetails = () => {
     const formData = new FormData(e.target);
     const { dateFrom, address } = Object.fromEntries(formData);
 
-    if (wallet && wallet.balance < data.price) {
+    if (wallet && wallet.balance < data.pricePerHour * time) {
       toast.error("vui lòng nạp thêm tiền vào tài khoản");
       return;
     }

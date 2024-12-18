@@ -73,8 +73,6 @@ public class ServiceController {
         return rejectedService != null ? ResponseEntity.ok(rejectedService) : ResponseEntity.notFound().build();
     }
 
-    /************* ✨ Codeium Command ⭐ *************/
-    /****** 84abfc35-5423-4b8e-aabd-96c775c7188b *******/
     @DeleteMapping("/{id}")
     public ResponseEntity<Long> deleteService(@PathVariable Long id) {
         serviceService.deleteService(id);

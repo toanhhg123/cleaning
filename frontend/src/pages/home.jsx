@@ -12,8 +12,6 @@ const Home = () => {
 
   const services = data || [];
 
-  console.log(services);
-
   return (
     <>
       <Header />

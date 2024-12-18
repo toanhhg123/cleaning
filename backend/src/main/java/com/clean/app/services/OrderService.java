@@ -86,8 +86,10 @@ public class OrderService {
                 Wallet walletCustomer = walletService.getWalletByUserId(order.getCustomerId());
 
                 // Update the balance: credit to employee, debit from customer
-                walletEmployee.setBalance(walletEmployee.getBalance() + order.getService().getPrice());
-                walletCustomer.setBalance(walletCustomer.getBalance() - order.getService().getPrice());
+                walletEmployee
+                        .setBalance(walletEmployee.getBalance() + (order.getPrice() == null ? 0 : order.getPrice()));
+                walletCustomer
+                        .setBalance(walletCustomer.getBalance() - (order.getPrice() == null ? 0 : order.getPrice()));
 
                 order.setIsPaid(Boolean.TRUE);
                 walletRepository.save(walletEmployee);
