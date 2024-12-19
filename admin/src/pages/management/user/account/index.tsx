@@ -3,7 +3,7 @@ import { Tabs, type TabsProps } from "antd";
 import { Iconify } from "@/components/icon";
 
 import GeneralTab from "./general-tab";
-import NotificationsTab from "./notifications-tab";
+
 import SecurityTab from "./security-tab";
 
 function UserAccount() {

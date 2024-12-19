@@ -99,6 +99,9 @@ export const useSignIn = () => {
       res.user = {
         ...res.user,
         permissions: permissions,
+        avatar: userInfo.avatar || "",
+        email: userInfo.email,
+        username: userInfo.fullName,
         role: {
           id: userInfo.id.toString(),
           name: userInfo.role,

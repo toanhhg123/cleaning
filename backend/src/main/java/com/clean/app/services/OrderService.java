@@ -74,9 +74,11 @@ public class OrderService {
     @Transactional
     public Order updateOrder(Long id, Order orderDetails) {
         Optional<Order> orderOptional = orderRepository.findById(id);
+
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
             order.setStatus(orderDetails.getStatus());
+            order.setAddress(orderDetails.getAddress());
 
             // Check if the order is marked as successful and is not yet paid
             boolean isPaid = Boolean.TRUE.equals(order.getIsPaid());

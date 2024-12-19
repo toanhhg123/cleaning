@@ -29,6 +29,7 @@ public class Contact {
     private String email;
     private String title;
     private String message;
+    private String phone;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)

@@ -10,7 +10,7 @@ export interface UserInfoResponse {
   fullName: string;
   email: string;
   phoneNumber: string;
-  password: string;
+  password?: string;
   role: string;
   avatar: string | null;
   address: string | null;

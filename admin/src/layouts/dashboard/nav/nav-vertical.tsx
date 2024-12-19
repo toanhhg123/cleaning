@@ -82,6 +82,8 @@ export default function NavVertical(props: Readonly<Props>) {
   };
 
   const handleOpenChange: MenuProps["onOpenChange"] = (keys) => {
+    console.log("change");
+
     if (collapsed) return;
     setOpenKeys(keys);
   };

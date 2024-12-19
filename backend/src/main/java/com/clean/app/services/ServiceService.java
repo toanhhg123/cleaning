@@ -42,12 +42,16 @@ public class ServiceService {
             service.setName(serviceDetails.getName());
             service.setDescription(serviceDetails.getDescription());
             service.setPrice(serviceDetails.getPrice());
+
             service.setStatus(serviceDetails.getStatus());
             service.setTag(serviceDetails.getTag());
             service.setPhone(serviceDetails.getPhone());
             service.setTime(serviceDetails.getTime());
             service.setAddress(serviceDetails.getAddress());
-            if(serviceDetails.getImage() != null)  service.setImage(serviceDetails.getImage());
+            if (serviceDetails.getPricePerHour() != null)
+                service.setPricePerHour(serviceDetails.getPricePerHour());
+            if (serviceDetails.getImage() != null)
+                service.setImage(serviceDetails.getImage());
 
             return serviceRepository.save(service);
         }

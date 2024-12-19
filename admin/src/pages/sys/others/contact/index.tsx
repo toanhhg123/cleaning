@@ -38,6 +38,12 @@ const FeedBackPage = () => {
       render: (email) => <ProTag color="yellow-inverse">{email}</ProTag>,
     },
     {
+      title: "Phone",
+      dataIndex: "phone",
+      width: 60,
+      render: (phone) => <ProTag color="yellow-inverse">{phone}</ProTag>,
+    },
+    {
       title: "user",
       dataIndex: "username",
       width: 60,

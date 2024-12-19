@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row, Space, Switch } from "antd";
+import { Button, Col, Form, Input, Row } from "antd";
 
 import type { UserInfoResponse } from "#/entity";
 import apiUser from "@/api/services/userService";
@@ -12,6 +12,7 @@ export default function GeneralTab() {
     queryKey: ["userInfo"],
     queryFn: apiUser.getMe,
   });
+
   const [form] = Form.useForm<UserInfoResponse>();
 
   const { mutateAsync: updateUser } = useMutation({
@@ -33,16 +34,11 @@ export default function GeneralTab() {
     <Row gutter={[16, 16]}>
       <Col span={24} lg={8}>
         <Card className="flex-col !px-6 !pb-10 !pt-20">
-          <UploadAvatar defaultAvatar={""} />
-
-          <Space className="py-6">
-            <div>Public Profile</div>
-            <Switch size="small" />
-          </Space>
-
-          <Button type="primary" danger>
-            Delete User
-          </Button>
+          <UploadAvatar
+            defaultAvatar={
+              `http://localhost:8080/api/upload/files/${data.avatar}` || ""
+            }
+          />
         </Card>
       </Col>
       <Col span={24} lg={16}>
