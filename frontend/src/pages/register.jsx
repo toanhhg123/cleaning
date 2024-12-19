@@ -6,9 +6,11 @@ import Header from "../components/header";
 import { register } from "../service/auth";
 
 const Register = () => {
+  // gọi api đăng kí
   const { mutate } = useMutation({
     mutationFn: (data) => register(data),
     onSuccess: (data) => {
+      // sau khi đang kí thành công thì backend trả về cho 1 chuỗi mã hoá và lưu bên phía client
       localStorage.setItem("accessToken", data);
       window.location.href = "/";
     },

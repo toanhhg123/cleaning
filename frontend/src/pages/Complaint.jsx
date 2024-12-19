@@ -7,7 +7,9 @@ import useUser from "../hooks/useUser";
 import { createFeedback } from "../service/feedback";
 
 const Feedback = () => {
+  // Kiểm tra user đã login hay chưa nếu có thông tin thì đã login rồi
   const { userInfo } = useUser();
+
   const { mutate } = useMutation({
     mutationFn: (data) => createFeedback(data),
     onSuccess: () => {
@@ -52,6 +54,7 @@ const Feedback = () => {
         {/* Contact Start */}
         {/* Contact Start */}
 
+        {/* nếu user login rồi thì hiện form đánh giá còn không thì hiện thông báo đăngd nhập */}
         {userInfo ? (
           <div className="contact" style={{ marginTop: "-80px" }}>
             <div className="container text-center">

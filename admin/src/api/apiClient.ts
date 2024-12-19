@@ -10,6 +10,7 @@ import userStore from "@/store/userStore";
 import type { Result } from "#/api";
 import { toast } from "sonner";
 
+// khỏi tạo axios
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 50000,

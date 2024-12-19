@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import About from "./pages/about";
 import Service from "./pages/service";
-import Feedback from "./pages/Feedback";
+import Feedback from "./pages/Complaint";
 import Project from "./pages/project";
 import Login from "./pages/login";
 import { Toaster } from "sonner";

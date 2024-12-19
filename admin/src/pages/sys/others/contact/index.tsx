@@ -10,10 +10,12 @@ import { Card, Popconfirm } from "antd";
 import Table, { type ColumnsType } from "antd/es/table";
 import Paragraph from "antd/es/typography/Paragraph";
 import { toast } from "sonner";
+import { formatDate } from "@fullcalendar/core/index.js";
 
 const FeedBackPage = () => {
   const queryClient = useQueryClient();
 
+  // Lấy thông tin liên hệ của người dùng
   const { data, isFetching } = useQuery({
     queryKey: ["contact"],
     queryFn: apiContact.getContacts,
@@ -36,6 +38,12 @@ const FeedBackPage = () => {
       dataIndex: "email",
       width: 60,
       render: (email) => <ProTag color="yellow-inverse">{email}</ProTag>,
+    },
+    {
+      title: "Ngày tạo",
+      dataIndex: "createdAt",
+      width: 60,
+      render: (date: number) => formatDate(new Date(date)),
     },
     {
       title: "Phone",

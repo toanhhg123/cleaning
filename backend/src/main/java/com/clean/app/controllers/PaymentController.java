@@ -27,16 +27,7 @@ public class PaymentController {
     private final PaymentService paymentService;
     private final UserService userService;
 
-    /**
-     * This method creates an order and redirects the user to the VNPAY payment
-     * page.
-     * 
-     * @param paymentRequest The payment request object.
-     * @param request        The HttpServletRequest object.
-     * @return The redirection URL.
-     * @throws JsonProcessingException If there is an error parsing the JSON
-     *                                 string.
-     */
+    // Hàm để tạo ra đương link dẫn tới trang thanh toán của VNPAY
     @PostMapping(path = "/vn-pay")
     public String createOrder(
             @RequestBody() PaymentRequest paymentRequest,
@@ -44,30 +35,20 @@ public class PaymentController {
             throws JsonProcessingException {
         String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
 
-        // Get the user ID from the request
         paymentRequest.setUserId(userService.getCurrentUser().getId().toString());
 
-        // Convert the payment request to a JSON string
         ObjectMapper objectMapper = new ObjectMapper();
         String body = objectMapper.writeValueAsString(paymentRequest);
 
-        // Create the order and get the redirection URL
         return paymentService.createOrder(paymentRequest.getAmount(), body, baseUrl);
     }
 
-    /**
-     * This method handles the payment return URL from VNPAY.
-     * 
-     * @param request The HttpServletRequest object.
-     * @return The result of the payment.
-     * @throws IOException
-     */
+    // Hàm xử lí cộng tiền cho user khi thanh toán thành công
     @GetMapping(path = "/vnpay-payment")
     public void returnOrder(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Convert the payment request parameter to a JSON string
+
         ObjectMapper objectMapper = new ObjectMapper();
 
-        // Parse the JSON string to a PaymentRequest object
         PaymentRequest paymentRequest = objectMapper.readValue(
                 request.getParameter("vnp_OrderInfo"),
                 PaymentRequest.class);

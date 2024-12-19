@@ -5,6 +5,7 @@ import { getMyOrders } from "../service/order";
 import { Link } from "react-router-dom";
 
 const MyOrders = () => {
+  // api lay danh sach don hang
   const { data } = useQuery({
     queryKey: ["orders"],
     queryFn: () => getMyOrders(),

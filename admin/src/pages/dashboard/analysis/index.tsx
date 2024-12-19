@@ -18,28 +18,40 @@ import image from "./image.png";
 function Analysis() {
   const theme = useThemeToken();
 
+  // Lấy danh sách đặt hàng
   const { data: orders } = useQuery({
     queryKey: ["orders"],
     queryFn: apiOrder.getOrders,
   });
+
+  // lấy danh sách user
   const { data: users } = useQuery({
     queryKey: ["users"],
     queryFn: apiUser.getUsers,
   });
 
+  // lấy danh sách dịch vụ
   const { data: services } = useQuery({
     queryKey: ["services"],
     queryFn: apiService.getServices,
   });
 
+  // lấy danh sách liên hệ
   const { data } = useQuery({
     queryKey: ["contact"],
     queryFn: apiContact.getContacts,
   });
 
+  // tổng danh sách đặt hàng
   const totalOrder = orders?.length ?? 0;
+
+  // tổng danh sách dịch vụ
   const totalService = services?.length ?? 0;
+
+  // tổng danh sách người dùng
   const totalUsers = users?.map((user) => user.role === "employee").length ?? 0;
+
+  // tổng danh sách liên hẹ
   const totalContact = data?.length ?? 0;
 
   return (

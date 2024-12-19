@@ -65,6 +65,7 @@ export const useUserPermission = () =>
   useUserStore((state) => state.userInfo.permissions);
 export const useUserActions = () => useUserStore((state) => state.actions);
 
+// xử lí login login + hiện thông báo
 export const useSignIn = () => {
   const navigate = useNavigate();
   const { setUserToken, setUserInfo } = useUserActions();

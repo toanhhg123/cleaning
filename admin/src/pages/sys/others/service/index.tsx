@@ -35,17 +35,24 @@ const ServicePage = () => {
   const queryClient = useQueryClient();
   const userInfo = useUserInfo();
 
+  // lấy dữ liệu
   const { data, isFetching } = useQuery({
     queryKey: ["services"],
     queryFn: apiService.getServices,
   });
+
+  // thêm
   const { mutateAsync: createService } = useMutation({
     mutationFn: (body: ServiceResponse) => apiService.createService(body),
   });
+
+  // sửa
   const { mutateAsync: updateService } = useMutation({
     mutationFn: (body: ServiceResponse) =>
       apiService.updateService(body.id, body),
   });
+
+  // xoá
   const { mutateAsync: deleteService } = useMutation({
     mutationFn: (id: number) => apiService.deleteService(id),
   });

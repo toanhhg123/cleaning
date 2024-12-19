@@ -6,9 +6,11 @@ import { login } from "../service/auth";
 import { toast } from "sonner";
 
 const Login = () => {
+  // gọi api login từ backend
   const { mutate } = useMutation({
     mutationFn: (data) => login(data),
     onSuccess: (data) => {
+      // sau khi đăng nhập thành công thì backend trả về cho 1 chuỗi mã hoá và lưu bên phía client
       localStorage.setItem("accessToken", data);
       window.location.href = "/";
     },

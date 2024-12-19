@@ -20,6 +20,7 @@ const ServiceDetails = () => {
 
   const queryClient = useQueryClient();
 
+  // lấy thông tin dịch vụ theo id
   const { data } = useQuery({
     queryKey: ["service", id],
     queryFn: () => getServicesById(id),
@@ -30,6 +31,7 @@ const ServiceDetails = () => {
     queryFn: () => getServiceFeedbackByServiceId(id),
   });
 
+  // hàm xử lí api đặt dịch vụ
   const { mutate } = useMutation({
     mutationFn: (order) => createOrder(order),
 
@@ -40,16 +42,19 @@ const ServiceDetails = () => {
     },
   });
 
+  // hàm xử lí logic khi đặt dịch vụ
   const handleOrder = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const { dateFrom, address } = Object.fromEntries(formData);
 
+    // kiểm tra tiền của người có thể đặt dịch vụ này khogo
     if (wallet && wallet.balance < data.pricePerHour * time) {
       toast.error("vui lòng nạp thêm tiền vào tài khoản");
       return;
     }
 
+    // thao tác đặt dịch vụ
     mutate({
       serviceId: id,
       dateFrom: new Date(dateFrom).valueOf(),
@@ -123,7 +128,7 @@ const ServiceDetails = () => {
                           </li>
                         </ul>
 
-                        {/* Order Form */}
+                        {/* Chỉ khách hàng mới có thể đặt dịch vụ */}
                         {role === "customer" && (
                           <form className="mt-4" onSubmit={handleOrder}>
                             <div className="row g-3">

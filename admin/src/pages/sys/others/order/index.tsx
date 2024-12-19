@@ -34,6 +34,7 @@ const OrderPage = () => {
 
   const orders = data || [];
 
+  // sử lí update trạng thái order
   const { mutateAsync: updateOrder } = useMutation({
     mutationFn: (data: OrderResponse) =>
       orderService.updateOrders(data.id, data),

@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 
 export default function GeneralTab() {
+  // Lấy thông tin của người dùng đang đăng nhập
   const { data } = useQuery({
     queryKey: ["userInfo"],
     queryFn: apiUser.getMe,
@@ -15,6 +16,7 @@ export default function GeneralTab() {
 
   const [form] = Form.useForm<UserInfoResponse>();
 
+  // cập nhật thông tin của người dùng đang đăng nhập
   const { mutateAsync: updateUser } = useMutation({
     mutationFn: (body: UserInfoResponse) => apiUser.updateUser(body),
   });

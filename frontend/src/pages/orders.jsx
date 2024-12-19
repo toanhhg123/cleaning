@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const OrderPage = () => {
   const navigate = useNavigate();
 
+  // lấy danh sách dịch vụ của khách hàng đang đặt
   const { data } = useQuery({
     queryKey: ["orders", "status", "pending"],
     queryFn: () => getOrdersStatus("pending"),
@@ -15,6 +16,7 @@ const OrderPage = () => {
 
   const queryClient = useQueryClient();
 
+  // xử lí nhận dịch vụ của khách hàng đối với nhân viên
   const { mutate } = useMutation({
     mutationFn: (id) => acceptOrder(id),
     onSuccess: () => {
