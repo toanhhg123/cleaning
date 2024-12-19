@@ -27,7 +27,7 @@ const MyOrders = () => {
                     Dịch vụ: {order.service.name}
                   </h5>
                   <p className="card-text">
-                    <strong>Giá:</strong> {order.service.price} VND
+                    <strong>Giá:</strong> {order.price?.toLocaleString()} VND
                   </p>
                   <p className="card-text">
                     <strong>Ngày:</strong>{" "}

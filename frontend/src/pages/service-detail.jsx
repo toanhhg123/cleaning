@@ -189,6 +189,7 @@ const ServiceDetails = () => {
                                 <textarea
                                   className="form-control shadow-sm"
                                   name="address"
+                                  required
                                   id=""
                                 />
                               </div>

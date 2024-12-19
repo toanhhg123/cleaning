@@ -87,6 +87,16 @@ const Contact = () => {
                     </div>
 
                     <div className="form-group">
+                      <input
+                        type="number"
+                        className="form-control"
+                        placeholder="Số điện thoại"
+                        required="required"
+                        name="phone"
+                      />
+                    </div>
+
+                    <div className="form-group">
                       <textarea
                         className="form-control"
                         rows={6}

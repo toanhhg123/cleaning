@@ -110,7 +110,8 @@ const OrderDetails = () => {
 
           <div className="mb-3">
             <p className="mb-2">
-              <strong>Giá:</strong> {data.service.price} VND
+              <strong>Giá:</strong>{" "}
+              {data.service.pricePerHour?.toLocaleString()} VND / 1 giờ
             </p>
             <p className="mb-2">
               <strong>Họ và tên NV:</strong>{" "}
@@ -141,7 +142,7 @@ const OrderDetails = () => {
             <p className="mb-2">
               <strong>Địa chỉ KH:</strong>{" "}
               <span className="text-muted">
-                {data?.customer?.address || "Chưa cập nhật"}
+                {data?.address || "Chưa cập nhật"}
               </span>
             </p>
 
