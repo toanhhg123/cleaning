@@ -49,6 +49,8 @@ public class Order {
 
     private Date dateFrom;
 
+    private Date dateTo;
+
     private Integer time;
 
     private Double price;

@@ -1,8 +1,11 @@
 package com.clean.app.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.clean.app.entity.CommissionOrder;
+import com.clean.app.exceptions.ApiError;
 import org.springframework.stereotype.Service;
 
 import com.clean.app.entity.Order;
@@ -23,6 +26,9 @@ public class OrderService {
     private final OrderImageRepository orderImageRepository;
     private final WalletService walletService;
     private final WalletRepository walletRepository;
+    private final CommissionOrderService commissionOrderService;
+
+    static final Double COMMISSION_ORDER = 0.1;
 
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
@@ -61,6 +67,10 @@ public class OrderService {
         return orderImageRepository.findByOrderId(orderId);
     }
 
+    public Double getSumOrder(Date dateFrom, Date dateTo){
+        return orderRepository.sumPriceOrder(dateFrom, dateTo);
+    }
+
     /**
      * Updates the order details for a given order ID.
      * If the order status is 'success' and it's not yet paid, it updates the
@@ -87,15 +97,24 @@ public class OrderService {
                 Wallet walletEmployee = walletService.getWalletByUserId(order.getEmployeeId());
                 Wallet walletCustomer = walletService.getWalletByUserId(order.getCustomerId());
 
+                double priceAfterCommission = order.getPrice() == null ? 0 : order.getPrice() * (1 - COMMISSION_ORDER);
+
                 // Update the balance: credit to employee, debit from customer
                 walletEmployee
-                        .setBalance(walletEmployee.getBalance() + (order.getPrice() == null ? 0 : order.getPrice()));
+                        .setBalance(walletEmployee.getBalance() + priceAfterCommission);
                 walletCustomer
                         .setBalance(walletCustomer.getBalance() - (order.getPrice() == null ? 0 : order.getPrice()));
 
                 order.setIsPaid(Boolean.TRUE);
                 walletRepository.save(walletEmployee);
                 walletRepository.save(walletCustomer);
+
+                CommissionOrder commissionOrder = CommissionOrder.builder()
+                        .price(order.getPrice() == null ? 0 : order.getPrice() * COMMISSION_ORDER)
+                        .orderId(order.getId())
+                        .build();
+
+                commissionOrderService.create(commissionOrder);
             }
 
             // Save and return the updated order
@@ -108,12 +127,31 @@ public class OrderService {
         Optional<Order> orderOptional = orderRepository.findById(id);
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
+
+            if(orderRepository.existsOrderAcceptByEmployee(employeeId, order.getDateFrom(), order.getDateTo())) {
+                throw new ApiError("Lịch làm việc bị trùng với những đơn đặt hàng trước đó");
+            }
+
             order.setStatus("processing");
             order.setEmployeeId(employeeId);
             return orderRepository.save(order);
         }
         return null;
     }
+
+    @Transactional
+    public Order cancelOrder(Long id){
+        Order order = orderRepository.findById(id).orElseThrow(() -> new ApiError("Order not found"));
+        order.setStatus("cancelled");
+
+        Wallet walletCustomer = walletService.getWalletByUserId(order.getCustomerId());
+        walletCustomer.setBalance(walletCustomer.getBalance() + (order.getPrice() == null ? 0 : order.getPrice()));
+        walletRepository.save(walletCustomer);
+
+        return orderRepository.save(order);
+    }
+
+
 
     @Transactional
     public boolean deleteOrder(Long id) {

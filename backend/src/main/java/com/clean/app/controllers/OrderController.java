@@ -1,16 +1,11 @@
 package com.clean.app.controllers;
 
+import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.clean.app.entity.Order;
 import com.clean.app.entity.OrderImage;
@@ -26,6 +21,12 @@ public class OrderController {
 
     private final OrderService orderService;
     private final UserService userService;
+
+    @GetMapping("/report")
+    public ResponseEntity<Double> reportPrice(@RequestParam("dateFrom") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date dateFrom,
+                                              @RequestParam("dateTo") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date dateTo) {
+        return  ResponseEntity.ok(orderService.getSumOrder(dateFrom, dateTo));
+    }
 
     // lấy tất cả
     @GetMapping
@@ -102,6 +103,14 @@ public class OrderController {
     @PutMapping("/{id}")
     public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order orderDetails) {
         Order updatedOrder = orderService.updateOrder(id, orderDetails);
+        return ResponseEntity.ok(updatedOrder);
+    }
+
+
+    // Cancel Order
+    @PutMapping("/cancel/{id}")
+    public ResponseEntity<Order> cancelOrder(@PathVariable Long id) {
+        Order updatedOrder = orderService.cancelOrder(id);
         return ResponseEntity.ok(updatedOrder);
     }
 
