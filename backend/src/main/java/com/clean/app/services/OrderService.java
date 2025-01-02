@@ -54,9 +54,22 @@ public class OrderService {
         return orderRepository.findByServiceId(serviceId);
     }
 
-    @Transactional()
+
     public Order createOrder(Order order) {
         return orderRepository.save(order);
+    }
+
+
+    public Order cancelOrder(Long id) {
+
+        Order order = orderRepository.findById(id).orElse(null);
+
+        if(order != null){
+            order.setStatus("canceled");
+            return orderRepository.save(order);
+        }
+
+        return null;
     }
 
     public OrderImage createOrderImage(OrderImage order) {
@@ -138,20 +151,6 @@ public class OrderService {
         }
         return null;
     }
-
-    @Transactional
-    public Order cancelOrder(Long id){
-        Order order = orderRepository.findById(id).orElseThrow(() -> new ApiError("Order not found"));
-        order.setStatus("cancelled");
-
-        Wallet walletCustomer = walletService.getWalletByUserId(order.getCustomerId());
-        walletCustomer.setBalance(walletCustomer.getBalance() + (order.getPrice() == null ? 0 : order.getPrice()));
-        walletRepository.save(walletCustomer);
-
-        return orderRepository.save(order);
-    }
-
-
 
     @Transactional
     public boolean deleteOrder(Long id) {

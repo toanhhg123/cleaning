@@ -40,7 +40,7 @@ const MyOrders = () => {
                       className={`badge ${
                         order.status === "done"
                           ? "bg-success"
-                          : order.status === "processing"
+                          : order.status === "pending"
                           ? "bg-warning"
                           : "bg-danger"
                       }`}
@@ -48,12 +48,14 @@ const MyOrders = () => {
                       {order.status}
                     </span>
                   </p>
-                  <Link
-                    to={`/order-detail/${order.id}`}
-                    className="btn btn-outline-info w-100"
-                  >
-                    Xem Chi Tiết
-                  </Link>
+                  <div>
+                    <Link
+                      to={`/order-detail/${order.id}`}
+                      className="btn btn-outline-info w-100"
+                    >
+                      Xem Chi Tiết
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

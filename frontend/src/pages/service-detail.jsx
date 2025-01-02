@@ -46,7 +46,7 @@ const ServiceDetails = () => {
   const handleOrder = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const { dateFrom, address } = Object.fromEntries(formData);
+    const { dateFrom, address, dateTo } = Object.fromEntries(formData);
 
     // kiểm tra tiền của người có thể đặt dịch vụ này khogo
     if (wallet && wallet.balance < data.pricePerHour * time) {
@@ -58,6 +58,7 @@ const ServiceDetails = () => {
     mutate({
       serviceId: id,
       dateFrom: new Date(dateFrom).valueOf(),
+      dateTo: new Date(dateTo).valueOf(),
       address,
       time,
       price: data.pricePerHour * time,
@@ -137,13 +138,29 @@ const ServiceDetails = () => {
                                   htmlFor="dateFrom"
                                   className="form-label fw-semibold"
                                 >
-                                  Thời gian
+                                  Thời gian bắt đầu
                                 </label>
                                 <input
                                   type="datetime-local"
                                   className="form-control shadow-sm"
                                   id="dateFrom"
                                   name="dateFrom"
+                                  required
+                                />
+                              </div>
+
+                              <div className="col-md-6">
+                                <label
+                                  htmlFor="dateTo"
+                                  className="form-label fw-semibold"
+                                >
+                                  Thời gian kết thúc
+                                </label>
+                                <input
+                                  type="datetime-local"
+                                  className="form-control shadow-sm"
+                                  id="dateTo"
+                                  name="dateTo"
                                   required
                                 />
                               </div>

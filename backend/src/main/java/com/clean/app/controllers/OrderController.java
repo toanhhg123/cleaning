@@ -80,6 +80,7 @@ public class OrderController {
         return orderService.createOrder(order);
     }
 
+
     // tao hinh anh
     @PostMapping("/image")
     public OrderImage createOrderImage(@RequestBody OrderImage orderImage) {
@@ -108,7 +109,7 @@ public class OrderController {
 
 
     // Cancel Order
-    @PutMapping("/cancel/{id}")
+    @PutMapping("cancel/{id}")
     public ResponseEntity<Order> cancelOrder(@PathVariable Long id) {
         Order updatedOrder = orderService.cancelOrder(id);
         return ResponseEntity.ok(updatedOrder);

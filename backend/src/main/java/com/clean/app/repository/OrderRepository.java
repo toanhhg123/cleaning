@@ -16,6 +16,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByEmployeeId(Long employeeId);
 
+    @Query("SELECT o FROM Order o WHERE o.customerId = :customerId AND o.status != 'canceled'")
     List<Order> findByCustomerId(Long customerId);
 
     List<Order> findByServiceId(Long serviceId);
