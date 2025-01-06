@@ -38,5 +38,15 @@
     "type": 1,
     "route": "contact",
     "component": "/sys/others/contact/index.tsx"
+  },
+  {
+    "id": "12301283012323i47829",
+    "parentId": "",
+    "label": "sys.menu.commission",
+    "name": "Commission",
+    "icon": "tabler:coin-filled",
+    "type": 1,
+    "route": "commission",
+    "component": "/sys/others/commission/index.tsx"
   }
 ]

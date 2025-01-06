@@ -24,6 +24,9 @@ const OrderPage = () => {
       queryClient.invalidateQueries(["orders"]);
       navigate("/my-works");
     },
+    onError: (e) => {
+      toast.error(e.response.data.message);
+    },
   });
 
   const orders = data || [];
@@ -47,7 +50,7 @@ const OrderPage = () => {
                     Dịch vụ: {order.service.name}
                   </h5>
                   <p className="card-text">
-                    <strong>Giá:</strong> {order.service.price} VND
+                    <strong>Giá:</strong> {order?.price?.toLocaleString()} VND
                   </p>
                   <p className="card-text">
                     <strong>Ngày:</strong>{" "}

@@ -21,6 +21,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     List<Order> findByServiceId(Long serviceId);
 
+
     @Query("SELECT CASE WHEN COUNT(o) > 0 THEN true ELSE false END FROM Order o WHERE o.customerId = :customerId AND o.serviceId = :serviceId")
     boolean existsByCustomerIdAndServiceId(@Param("customerId") Long customerId, @Param("serviceId") Long serviceId);
 
@@ -29,6 +30,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "AND (o.dateFrom BETWEEN :dateFrom AND :dateTo OR o.dateTo BETWEEN :dateFrom AND :dateTo)")
     boolean existsOrderAcceptByEmployee(Long employeeId, Date dateFrom, Date dateTo);
 
-    @Query("SELECT SUM(o.price) FROM Order o WHERE o.status = 'success' AND o.createdAt BETWEEN :dateFrom AND :dateTo")
+    @Query("SELECT SUM(o.price) FROM Order o WHERE o.status = 'success' AND o.createdAt >= :dateFrom AND o.createdAt <= :dateTo")
     Double sumPriceOrder(Date dateFrom, Date dateTo);
 }
+

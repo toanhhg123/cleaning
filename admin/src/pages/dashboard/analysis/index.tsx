@@ -14,9 +14,42 @@ import apiUser from "@/api/services/userService";
 import { useQuery } from "@tanstack/react-query";
 import AnalysisCard from "./analysis-card";
 import image from "./image.png";
+import moment from "moment";
+
+const startOfDay = moment().startOf("day").toISOString();
+const endOfDay = moment().endOf("day").toISOString();
+
+const startOfMonth = moment().startOf("month").toISOString();
+const endOfMonth = moment().endOf("month").toISOString();
+
+const startOfYear = moment().startOf("year").toISOString();
+const endOfYear = moment().endOf("year").toISOString();
+
+const startOf1990 = moment("1990-01-01").toISOString();
+const endOf3000 = moment("3000-01-01").toISOString();
 
 function Analysis() {
   const theme = useThemeToken();
+
+  const { data: priceOfDay } = useQuery({
+    queryKey: ["orders", "report", startOfDay, endOfDay],
+    queryFn: () => apiOrder.getOrderReport(startOfDay, endOfDay),
+  });
+
+  const { data: priceOfMonth } = useQuery({
+    queryKey: ["orders", "report", startOfMonth, endOfMonth],
+    queryFn: () => apiOrder.getOrderReport(startOfMonth, endOfMonth),
+  });
+
+  const { data: priceOfYear } = useQuery({
+    queryKey: ["orders", "report", startOfYear, endOfYear],
+    queryFn: () => apiOrder.getOrderReport(startOfYear, endOfYear),
+  });
+
+  const { data: priceOf1990 } = useQuery({
+    queryKey: ["orders", "report", startOf1990, endOf3000],
+    queryFn: () => apiOrder.getOrderReport(startOf1990, endOf3000),
+  });
 
   // Lấy danh sách đặt hàng
   const { data: orders } = useQuery({
@@ -114,6 +147,75 @@ function Analysis() {
             cover={glass_message}
             title={totalContact.toLocaleString()}
             subtitle="Contacts"
+            style={{
+              color: theme.colorErrorTextActive,
+              background: `linear-gradient(135deg, ${Color(
+                theme.colorErrorActive
+              )
+                .alpha(0.2)
+                .toString()}, ${Color(theme.colorError)
+                .alpha(0.2)
+                .toString()}) rgb(255, 255, 255)`,
+            }}
+          />
+        </Col>
+
+        <Col lg={6} md={12} span={24}>
+          <AnalysisCard
+            cover={""}
+            title={priceOfDay?.toLocaleString() || "0"}
+            subtitle="Revenue today"
+            style={{
+              color: theme.colorPrimaryTextActive,
+              background: `linear-gradient(135deg, ${Color(
+                theme.colorPrimaryActive
+              )
+                .alpha(0.2)
+                .toString()}, ${Color(theme.colorPrimary)
+                .alpha(0.2)
+                .toString()}) rgb(255, 255, 255)`,
+            }}
+          />
+        </Col>
+        <Col lg={6} md={12} span={24}>
+          <AnalysisCard
+            cover={""}
+            title={priceOfMonth?.toLocaleString() || "0"}
+            subtitle="Revenue this month"
+            style={{
+              color: theme.colorInfoTextActive,
+              background: `linear-gradient(135deg, ${Color(
+                theme.colorInfoActive
+              )
+                .alpha(0.2)
+                .toString()}, ${Color(theme.colorInfo)
+                .alpha(0.2)
+                .toString()}) rgb(255, 255, 255)`,
+            }}
+          />
+        </Col>
+        <Col lg={6} md={12} span={24}>
+          <AnalysisCard
+            cover={""}
+            title={priceOfYear?.toLocaleString() || "0"}
+            subtitle="Revenue this year"
+            style={{
+              color: theme.colorWarningTextActive,
+              background: `linear-gradient(135deg, ${Color(
+                theme.colorWarningActive
+              )
+                .alpha(0.2)
+                .toString()}, ${Color(theme.colorWarning)
+                .alpha(0.2)
+                .toString()}) rgb(255, 255, 255)`,
+            }}
+          />
+        </Col>
+        <Col lg={6} md={12} span={24}>
+          <AnalysisCard
+            cover={""}
+            title={priceOf1990?.toLocaleString() || "0"}
+            subtitle="Total Price"
             style={{
               color: theme.colorErrorTextActive,
               background: `linear-gradient(135deg, ${Color(

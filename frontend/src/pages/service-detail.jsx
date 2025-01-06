@@ -8,11 +8,18 @@ import useWallet from "../hooks/useWallet";
 import { createOrder } from "../service/order";
 import { getServicesById } from "../service/service";
 import { getServiceFeedbackByServiceId } from "../service/serviceFeedback";
+import moment from "moment";
 import { useState } from "react";
+
+const currentDay = moment();
 
 const ServiceDetails = () => {
   const role = useRole();
-  const [time, setTime] = useState(1);
+
+  const [dateFrom, setDateFrom] = useState(currentDay);
+  const [dateTo, setDateTo] = useState(moment(currentDay).add(1, "hours"));
+
+  const time = dateTo.diff(dateFrom, "hours");
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -145,6 +152,11 @@ const ServiceDetails = () => {
                                   className="form-control shadow-sm"
                                   id="dateFrom"
                                   name="dateFrom"
+                                  value={dateFrom.format("YYYY-MM-DDTHH:mm")}
+                                  onChange={(e) => {
+                                    const dateMoment = moment(e.target.value);
+                                    setDateFrom(dateMoment);
+                                  }}
                                   required
                                 />
                               </div>
@@ -158,6 +170,11 @@ const ServiceDetails = () => {
                                 </label>
                                 <input
                                   type="datetime-local"
+                                  value={dateTo.format("YYYY-MM-DDTHH:mm")}
+                                  onChange={(e) => {
+                                    const dateMoment = moment(e.target.value);
+                                    setDateTo(dateMoment);
+                                  }}
                                   className="form-control shadow-sm"
                                   id="dateTo"
                                   name="dateTo"
@@ -165,34 +182,6 @@ const ServiceDetails = () => {
                                 />
                               </div>
 
-                              <div className="col-md-12 mt-3">
-                                <label
-                                  htmlFor="time"
-                                  className="form-label fw-semibold"
-                                  style={{ display: "block" }}
-                                >
-                                  time:
-                                </label>
-                                <select
-                                  name="time"
-                                  id="time"
-                                  className="ml-2"
-                                  style={{ padding: 8 }}
-                                  value={time}
-                                  onChange={(e) => {
-                                    setTime(+e.target.value);
-                                  }}
-                                >
-                                  {Array.from({ length: 24 }, (_, i) => (
-                                    <option
-                                      key={i.toLocaleString()}
-                                      value={i + 1}
-                                    >
-                                      {i + 1} h
-                                    </option>
-                                  ))}
-                                </select>
-                              </div>
                               <div className="col-md-12 mt-3">
                                 <h4
                                   id="service-price"

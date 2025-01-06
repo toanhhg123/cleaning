@@ -5,6 +5,8 @@ import com.clean.app.repository.CommissionOrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CommissionOrderService {
@@ -12,5 +14,8 @@ public class CommissionOrderService {
 
     public CommissionOrder create(CommissionOrder commissionOrder) {
         return repository.save(commissionOrder);
+    }
+    public List<CommissionOrder> getAll(){
+        return  repository.findAll();
     }
 }

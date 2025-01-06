@@ -51,8 +51,6 @@ public class Order {
 
     private Date dateTo;
 
-    private Integer time;
-
     private Double price;
 
     @ManyToOne

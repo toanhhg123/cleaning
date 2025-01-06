@@ -64,7 +64,7 @@ public class OrderService {
 
         Order order = orderRepository.findById(id).orElse(null);
 
-        if(order != null){
+        if (order != null) {
             order.setStatus("canceled");
             return orderRepository.save(order);
         }
@@ -80,8 +80,14 @@ public class OrderService {
         return orderImageRepository.findByOrderId(orderId);
     }
 
-    public Double getSumOrder(Date dateFrom, Date dateTo){
-        return orderRepository.sumPriceOrder(dateFrom, dateTo);
+    public Double getSumOrder(Date dateFrom, Date dateTo) {
+        var price = orderRepository.sumPriceOrder(dateFrom, dateTo);
+
+        if(price == null) {
+            return 0.0;
+        }
+
+        return price;
     }
 
     /**
@@ -92,7 +98,7 @@ public class OrderService {
      * @param id           the ID of the order to be updated
      * @param orderDetails the new details for the order
      * @return the updated order, or null if the order with the given ID does not
-     *         exist
+     * exist
      */
     @Transactional
     public Order updateOrder(Long id, Order orderDetails) {
@@ -141,7 +147,7 @@ public class OrderService {
         if (orderOptional.isPresent()) {
             Order order = orderOptional.get();
 
-            if(orderRepository.existsOrderAcceptByEmployee(employeeId, order.getDateFrom(), order.getDateTo())) {
+            if (orderRepository.existsOrderAcceptByEmployee(employeeId, order.getDateFrom(), order.getDateTo())) {
                 throw new ApiError("Lịch làm việc bị trùng với những đơn đặt hàng trước đó");
             }
 
