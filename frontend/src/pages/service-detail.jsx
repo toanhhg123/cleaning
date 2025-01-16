@@ -155,7 +155,12 @@ const ServiceDetails = () => {
                                   value={dateFrom.format("YYYY-MM-DDTHH:mm")}
                                   onChange={(e) => {
                                     const dateMoment = moment(e.target.value);
+                                    const dateToMoment = moment(dateMoment).add(
+                                      1,
+                                      "hour"
+                                    );
                                     setDateFrom(dateMoment);
+                                    setDateTo(dateToMoment);
                                   }}
                                   required
                                 />
@@ -171,6 +176,7 @@ const ServiceDetails = () => {
                                 <input
                                   type="datetime-local"
                                   value={dateTo.format("YYYY-MM-DDTHH:mm")}
+                                  min={dateFrom.format("YYYY-MM-DDTHH:mm")}
                                   onChange={(e) => {
                                     const dateMoment = moment(e.target.value);
                                     setDateTo(dateMoment);

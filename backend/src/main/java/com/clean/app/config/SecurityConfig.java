@@ -24,12 +24,13 @@ import lombok.AllArgsConstructor;
 @Configuration
 @EnableMethodSecurity
 @AllArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig { // dùng cho đăng kí đăng nhập
 
     private final JwtAuthenticationFilter authenticationFilter;
     private final UserDetailsServiceImpl userDetailsServiceImpl;
     private final JwtAuthenticationEntryPoint authenticationEntryPoint;
 
+    // mã hoá passowrd lưu vào database
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

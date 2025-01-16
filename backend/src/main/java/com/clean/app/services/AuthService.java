@@ -42,6 +42,7 @@ public class AuthService {
         String token = jwtService.generateToken(authentication);
 
         // tra ve token
+        // Client lưu lại token bên local storage
         return AuthResponse.builder().accessToken(token).build();
     }
 

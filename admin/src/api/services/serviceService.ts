@@ -20,7 +20,6 @@ export interface ServiceResponse {
 	tag: string;
 	createdAt: number;
 	image?: string;
-
 	updatedAt: number;
 }
 
